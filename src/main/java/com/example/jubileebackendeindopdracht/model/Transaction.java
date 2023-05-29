@@ -32,7 +32,7 @@ public class Transaction {
     private String expense;
     private BigDecimal amount;
     private LocalDate date;
-    private String categorie;
+    private String category;
     private String payee;
 
     @Column(name = "payment_method")

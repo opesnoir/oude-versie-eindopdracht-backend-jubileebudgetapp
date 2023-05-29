@@ -42,7 +42,7 @@ public class TransactionDto {
 
     //@NotBlank checks if not empty
     @NotBlank(message = "Categorie is required")
-    private String categorie;
+    private String category;
 
     @NotBlank(message = "Payee is required")
     private String payee;
