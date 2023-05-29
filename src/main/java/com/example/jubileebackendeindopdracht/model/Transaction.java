@@ -1,9 +1,7 @@
 package com.example.jubileebackendeindopdracht.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +15,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 
-
 // Getters and setters for all variable declarations
 @Getter
 @Setter
@@ -26,9 +23,9 @@ import java.time.LocalDate;
 @Table(name = "transactions")
 public class Transaction {
 
-    // Primary key (id) of the entity, automatically generated
+    // Primary key (id) of the entity, automatically generated using identity column
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String income;
     private String expense;
@@ -37,5 +34,7 @@ public class Transaction {
     private String categorie;
     private String payee;
     private String paymentMethod;
+
+    // Relationships
 
 }
