@@ -23,10 +23,6 @@ import java.time.LocalDate;
 public class TransactionDto {
 
     //variables declaration
-
-
-
-
     private Long id;
     private String income;
     private String expense;
@@ -35,9 +31,10 @@ public class TransactionDto {
     private boolean isIncomeOrExpenseProvided(){
         return income != null || expense != null;
     }
+
     //@NotNull checks if not null
     @NotNull(message = "Amount is required")
-    @DecimalMin(value = "0,01", message = "Amount must be greater than or equal to 0.01")
+    @DecimalMin(value = "0.01", message = "Amount must be greater than or equal to 0.01")
     private BigDecimal amount;
 
     @NotNull(message = "Date is required")
@@ -52,6 +49,5 @@ public class TransactionDto {
 
     @NotBlank(message = "Payment method is required")
     private String paymentMethod;
-
 
 }
