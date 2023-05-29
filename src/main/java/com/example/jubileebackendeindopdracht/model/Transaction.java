@@ -34,6 +34,9 @@ public class Transaction {
     private LocalDate date;
     private String categorie;
     private String payee;
+
+    @Column(name = "payment_method")
+    // Specifies the name of the column in the database table that maps to the 'paymentMethod' field.
     private String paymentMethod;
 
     // Relationships

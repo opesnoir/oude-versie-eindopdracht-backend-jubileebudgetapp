@@ -50,4 +50,6 @@ public class TransactionDto {
     @NotBlank(message = "Payment method is required")
     private String paymentMethod;
 
+    // Relationships
+
 }
