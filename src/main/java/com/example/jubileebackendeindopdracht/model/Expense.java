@@ -1,4 +1,4 @@
 package com.example.jubileebackendeindopdracht.model;
 
-public class Income extends Transaction{
+public class Expense extends Transaction{
 }
