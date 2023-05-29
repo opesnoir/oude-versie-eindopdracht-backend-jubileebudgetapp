@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
+
     // variables
     private final TransactionService transactionService;
 
@@ -22,6 +23,7 @@ public class TransactionController {
     // getmapping
     @GetMapping
     public List<TransactionDto> getAllTransactions(){
+        // get all transactions using the transactionService
         List<TransactionDto> transactionDtoList = transactionService.getAllTransactions();
         return transactionDtoList;
     }
