@@ -23,6 +23,7 @@ import java.time.LocalDate;
 @Table(name = "transactions")
 public class Transaction {
 
+    //variables declaration
     // Primary key (id) of the entity, automatically generated using identity column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
