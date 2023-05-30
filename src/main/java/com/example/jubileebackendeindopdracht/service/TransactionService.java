@@ -5,9 +5,11 @@ import com.example.jubileebackendeindopdracht.dto.TransactionDto;
 import com.example.jubileebackendeindopdracht.model.Transaction;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -34,7 +36,11 @@ public class TransactionService {
         return transactionDtos;
     }
 
-    // Helper method to convert a Transaction object to a TransactionDto object
+    // methode to get one single transaction
+
+
+
+    // helper method to convert a Transaction object to a TransactionDto object
     private TransactionDto transferToDto(Transaction transaction){
 
         TransactionDto transactionDto = new TransactionDto();
@@ -51,7 +57,8 @@ public class TransactionService {
     }
 
     //TODO: vragen waarom hij zegt dat de code duplicaat is,terwijl het andere code is.
-    // transfer to transaction
+
+    // Helper method to convert a TransactionDto object to a Transaction object
 /*    public Transaction transferToTransaction(TransactionDto transactionDto){
 
         Transaction transaction = new Transaction();

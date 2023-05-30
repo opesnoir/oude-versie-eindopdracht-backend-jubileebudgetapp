@@ -20,12 +20,15 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    // getmapping
+    // getmapping to get all transactions
     @GetMapping
     public List<TransactionDto> getAllTransactions(){
         // get all transactions using the transactionService
         List<TransactionDto> transactionDtoList = transactionService.getAllTransactions();
         return transactionDtoList;
     }
+
+    // getmapping to get one single transaction
+
 
 }
