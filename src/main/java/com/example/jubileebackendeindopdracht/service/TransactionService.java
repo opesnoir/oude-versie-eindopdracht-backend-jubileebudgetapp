@@ -55,6 +55,29 @@ public class TransactionService {
         }
     }
 
+    // methode to create a single transaction
+    public TransactionDto createTransaction(TransactionDto transactionDto){
+
+        Transaction transaction = new Transaction();
+
+        transaction.setIncome(transactionDto.getIncome());
+        transaction.setExpense(transactionDto.getExpense());
+        transaction.setAmount(transactionDto.getAmount());
+        transaction.setDate(transactionDto.getDate());
+        transaction.setCategory(transactionDto.getCategory());
+        transaction.setPayee(transactionDto.getPayee());
+        transaction.setPaymentMethod(transactionDto.getPaymentMethod());
+
+        Transaction savedTransaction = transactionRepository.save(transaction);
+
+        return transferToDto(savedTransaction);
+    }
+
+
+    // methode to update a single transaction
+
+    // methode to delete a single transaction
+
 
     // helper method to convert a Transaction object to a TransactionDto object
     private TransactionDto transferToDto(Transaction transaction){
@@ -75,7 +98,7 @@ public class TransactionService {
     //TODO: vragen waarom hij zegt dat de code duplicaat is,terwijl het andere code is.
 
     // Helper method to convert a TransactionDto object to a Transaction object
-/*    public Transaction transferToTransaction(TransactionDto transactionDto){
+    public Transaction transferToTransaction(TransactionDto transactionDto){
 
         Transaction transaction = new Transaction();
         transaction.setId(transactionDto.getId());
@@ -89,7 +112,7 @@ public class TransactionService {
 
         return transaction;
 
-    }*/
+    }
 
 
 }
