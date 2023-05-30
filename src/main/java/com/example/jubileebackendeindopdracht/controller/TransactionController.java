@@ -2,7 +2,9 @@ package com.example.jubileebackendeindopdracht.controller;
 
 import com.example.jubileebackendeindopdracht.dto.TransactionDto;
 import com.example.jubileebackendeindopdracht.service.TransactionService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +31,11 @@ public class TransactionController {
     }
 
     // getmapping to get one single transaction
+    @GetMapping("/{id}")
+    public ResponseEntity<TransactionDto> getTransaction(@PathVariable Long id){
+        return ResponseEntity.ok(transactionService.getTransaction(id));
+    }
+
 
 
 }

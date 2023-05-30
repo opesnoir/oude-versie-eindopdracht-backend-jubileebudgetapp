@@ -2,6 +2,7 @@ package com.example.jubileebackendeindopdracht.service;
 
 
 import com.example.jubileebackendeindopdracht.dto.TransactionDto;
+import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Transaction;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
@@ -25,19 +26,34 @@ public class TransactionService {
 
     // methode to get all transactions from the repository
     public List<TransactionDto> getAllTransactions(){
-
+        // make a list to hold all the transaction dto objects
         List<TransactionDto> transactionDtos = new ArrayList<>();
+        // get all transactions from the repository
         List<Transaction> transactions = transactionRepository.findAll();
-
+        // loop over each transaction
         for (Transaction transaction : transactions){
+            // convert the Transaction object to a transaction dto object, see helpen method transferToDto
             TransactionDto transactionDto = transferToDto(transaction);
+            // add the transaction dto object to the list
             transactionDtos.add(transactionDto);
         }
+        // return the list of transaction dto objects
         return transactionDtos;
     }
 
     // methode to get one single transaction
-
+    public TransactionDto getTransaction(Long id){
+        // retrieve the transaction from the repository by id
+        Optional<Transaction> transactionOptional = transactionRepository.findById(id);
+        // check if the transaction is present
+        if (transactionOptional.isPresent()){
+            Transaction transaction = transactionOptional.get();
+            // convert the transaction object to a transactionDto object
+            return transferToDto(transaction);
+        } else { // transaction not found: throw a transaction not found exception
+            throw new TransactionNotFoundException(id);
+        }
+    }
 
 
     // helper method to convert a Transaction object to a TransactionDto object
