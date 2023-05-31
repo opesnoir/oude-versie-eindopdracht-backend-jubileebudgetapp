@@ -53,6 +53,11 @@ public class TransactionController {
     }
 
     // putmapping to update a single transaction
+    @PutMapping("/{id}")
+    public ResponseEntity<TransactionDto> updateTransaction(@PathVariable Long id, @RequestBody TransactionDto updatedTransactionDto){
+        TransactionDto updatedTransaction = transactionService.updateTransaction(id, updatedTransactionDto);
+        return ResponseEntity.ok(updatedTransaction);
+    }
 
     // deletemapping to delete a single transaction
     @DeleteMapping("/{id}")

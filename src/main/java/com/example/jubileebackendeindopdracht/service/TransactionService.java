@@ -66,10 +66,23 @@ public class TransactionService {
     }
 
     // methode to update a single transaction
-
-
-
-
+    public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto) {
+        // get the transaction from the repository by ID
+        Optional<Transaction> transactionOptional = transactionRepository.findById(id);
+        if (transactionOptional.isPresent()) {
+            // if the transaction exists, get existing transaction object
+            Transaction existingTransaction = transactionOptional.get();
+            // update existing transaction with new data
+            updateTransactionFromDto(existingTransaction, updatedTransactionDto);
+            // save updated transaction to repository
+            Transaction updatedTransaction = transactionRepository.save(existingTransaction);
+            // convert the updated transaction object to a dto object
+            return transferToDto(updatedTransaction);
+        } else {
+            // else throw exception
+            throw new TransactionNotFoundException(id);
+        }
+    }
 
     // methode to delete a single transaction
     public TransactionDto deleteTransaction(Long id){
@@ -122,4 +135,19 @@ public class TransactionService {
         return transaction;
 
     }
+
+    // helper method to update properties of existing transaction object from a transaction dto object
+    private void updateTransactionFromDto(Transaction existingTransaction, TransactionDto updatedTransactionDto) {
+
+        existingTransaction.setIncome(updatedTransactionDto.getIncome());
+        existingTransaction.setExpense(updatedTransactionDto.getExpense());
+        existingTransaction.setAmount(updatedTransactionDto.getAmount());
+        existingTransaction.setDate(updatedTransactionDto.getDate());
+        existingTransaction.setCategory(updatedTransactionDto.getCategory());
+        existingTransaction.setPayee(updatedTransactionDto.getPayee());
+        existingTransaction.setPaymentMethod(updatedTransactionDto.getPaymentMethod());
+
+    }
+
+
 }
