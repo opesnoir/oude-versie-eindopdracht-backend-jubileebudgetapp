@@ -57,19 +57,11 @@ public class TransactionService {
 
     // methode to create a single transaction
     public TransactionDto createTransaction(TransactionDto transactionDto){
-
-        Transaction transaction = new Transaction();
-
-        transaction.setIncome(transactionDto.getIncome());
-        transaction.setExpense(transactionDto.getExpense());
-        transaction.setAmount(transactionDto.getAmount());
-        transaction.setDate(transactionDto.getDate());
-        transaction.setCategory(transactionDto.getCategory());
-        transaction.setPayee(transactionDto.getPayee());
-        transaction.setPaymentMethod(transactionDto.getPaymentMethod());
-
+        // convert transaction dto to transaction, met helper methode transfer to transaction
+        Transaction transaction = transferToTransaction(transactionDto);
+        // save the transaction in the repository
         Transaction savedTransaction = transactionRepository.save(transaction);
-
+        // convert the saved Transaction object to a TransactionDto object
         return transferToDto(savedTransaction);
     }
 
