@@ -67,21 +67,17 @@ public class TransactionService {
 
     // methode to update a single transaction
     public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto) {
-        // get the transaction from the repository by ID
-        Optional<Transaction> transactionOptional = transactionRepository.findById(id);
-        if (transactionOptional.isPresent()) {
-            // if the transaction exists, get existing transaction object
-            Transaction existingTransaction = transactionOptional.get();
-            // update existing transaction with new data
-            updateTransactionFromDto(existingTransaction, updatedTransactionDto);
-            // save updated transaction to repository
-            Transaction updatedTransaction = transactionRepository.save(existingTransaction);
-            // convert the updated transaction object to a dto object
-            return transferToDto(updatedTransaction);
-        } else {
-            // else throw exception
-            throw new TransactionNotFoundException(id);
-        }
+        Transaction existingTransaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new TransactionNotFoundException(id));
+
+        // update existing transaction with new data
+        updateTransactionFromDto(existingTransaction, updatedTransactionDto);
+
+        // save updated transaction to repository
+        Transaction updatedTransaction = transactionRepository.save(existingTransaction);
+
+        // convert the updated transaction object to a dto object
+        return transferToDto(updatedTransaction);
     }
 
     // methode to delete a single transaction
