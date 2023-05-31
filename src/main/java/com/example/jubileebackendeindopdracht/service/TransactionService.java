@@ -81,19 +81,15 @@ public class TransactionService {
     }
 
     // methode to delete a single transaction
-    public TransactionDto deleteTransaction(Long id){
-        // retrieve the transaction from the repository by id
-        Optional<Transaction> transactionOptional = transactionRepository.findById(id);
-        // check if the transaction is present
-        if (transactionOptional.isPresent()){
-            Transaction transaction = transactionOptional.get();
-            // delete the transaction from the repository
-            transactionRepository.delete(transaction);
-            // convert the transaction object to a transactionDto object
-            return transferToDto(transaction);
-        } else { // transaction not found: throw a transaction not found exception
-            throw new TransactionNotFoundException(id);
-        }
+    public TransactionDto deleteTransaction(Long id) {
+        Transaction transaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new TransactionNotFoundException(id));
+
+        // delete the transaction from the repository
+        transactionRepository.delete(transaction);
+
+        // convert the transaction object to a transactionDto object
+        return transferToDto(transaction);
     }
 
 
