@@ -136,7 +136,7 @@ public class TransactionService {
 
     }
 
-    // helper method to update properties of existing transaction object from a transaction dto object
+    // helper method to update (a part of all or all) properties of existing transaction object from a transaction dto object
     public void updateTransactionFromDto(Transaction existingTransaction, TransactionDto updatedTransactionDto) {
 
         // if the property is null, the property will not be changed. if the property is not null, the property will be changed

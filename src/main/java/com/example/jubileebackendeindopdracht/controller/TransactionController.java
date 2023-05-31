@@ -46,15 +46,15 @@ public class TransactionController {
         // create a transaction using the transaction service methode: create transaction
         TransactionDto createdTransactionDto = transactionService.createTransaction(transactionDto);
         // create the URI for the created transaction
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/transaction" + createdTransactionDto.getId())
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/transactions" + createdTransactionDto.getId())
                 .buildAndExpand().toUriString());
         // return a response entity with the appropriate status and the created transaction dto object
         return ResponseEntity.created(uri).body(createdTransactionDto);
     }
 
-    // putmapping to update a single transaction
-    @PutMapping("/{id}")
-    public ResponseEntity<TransactionDto> updateTransaction(@PathVariable Long id, @RequestBody TransactionDto updatedTransactionDto){
+    // put (fully) /patch (partially) mapping to update a single transaction
+    @RequestMapping(value = "/{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+    public ResponseEntity<TransactionDto> updateTransaction(@PathVariable Long id, @RequestBody TransactionDto updatedTransactionDto) {
         TransactionDto updatedTransaction = transactionService.updateTransaction(id, updatedTransactionDto);
         return ResponseEntity.ok(updatedTransaction);
     }
@@ -63,7 +63,7 @@ public class TransactionController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTransaction(@PathVariable Long id){
         transactionService.deleteTransaction(id);
-        return ResponseEntity.ok("Transaction with ID " + id + " has been deleted");
+        return ResponseEntity.noContent().build();
     }
 
 
