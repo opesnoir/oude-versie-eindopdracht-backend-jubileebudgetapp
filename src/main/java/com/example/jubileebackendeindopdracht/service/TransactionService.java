@@ -102,7 +102,7 @@ public class TransactionService {
 
 
     // helper method to convert a Transaction object to a TransactionDto object
-    private TransactionDto transferToDto(Transaction transaction){
+    public TransactionDto transferToDto(Transaction transaction){
 
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setId(transaction.getId());
@@ -137,15 +137,30 @@ public class TransactionService {
     }
 
     // helper method to update properties of existing transaction object from a transaction dto object
-    private void updateTransactionFromDto(Transaction existingTransaction, TransactionDto updatedTransactionDto) {
+    public void updateTransactionFromDto(Transaction existingTransaction, TransactionDto updatedTransactionDto) {
 
-        existingTransaction.setIncome(updatedTransactionDto.getIncome());
-        existingTransaction.setExpense(updatedTransactionDto.getExpense());
-        existingTransaction.setAmount(updatedTransactionDto.getAmount());
-        existingTransaction.setDate(updatedTransactionDto.getDate());
-        existingTransaction.setCategory(updatedTransactionDto.getCategory());
-        existingTransaction.setPayee(updatedTransactionDto.getPayee());
-        existingTransaction.setPaymentMethod(updatedTransactionDto.getPaymentMethod());
+        // if the property is null, the property will not be changed. if the property is not null, the property will be changed
+        if (updatedTransactionDto.getIncome() != null) {
+            existingTransaction.setIncome(updatedTransactionDto.getIncome());
+        }
+        if (updatedTransactionDto.getExpense() != null) {
+            existingTransaction.setExpense(updatedTransactionDto.getExpense());
+        }
+        if (updatedTransactionDto.getAmount() != null) {
+            existingTransaction.setAmount(updatedTransactionDto.getAmount());
+        }
+        if (updatedTransactionDto.getDate() != null) {
+            existingTransaction.setDate(updatedTransactionDto.getDate());
+        }
+        if (updatedTransactionDto.getCategory() != null) {
+            existingTransaction.setCategory(updatedTransactionDto.getCategory());
+        }
+        if (updatedTransactionDto.getPayee() != null) {
+            existingTransaction.setPayee(updatedTransactionDto.getPayee());
+        }
+        if (updatedTransactionDto.getPaymentMethod() != null) {
+            existingTransaction.setPaymentMethod(updatedTransactionDto.getPaymentMethod());
+        }
 
     }
 
