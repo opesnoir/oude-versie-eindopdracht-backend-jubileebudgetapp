@@ -52,7 +52,9 @@ public class TransactionController {
         return ResponseEntity.created(uri).body(createdTransactionDto);
     }
 
-    //deletemapping to delete a single transaction
+    // putmapping to update a single transaction
+
+    // deletemapping to delete a single transaction
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTransaction(@PathVariable Long id){
         transactionService.deleteTransaction(id);

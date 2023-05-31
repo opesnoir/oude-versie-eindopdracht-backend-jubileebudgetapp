@@ -65,8 +65,11 @@ public class TransactionService {
         return transferToDto(savedTransaction);
     }
 
-
     // methode to update a single transaction
+
+
+
+
 
     // methode to delete a single transaction
     public TransactionDto deleteTransaction(Long id){
@@ -103,7 +106,7 @@ public class TransactionService {
 
     //TODO: vragen waarom hij zegt dat de code duplicaat is,terwijl het andere code is.
 
-    // Helper method to convert a TransactionDto object to a Transaction object
+    // helper method to convert a TransactionDto object to a Transaction object
     public Transaction transferToTransaction(TransactionDto transactionDto){
 
         Transaction transaction = new Transaction();
@@ -119,6 +122,4 @@ public class TransactionService {
         return transaction;
 
     }
-
-
 }
