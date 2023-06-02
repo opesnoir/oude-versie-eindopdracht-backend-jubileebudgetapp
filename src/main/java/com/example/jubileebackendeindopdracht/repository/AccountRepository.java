@@ -9,7 +9,7 @@ import java.util.List;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
     //query('s)
-    List<Account> findAllByTotalIncome(BigDecimal totalIncome);
-    List<Account> findAllByTotalExpense(BigDecimal totalExpense);
+    List<Account> findAllByIdAndTotalIncome(Long id, BigDecimal totalIncome);
+    List<Account> findAllByIdAndTotalExpense(Long id, BigDecimal totalExpense);
 
 }
