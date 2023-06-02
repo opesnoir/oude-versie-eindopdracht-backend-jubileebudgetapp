@@ -1,7 +1,6 @@
 package com.example.jubileebackendeindopdracht.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +10,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
-// Constructors, one empty and one with all variables
+// constructors, one empty and one with all variables
 @NoArgsConstructor
 @AllArgsConstructor
 
-// Getters and setters for all variable declarations
+// getters and setters for all variable declarations
 @Getter
 @Setter
 
@@ -28,7 +27,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //TODO: tijd over: enumiratie type maken en daar dan de optie income en expense inplaatsen
+    //TODO: tijd over: enumeration type maken en daar dan de optie income en expense inplaatsen
     private String income;
     private String expense;
     private BigDecimal amount;
