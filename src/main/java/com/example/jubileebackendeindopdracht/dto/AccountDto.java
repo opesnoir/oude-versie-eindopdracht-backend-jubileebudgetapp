@@ -2,7 +2,6 @@ package com.example.jubileebackendeindopdracht.dto;
 
 import com.example.jubileebackendeindopdracht.model.Transaction;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
