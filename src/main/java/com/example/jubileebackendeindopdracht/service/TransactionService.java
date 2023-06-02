@@ -6,7 +6,6 @@ import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundExcep
 import com.example.jubileebackendeindopdracht.model.Transaction;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +27,20 @@ public class TransactionService {
     public List<TransactionDto> getAllTransactions(){
         // make a list to hold all the transaction dto objects
         List<TransactionDto> transactionDtos = new ArrayList<>();
+
         // get all transactions from the repository
         List<Transaction> transactions = transactionRepository.findAll();
+
         // loop over each transaction
         for (Transaction transaction : transactions){
+
             // convert the Transaction object to a transaction dto object, see helpen method transferToDto
             TransactionDto transactionDto = transferToDto(transaction);
+
             // add the transaction dto object to the list
             transactionDtos.add(transactionDto);
         }
+
         // return the list of transaction dto objects
         return transactionDtos;
     }
@@ -45,11 +49,14 @@ public class TransactionService {
     public TransactionDto getTransaction(Long id){
         // retrieve the transaction from the repository by id
         Optional<Transaction> transactionOptional = transactionRepository.findById(id);
+
         // check if the transaction is present
         if (transactionOptional.isPresent()){
             Transaction transaction = transactionOptional.get();
+
             // convert the transaction object to a transactionDto object
             return transferToDto(transaction);
+
         } else { // transaction not found: throw a transaction not found exception
             throw new TransactionNotFoundException(id);
         }
@@ -59,8 +66,10 @@ public class TransactionService {
     public TransactionDto createTransaction(TransactionDto transactionDto){
         // convert transaction dto to transaction, met helper methode transfer to transaction
         Transaction transaction = transferToTransaction(transactionDto);
+
         // save the transaction in the repository
         Transaction savedTransaction = transactionRepository.save(transaction);
+
         // convert the saved Transaction object to a TransactionDto object
         return transferToDto(savedTransaction);
     }
@@ -92,7 +101,6 @@ public class TransactionService {
         return transferToDto(transaction);
     }
 
-
     // helper method to convert a Transaction object to a TransactionDto object
     public TransactionDto transferToDto(Transaction transaction){
 
@@ -109,8 +117,6 @@ public class TransactionService {
         return transactionDto;
     }
 
-    //TODO: vragen waarom hij zegt dat de code duplicaat is,terwijl het andere code is.
-
     // helper method to convert a TransactionDto object to a Transaction object
     public Transaction transferToTransaction(TransactionDto transactionDto){
 
@@ -125,7 +131,6 @@ public class TransactionService {
         transaction.setPaymentMethod(transactionDto.getPaymentMethod());
 
         return transaction;
-
     }
 
     // helper method to update (a part of all or all) properties of existing transaction object from a transaction dto object
@@ -153,8 +158,5 @@ public class TransactionService {
         if (updatedTransactionDto.getPaymentMethod() != null) {
             existingTransaction.setPaymentMethod(updatedTransactionDto.getPaymentMethod());
         }
-
     }
-
-
 }

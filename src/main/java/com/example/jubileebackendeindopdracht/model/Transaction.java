@@ -28,6 +28,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    //TODO: tijd over: enumiratie type maken en daar dan de optie income en expense inplaatsen
     private String income;
     private String expense;
     private BigDecimal amount;
