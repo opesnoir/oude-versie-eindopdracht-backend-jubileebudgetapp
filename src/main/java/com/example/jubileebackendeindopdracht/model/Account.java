@@ -27,9 +27,16 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal balance;
+
+    @Column(name = "total_income")
+    // Specifies the name of the column in the database table that maps to the 'totalIncome' field.
     private BigDecimal totalIncome;
+
+    @Column(name = "total_expense")
+    // Specifies the name of the column in the database table that maps to the 'totalExpense' field.
     private BigDecimal totalExpense;
 
+    // relationship(s)
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactionList;
 

@@ -39,7 +39,7 @@ public class Transaction {
     // Specifies the name of the column in the database table that maps to the 'paymentMethod' field.
     private String paymentMethod;
 
-    // Relationships
+    // relationship(s)
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
