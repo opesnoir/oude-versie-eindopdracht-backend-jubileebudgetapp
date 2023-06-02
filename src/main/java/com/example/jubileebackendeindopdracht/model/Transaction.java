@@ -40,5 +40,8 @@ public class Transaction {
     private String paymentMethod;
 
     // Relationships
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
 }

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 // constructors, one empty and one with all variables
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +26,13 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private BigDecimal balance;
+    private BigDecimal totalIncome;
+    private BigDecimal totalExpense;
+
+    @OneToMany(mappedBy = "account")
+    private List<Transaction> transactionList;
+
 
 
 }
