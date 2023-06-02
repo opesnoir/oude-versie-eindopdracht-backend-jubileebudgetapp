@@ -12,11 +12,11 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-// Constructors, one empty and one with all variables
+// constructors, one empty and one with all variables
 @NoArgsConstructor
 @AllArgsConstructor
 
-// Getters and setters for all variable declarations
+// getters and setters for all variable declarations
 @Getter
 @Setter
 

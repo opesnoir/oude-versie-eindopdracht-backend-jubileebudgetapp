@@ -40,6 +40,4 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactionList;
 
-
-
 }
