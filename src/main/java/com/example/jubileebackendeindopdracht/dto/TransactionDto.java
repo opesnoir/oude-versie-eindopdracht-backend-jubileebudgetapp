@@ -32,9 +32,9 @@ public class TransactionDto {
         return income != null || expense != null;
     }
 
-    //@NotNull checks if not null
-    @NotNull(message = "Amount is required")
-    @DecimalMin(value = "0.01", message = "Amount must be greater than or equal to 0.01")
+    //@NotBlank checks if the value is not empty and does not consist of spaces only (not null gave problems when trying to use BigDecimal.ZERO in the code for the account)
+    @NotBlank(message = "Amount is required")
+    @DecimalMin(value = "0.00", message = "Amount must be greater than or equal to 0.00")
     private BigDecimal amount;
 
     @NotNull(message = "Date is required")
