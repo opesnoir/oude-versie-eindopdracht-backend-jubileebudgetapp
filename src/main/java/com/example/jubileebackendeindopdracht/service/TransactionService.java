@@ -68,6 +68,10 @@ public class TransactionService {
         // convert transaction dto to transaction, met helper methode transfer to transaction
         Transaction transaction = transferToTransaction(transactionDto);
 
+        //TODO: account repository aanmaken en daarna deze code aanpassen, nu werkt het niet en in pgadmin is deze tabel colom null
+/*        // set account_id value
+        transaction.setAccount();*/
+
         // save the transaction in the repository
         Transaction savedTransaction = transactionRepository.save(transaction);
 
