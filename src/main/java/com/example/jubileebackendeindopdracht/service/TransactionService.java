@@ -4,7 +4,6 @@ package com.example.jubileebackendeindopdracht.service;
 import com.example.jubileebackendeindopdracht.dto.TransactionDto;
 import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Transaction;
-import com.example.jubileebackendeindopdracht.model.TransactionType;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
