@@ -25,6 +25,7 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
+    private String password;
 
     @Column(name = "email_address")
     private String emailAddress;
