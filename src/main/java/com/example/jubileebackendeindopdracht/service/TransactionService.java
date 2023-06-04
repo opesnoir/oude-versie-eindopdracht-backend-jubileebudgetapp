@@ -4,6 +4,7 @@ package com.example.jubileebackendeindopdracht.service;
 import com.example.jubileebackendeindopdracht.dto.TransactionDto;
 import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Transaction;
+import com.example.jubileebackendeindopdracht.model.TransactionType;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -106,8 +107,7 @@ public class TransactionService {
 
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setId(transaction.getId());
-        transactionDto.setIncome(transaction.getIncome());
-        transactionDto.setExpense(transaction.getExpense());
+        transactionDto.setType(transaction.getType());
         transactionDto.setAmount(transaction.getAmount());
         transactionDto.setDate(transaction.getDate());
         transactionDto.setCategory(transaction.getCategory());
@@ -122,8 +122,7 @@ public class TransactionService {
 
         Transaction transaction = new Transaction();
         transaction.setId(transactionDto.getId());
-        transaction.setIncome(transactionDto.getIncome());
-        transaction.setExpense(transactionDto.getExpense());
+        transaction.setType(transactionDto.getType());
         transaction.setAmount(transactionDto.getAmount());
         transaction.setDate(transactionDto.getDate());
         transaction.setCategory(transactionDto.getCategory());
@@ -137,11 +136,8 @@ public class TransactionService {
     public void updateTransactionFromDto(Transaction existingTransaction, TransactionDto updatedTransactionDto) {
 
         // if the property is null, the property will not be changed. if the property is not null, the property will be changed
-        if (updatedTransactionDto.getIncome() != null) {
-            existingTransaction.setIncome(updatedTransactionDto.getIncome());
-        }
-        if (updatedTransactionDto.getExpense() != null) {
-            existingTransaction.setExpense(updatedTransactionDto.getExpense());
+        if (updatedTransactionDto.getType() != null) {
+            existingTransaction.setType(updatedTransactionDto.getType());
         }
         if (updatedTransactionDto.getAmount() != null) {
             existingTransaction.setAmount(updatedTransactionDto.getAmount());

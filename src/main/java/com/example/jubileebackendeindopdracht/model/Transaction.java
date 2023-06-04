@@ -1,6 +1,8 @@
 package com.example.jubileebackendeindopdracht.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +29,8 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //TODO: tijd over: enumeration type maken en daar dan de optie income en expense inplaatsen
-    private String income;
-    private String expense;
+    @Column(name = "transaction_type_income_or_expense")
+    private TransactionType type;
     private BigDecimal amount;
     private LocalDate date;
     private String category;

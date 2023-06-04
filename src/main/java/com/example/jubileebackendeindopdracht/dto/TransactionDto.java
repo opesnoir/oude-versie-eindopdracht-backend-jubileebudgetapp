@@ -1,9 +1,9 @@
 package com.example.jubileebackendeindopdracht.dto;
 
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import com.example.jubileebackendeindopdracht.model.TransactionType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,12 +24,17 @@ public class TransactionDto {
 
     //variables declaration
     private Long id;
-    private String income;
-    private String expense;
+
+    //enumeration type option income or expense
+    @NotNull(message = "Transaction type cannot be null")
+    @Pattern(regexp = "^(?i)(income|expense)$", message = "Please enter 'income' or 'expense'")
+    @Enumerated(EnumType.STRING)
+    private TransactionType type;
+
     //@AssertTrue boolean checks if income or expense is provided
     @AssertTrue(message = "Either income or expense should be provided")
     private boolean isIncomeOrExpenseProvided(){
-        return income != null || expense != null;
+        return type == TransactionType.INCOME || type == TransactionType.EXPENSE;
     }
 
     //@NotBlank checks if the value is not empty and does not consist of spaces only (not null gave problems when trying to use BigDecimal.ZERO in the code for the account)
