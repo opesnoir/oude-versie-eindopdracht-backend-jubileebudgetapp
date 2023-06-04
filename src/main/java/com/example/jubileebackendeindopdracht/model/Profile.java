@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-
 
 // constructors, one empty and one with all variables
 @NoArgsConstructor
@@ -19,28 +17,18 @@ import java.time.LocalDate;
 @Setter
 
 @Entity
-@Table(name = "transactions")
-public class Transaction {
-
+@Table(name = "profiles")
+public class Profile {
     //variables declaration
     // Primary key (id) of the entity, automatically generated using identity column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "transaction_type_income_or_expense")
-    private TransactionType type;
-    private BigDecimal amount;
-    private LocalDate date;
-    private String category;
-    private String payee;
+    private String username;
 
-    @Column(name = "payment_method")
-    // Specifies the name of the column in the database table that maps to the 'paymentMethod' field.
-    private String paymentMethod;
+    @Column(name = "email_address")
+    private String emailAddress;
 
-    // relationship(s)
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
-
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 }
