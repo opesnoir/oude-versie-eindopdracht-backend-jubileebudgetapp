@@ -21,21 +21,20 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    // getmapping to get all transactions
+    // get all transactions
     @GetMapping
     public List<TransactionDto> getAllTransactions(){
-        // get all transactions using the transactionService
         List<TransactionDto> transactionDtoList = transactionService.getAllTransactions();
         return transactionDtoList;
     }
 
-    // getmapping to get one single transaction
+    /*// getmapping to get one single transaction
     @GetMapping("/{id}")
     public ResponseEntity<TransactionDto> getTransaction(@PathVariable Long id){
         return ResponseEntity.ok(transactionService.getTransaction(id));
-    }
+    }*/
 
-    // postmapping to create a new transaction
+    /*// postmapping to create a new transaction
     @PostMapping
     public ResponseEntity<TransactionDto> createTransaction(@RequestBody TransactionDto transactionDto){
 
@@ -46,21 +45,21 @@ public class TransactionController {
                 .buildAndExpand().toUriString());
         // return a response entity with the appropriate status and the created transaction dto object
         return ResponseEntity.created(uri).body(createdTransactionDto);
-    }
+    }*/
 
-    // put (fully) /patch (partially) mapping to update a single transaction
+    /*// put (fully) /patch (partially) mapping to update a single transaction
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
     public ResponseEntity<TransactionDto> updateTransaction(@PathVariable Long id, @RequestBody TransactionDto updatedTransactionDto) {
         TransactionDto updatedTransaction = transactionService.updateTransaction(id, updatedTransactionDto);
         return ResponseEntity.ok(updatedTransaction);
-    }
+    }*/
 
-    // deletemapping to delete a single transaction
+    /*// deletemapping to delete a single transaction
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTransaction(@PathVariable Long id){
         transactionService.deleteTransaction(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
 
 }

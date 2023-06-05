@@ -11,7 +11,7 @@ public class UserIdNotFoundException extends RuntimeException{
         super();
     }
 
-    public UserIdNotFoundException(String id){
+    public UserIdNotFoundException(Long id){
         super("Failed to find user with ID: " + id);
     }
 
