@@ -17,6 +17,7 @@ public class ProfileController {
     }
 
     //welcome message
+    //TODO: welcome message pas doorgeven bij het aanmaken van account
     @PostMapping("/welcome")
     public ResponseEntity<String> getWelcomeMessage(@RequestBody ProfileDto profileDto) {
         String welcomeMessage = profileService.getWelcomeMessage(profileDto);

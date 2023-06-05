@@ -35,7 +35,7 @@ public class TransactionService {
         for (Transaction transaction : transactions){
 
             // convert the Transaction object to a transaction dto object, see helpen method transferToDto
-            TransactionDto transactionDto = transferToDto(transaction);
+            TransactionDto transactionDto = transferTransactionToTransactionDto(transaction);
 
             // add the transaction dto object to the list
             transactionDtos.add(transactionDto);
@@ -55,7 +55,7 @@ public class TransactionService {
             Transaction transaction = transactionOptional.get();
 
             // convert the transaction object to a transactionDto object
-            return transferToDto(transaction);
+            return transferTransactionToTransactionDto(transaction);
 
         } else { // transaction not found: throw a transaction not found exception
             throw new TransactionNotFoundException(id);
@@ -65,13 +65,13 @@ public class TransactionService {
     // methode to create a single transaction
     public TransactionDto createTransaction(TransactionDto transactionDto){
         // convert transaction dto to transaction, met helper methode transfer to transaction
-        Transaction transaction = transferToTransaction(transactionDto);
+        Transaction transaction = transferTransactionDtoToTransaction(transactionDto);
 
         // save the transaction in the repository
         Transaction savedTransaction = transactionRepository.save(transaction);
 
         // convert the saved Transaction object to a TransactionDto object
-        return transferToDto(savedTransaction);
+        return transferTransactionToTransactionDto(savedTransaction);
     }
 
     // methode to update a single transaction
@@ -86,7 +86,7 @@ public class TransactionService {
         Transaction updatedTransaction = transactionRepository.save(existingTransaction);
 
         // convert the updated transaction object to a dto object
-        return transferToDto(updatedTransaction);
+        return transferTransactionToTransactionDto(updatedTransaction);
     }
 
     // methode to delete a single transaction
@@ -98,12 +98,13 @@ public class TransactionService {
         transactionRepository.delete(transaction);
 
         // convert the transaction object to a transactionDto object
-        return transferToDto(transaction);
+        return transferTransactionToTransactionDto(transaction);
     }
 
     // helper method to convert a Transaction object to a TransactionDto object
-    public TransactionDto transferToDto(Transaction transaction){
+    public TransactionDto transferTransactionToTransactionDto(Transaction transaction){
 
+        //TODO: relaties toevoegen
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setId(transaction.getId());
         transactionDto.setType(transaction.getType());
@@ -117,8 +118,9 @@ public class TransactionService {
     }
 
     // helper method to convert a TransactionDto object to a Transaction object
-    public Transaction transferToTransaction(TransactionDto transactionDto){
+    public Transaction transferTransactionDtoToTransaction(TransactionDto transactionDto){
 
+        //TODO: relaties toevoegen
         Transaction transaction = new Transaction();
         transaction.setId(transactionDto.getId());
         transaction.setType(transactionDto.getType());
@@ -127,6 +129,7 @@ public class TransactionService {
         transaction.setCategory(transactionDto.getCategory());
         transaction.setPayee(transactionDto.getPayee());
         transaction.setPaymentMethod(transactionDto.getPaymentMethod());
+        transaction.setAccount(transactionDto.getAccount());
 
         return transaction;
     }

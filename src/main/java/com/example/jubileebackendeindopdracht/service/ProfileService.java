@@ -18,6 +18,7 @@ public class ProfileService {
         this.profileRepository = profileRepository;
     }
 
+    //TODO: welcome message pas doorgeven bij het aanmaken van account, je wil het maar 1 ker zien het hoeft niet terug gezocht te worden
     public String getWelcomeMessage(ProfileDto profileDto) {
         if (profileDto == null){
             return "Welcome, user!";

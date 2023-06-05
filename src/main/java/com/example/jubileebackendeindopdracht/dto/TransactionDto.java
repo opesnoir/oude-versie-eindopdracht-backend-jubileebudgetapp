@@ -1,5 +1,6 @@
 package com.example.jubileebackendeindopdracht.dto;
 
+import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.TransactionType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -55,6 +56,7 @@ public class TransactionDto {
     @NotBlank(message = "Payment method is required")
     private String paymentMethod;
 
-    // Relationships
+    // Relationship(s)
+    private Account account;
 
 }
