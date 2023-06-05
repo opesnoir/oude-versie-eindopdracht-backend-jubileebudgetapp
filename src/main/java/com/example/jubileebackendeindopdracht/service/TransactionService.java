@@ -10,7 +10,6 @@ import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,7 +65,7 @@ public class TransactionService {
         }
     }
 
-    /*// methode to create a transaction with account id
+    // methode to create a transaction with account id
     public TransactionDto createTransaction(TransactionDto transactionDto, Long accountId) {
 
         Account account = accountRepository.findById(accountId)
@@ -77,8 +76,11 @@ public class TransactionService {
         Transaction transaction = transferTransactionDtoToTransaction(transactionDto);
         Transaction savedTransaction = transactionRepository.save(transaction);
 
+        account.getTransactionList().add(savedTransaction);
+        accountRepository.save(account);
+
         return transferTransactionToTransactionDto(savedTransaction);
-    }*/
+    }
 
         //TODO: de onderstaande, tevens oude create methode, verwijderen als de nieuwe werkt
 /*    public TransactionDto createTransaction(TransactionDto transactionDto){
