@@ -17,6 +17,7 @@ public class TransactionService {
 
     // repository for accessing transaction data
     private final TransactionRepository transactionRepository;
+    private final AccountRe
 
     // constructor for initializing TransactionService with the corresponding repository
     public TransactionService(TransactionRepository transactionRepository) {
