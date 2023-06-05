@@ -46,29 +46,25 @@ public class TransactionService {
     }
 
 
-/*    public List<TransactionDto> getAllTransactions(){
-        List<TransactionDto> transactionDtos = new ArrayList<>();
-        List<Transaction> transactions = transactionRepository.findAll();
 
-        for (Transaction transaction : transactions){
-            TransactionDto transactionDto = transferTransactionToTransactionDto(transaction);
-            transactionDtos.add(transactionDto);
-        }
-        return transactionDtos;
-    }*/
-
-    /*// methode to get one single transaction
+    // methode to get one single transaction
     public TransactionDto getTransaction(Long id){
         Optional<Transaction> transactionOptional = transactionRepository.findById(id);
 
         if (transactionOptional.isPresent()){
             Transaction transaction = transactionOptional.get();
-            return transferTransactionToTransactionDto(transaction);
+            TransactionDto transactionDto = transferTransactionToTransactionDto(transaction);
+
+            Account account = transaction.getAccount();
+            if (account != null){
+                transactionDto.setAccountId(account.getId());
+            }
+
+            return transactionDto;
         } else {
             throw new TransactionNotFoundException(id);
         }
     }
-*/
 
     /*// methode to create a transaction with account id
     public TransactionDto createTransaction(TransactionDto transactionDto, Long accountId) {

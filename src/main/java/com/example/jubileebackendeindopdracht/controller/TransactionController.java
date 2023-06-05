@@ -28,11 +28,11 @@ public class TransactionController {
         return transactionDtoList;
     }
 
-    /*// getmapping to get one single transaction
+    // getmapping to get one single transaction
     @GetMapping("/{id}")
     public ResponseEntity<TransactionDto> getTransaction(@PathVariable Long id){
         return ResponseEntity.ok(transactionService.getTransaction(id));
-    }*/
+    }
 
     /*// postmapping to create a new transaction
     @PostMapping
