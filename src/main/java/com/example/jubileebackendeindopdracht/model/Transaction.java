@@ -27,8 +27,11 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type_income_or_expense")
     private TransactionType type;
+
     private BigDecimal amount;
     private LocalDate date;
     private String category;
