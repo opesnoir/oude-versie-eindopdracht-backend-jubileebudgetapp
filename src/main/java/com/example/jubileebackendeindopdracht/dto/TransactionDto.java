@@ -4,6 +4,7 @@ import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.TransactionType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -57,6 +58,8 @@ public class TransactionDto {
     private String paymentMethod;
 
     // Relationship(s)
+    @Valid
     private Account account;
+    private Long accountId;
 
 }

@@ -3,7 +3,9 @@ package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.TransactionDto;
 import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundException;
+import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.Transaction;
+import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,12 @@ public class TransactionService {
 
     // repository for accessing transaction data
     private final TransactionRepository transactionRepository;
-    private final AccountRe
+    private final AccountRepository accountRepository;
 
     // constructor for initializing TransactionService with the corresponding repository
-    public TransactionService(TransactionRepository transactionRepository) {
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository) {
         this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
     }
 
     // methode to get all transactions from the repository
@@ -114,6 +117,12 @@ public class TransactionService {
         transactionDto.setCategory(transaction.getCategory());
         transactionDto.setPayee(transaction.getPayee());
         transactionDto.setPaymentMethod(transaction.getPaymentMethod());
+
+        // get id
+        Account account = transaction.getAccount();
+            if (account != null){
+                transactionDto.setAccountId(account.getId());
+            }
 
         return transactionDto;
     }
