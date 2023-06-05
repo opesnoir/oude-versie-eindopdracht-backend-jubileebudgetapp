@@ -9,12 +9,9 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-
-// constructors, one empty and one with all variables
 @NoArgsConstructor
 @AllArgsConstructor
 
-// getters and setters for all variable declarations
 @Getter
 @Setter
 
@@ -22,8 +19,6 @@ import java.time.LocalDate;
 @Table(name = "transactions")
 public class Transaction {
 
-    //variables declaration
-    // Primary key (id) of the entity, automatically generated using identity column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,10 +33,8 @@ public class Transaction {
     private String payee;
 
     @Column(name = "payment_method")
-    // Specifies the name of the column in the database table that maps to the 'paymentMethod' field.
     private String paymentMethod;
 
-    // relationship(s)
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
