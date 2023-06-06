@@ -2,9 +2,14 @@ package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.AccountDto;
 import com.example.jubileebackendeindopdracht.model.Account;
+import com.example.jubileebackendeindopdracht.model.Transaction;
+import com.example.jubileebackendeindopdracht.model.TransactionType;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -12,17 +17,35 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final TransactionRepository transactionRepository;
 
-    public AccountService(AccountRepository accountRepository, TransactionRepository transactionRepository) {
+    private final List<Transaction> transactionList;
+
+    public AccountService(AccountRepository accountRepository, TransactionRepository transactionRepository, List<Transaction> transactionList) {
         this.accountRepository = accountRepository;
         this.transactionRepository = transactionRepository;
+        this.transactionList = transactionList;
     }
 
-    // methode to create an account
+    // create account
     public AccountDto createAccount(AccountDto accountDto){
         Account account = transferAccountDtoToAccount(accountDto);
         Account savedAccount = accountRepository.save(account);
         return transferAccountToAccountDto(savedAccount);
     }
+
+    //TODO: // delete account
+
+    // calculate total income
+    public BigDecimal calculateTotalIncome(){
+        BigDecimal totalIncome = BigDecimal.valueOf(0);
+
+        for (Transaction transaction : transactionList){
+            if (transaction.getType()== TransactionType.INCOME){
+                totalIncome = totalIncome.add(transaction.getAmount());
+            }
+        }
+        return totalIncome;
+    }
+
 
     // helper methods
     public Account transferAccountDtoToAccount (AccountDto accountDto){

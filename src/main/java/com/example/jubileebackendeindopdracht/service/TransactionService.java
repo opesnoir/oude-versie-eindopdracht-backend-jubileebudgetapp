@@ -101,7 +101,7 @@ public class TransactionService {
         return transferTransactionToTransactionDto(transaction);
     }
 
-    // helper method to convert a Transaction object to a TransactionDto object
+    // helper methods
     public TransactionDto transferTransactionToTransactionDto(Transaction transaction){
 
         TransactionDto transactionDto = new TransactionDto();
@@ -121,10 +121,8 @@ public class TransactionService {
         return transactionDto;
     }
 
-    // helper method to convert a TransactionDto object to a Transaction object
     public Transaction transferTransactionDtoToTransaction(TransactionDto transactionDto){
 
-        //TODO: relaties toevoegen
         Transaction transaction = new Transaction();
         transaction.setId(transactionDto.getId());
         transaction.setType(transactionDto.getType());
@@ -138,7 +136,6 @@ public class TransactionService {
         return transaction;
     }
 
-    // helper method to update (a part of all or all) properties of existing transaction object from a transaction dto object
     public void updateTransactionFromDto(Transaction existingTransaction, TransactionDto updatedTransactionDto) {
 
         if (updatedTransactionDto.getType() != null) {

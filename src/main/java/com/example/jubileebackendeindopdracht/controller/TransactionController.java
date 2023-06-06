@@ -13,10 +13,8 @@ import java.util.List;
 @RequestMapping("/transactions")
 public class TransactionController {
 
-    // variables
     private final TransactionService transactionService;
 
-    // constructor
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
@@ -34,7 +32,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.getTransaction(id));
     }
 
-    // create new transaction
+    // create transaction
     @PostMapping
     public ResponseEntity<TransactionDto> createTransaction(@RequestBody TransactionDto transactionDto){
 
