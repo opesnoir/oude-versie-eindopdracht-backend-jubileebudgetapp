@@ -3,12 +3,10 @@ package com.example.jubileebackendeindopdracht.controller;
 import com.example.jubileebackendeindopdracht.dto.AccountDto;
 import com.example.jubileebackendeindopdracht.service.AccountService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.net.URI;
 
 @RestController
@@ -29,6 +27,9 @@ public class AccountController {
                 .buildAndExpand(createdAccountDto.getId()).toUriString());
         return ResponseEntity.created(uri).body(createdAccountDto);
     }
+
+
+
 
 
 

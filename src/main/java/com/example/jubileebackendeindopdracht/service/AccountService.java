@@ -34,17 +34,10 @@ public class AccountService {
 
     //TODO: // delete account
 
-    // calculate total income
-    public BigDecimal calculateTotalIncome(){
-        BigDecimal totalIncome = BigDecimal.valueOf(0);
 
-        for (Transaction transaction : transactionList){
-            if (transaction.getType()== TransactionType.INCOME){
-                totalIncome = totalIncome.add(transaction.getAmount());
-            }
-        }
-        return totalIncome;
-    }
+
+
+
 
 
     // helper methods
