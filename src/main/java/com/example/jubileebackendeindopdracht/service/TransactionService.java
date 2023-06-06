@@ -44,8 +44,6 @@ public class TransactionService {
         return transactionDtos;
     }
 
-
-
     // methode to get one single transaction
     public TransactionDto getTransaction(Long id){
         Optional<Transaction> transactionOptional = transactionRepository.findById(id);
@@ -82,14 +80,9 @@ public class TransactionService {
         return transferTransactionToTransactionDto(savedTransaction);
     }
 
-        //TODO: de onderstaande, tevens oude create methode, verwijderen als de nieuwe werkt
-/*    public TransactionDto createTransaction(TransactionDto transactionDto){
-        Transaction transaction = transferTransactionDtoToTransaction(transactionDto);
-        Transaction savedTransaction = transactionRepository.save(transaction);
-        return transferTransactionToTransactionDto(savedTransaction);
-    }*/
 
-    /*// methode to update a single transaction
+
+    // methode to update a single transaction
     public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto) {
         Transaction existingTransaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
@@ -98,7 +91,7 @@ public class TransactionService {
         Transaction updatedTransaction = transactionRepository.save(existingTransaction);
 
         return transferTransactionToTransactionDto(updatedTransaction);
-    }*/
+    }
 
     /*// methode to delete a single transaction
     public TransactionDto deleteTransaction(Long id) {

@@ -34,7 +34,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.getTransaction(id));
     }
 
-    // postmapping to create a new transaction
+    // create new transaction
     @PostMapping
     public ResponseEntity<TransactionDto> createTransaction(@RequestBody TransactionDto transactionDto){
 
@@ -50,12 +50,12 @@ public class TransactionController {
         return ResponseEntity.created(uri).body(createdTransactionDto);
     }
 
-    /*// put (fully) /patch (partially) mapping to update a single transaction
+    // update transaction put (fully) /patch (partially)
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
     public ResponseEntity<TransactionDto> updateTransaction(@PathVariable Long id, @RequestBody TransactionDto updatedTransactionDto) {
         TransactionDto updatedTransaction = transactionService.updateTransaction(id, updatedTransactionDto);
         return ResponseEntity.ok(updatedTransaction);
-    }*/
+    }
 
     /*// deletemapping to delete a single transaction
     @DeleteMapping("/{id}")
