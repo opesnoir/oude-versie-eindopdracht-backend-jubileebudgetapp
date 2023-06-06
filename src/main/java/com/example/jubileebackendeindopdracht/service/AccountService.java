@@ -4,12 +4,10 @@ import com.example.jubileebackendeindopdracht.dto.AccountDto;
 import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.Transaction;
-import com.example.jubileebackendeindopdracht.model.TransactionType;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -33,7 +31,7 @@ public class AccountService {
         return transferAccountToAccountDto(savedAccount);
     }
 
-    //TODO: authorisatie toevoegen, dat enkel de admin een account kan verwijderen
+    //TODO: autorisatie toevoegen dat enkel de admin een account kan verwijderen
     // delete account
     public AccountDto deleteAccount(Long id){
         Account account = accountRepository.findById(id)
@@ -42,13 +40,6 @@ public class AccountService {
         accountRepository.delete(account);
         return transferAccountToAccountDto(account);
     }
-
-
-
-
-
-
-
 
     // helper methods
     public Account transferAccountDtoToAccount (AccountDto accountDto){

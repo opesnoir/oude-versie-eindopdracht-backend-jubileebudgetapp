@@ -6,10 +6,12 @@ import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundExcep
 import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.Transaction;
+import com.example.jubileebackendeindopdracht.model.TransactionType;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -79,7 +81,6 @@ public class TransactionService {
 
         return transferTransactionToTransactionDto(savedTransaction);
     }
-
 
     // update single transaction
     public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto) {
@@ -157,4 +158,10 @@ public class TransactionService {
             existingTransaction.setPaymentMethod(updatedTransactionDto.getPaymentMethod());
         }
     }
+
+    // calculate methodes
+    public BigDecimal calculateTotalIncome() {
+        return transactionRepository.calculateTotalIncome();
+    }
+
 }
