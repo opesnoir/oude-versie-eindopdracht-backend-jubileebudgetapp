@@ -26,7 +26,7 @@ public class TransactionService {
         this.accountRepository = accountRepository;
     }
 
-    // methode to get all transactions from the repository with account id
+    // get all transactions from the repository with account id
     public List<TransactionDto> getAllTransactions(){
 
         List<TransactionDto> transactionDtos = new ArrayList<>();
@@ -44,7 +44,7 @@ public class TransactionService {
         return transactionDtos;
     }
 
-    // methode to get one single transaction
+    // get single transaction
     public TransactionDto getTransaction(Long id){
         Optional<Transaction> transactionOptional = transactionRepository.findById(id);
 
@@ -63,7 +63,7 @@ public class TransactionService {
         }
     }
 
-    // methode to create a transaction with account id
+    // create transaction with account id
     public TransactionDto createTransaction(TransactionDto transactionDto, Long accountId) {
 
         Account account = accountRepository.findById(accountId)
@@ -81,8 +81,7 @@ public class TransactionService {
     }
 
 
-
-    // methode to update a single transaction
+    // update single transaction
     public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto) {
         Transaction existingTransaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
