@@ -17,11 +17,13 @@ public class AccountService {
     private final TransactionRepository transactionRepository;
 
     private final List<Transaction> transactionList;
+    private final TransactionService transactionService;
 
-    public AccountService(AccountRepository accountRepository, TransactionRepository transactionRepository, List<Transaction> transactionList) {
+    public AccountService(AccountRepository accountRepository, TransactionRepository transactionRepository, List<Transaction> transactionList, TransactionService transactionService) {
         this.accountRepository = accountRepository;
         this.transactionRepository = transactionRepository;
         this.transactionList = transactionList;
+        this.transactionService = transactionService;
     }
 
     // create account
@@ -59,7 +61,7 @@ public class AccountService {
 
         accountDto.setId(account.getId());
         accountDto.setBalance(account.getBalance());
-        accountDto.setTotalIncome(account.getTotalIncome());
+        accountDto.setTotalIncome(transactionService.calculateTotalIncome());
         accountDto.setTotalExpense(account.getTotalExpense());
 
         accountDto.setTransactionList(account.getTransactionList());
