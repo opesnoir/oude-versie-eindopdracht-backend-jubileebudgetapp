@@ -93,14 +93,14 @@ public class TransactionService {
         return transferTransactionToTransactionDto(updatedTransaction);
     }
 
-    /*// methode to delete a single transaction
+    // delete single transaction
     public TransactionDto deleteTransaction(Long id) {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
 
         transactionRepository.delete(transaction);
         return transferTransactionToTransactionDto(transaction);
-    }*/
+    }
 
     // helper method to convert a Transaction object to a TransactionDto object
     public TransactionDto transferTransactionToTransactionDto(Transaction transaction){
