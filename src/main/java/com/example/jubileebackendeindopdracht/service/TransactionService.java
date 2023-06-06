@@ -168,4 +168,11 @@ public class TransactionService {
         return transactionRepository.calculateTotalExpense();
     }
 
+
+    public BigDecimal calculateBalance(){
+        BigDecimal totalIncome = calculateTotalIncome();
+        BigDecimal totalExpense = calculateTotalExpense();
+        return totalIncome.subtract(totalExpense);
+    }
+
 }

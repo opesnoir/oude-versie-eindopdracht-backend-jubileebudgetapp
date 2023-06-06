@@ -8,6 +8,7 @@ import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -44,6 +45,7 @@ public class AccountService {
     }
 
     // helper methods
+
     public Account transferAccountDtoToAccount (AccountDto accountDto){
         Account account = new Account();
         account.setId(accountDto.getId());
@@ -61,12 +63,14 @@ public class AccountService {
 
         accountDto.setId(account.getId());
         accountDto.setBalance(account.getBalance());
-        accountDto.setTotalIncome(transactionService.calculateTotalIncome());
-        accountDto.setTotalExpense(transactionService.calculateTotalExpense());
+        accountDto.setTotalIncome(account.getTotalIncome());
+        accountDto.setTotalExpense(account.getTotalExpense());
 
         accountDto.setTransactionList(account.getTransactionList());
 
         return accountDto;
     }
+
+
 
 }

@@ -76,4 +76,10 @@ public class TransactionController {
         return ResponseEntity.ok(totalExpense);
     }
 
+    @GetMapping("/calculate-total-balance")
+    public ResponseEntity<BigDecimal> calculateBalance(){
+        BigDecimal totalBalance = transactionService.calculateBalance();
+        return ResponseEntity.ok(totalBalance);
+    }
+
 }
