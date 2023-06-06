@@ -28,6 +28,13 @@ public class AccountController {
         return ResponseEntity.created(uri).body(createdAccountDto);
     }
 
+    // delete transaction by id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAccount(@PathVariable Long id){
+        accountService.deleteAccount(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 

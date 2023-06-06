@@ -1,6 +1,7 @@
 package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.AccountDto;
+import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.Transaction;
 import com.example.jubileebackendeindopdracht.model.TransactionType;
@@ -32,7 +33,16 @@ public class AccountService {
         return transferAccountToAccountDto(savedAccount);
     }
 
-    //TODO: // delete account
+    //TODO: authorisatie toevoegen, dat enkel de admin een account kan verwijderen
+    // delete account
+    public AccountDto deleteAccount(Long id){
+        Account account = accountRepository.findById(id)
+            .orElseThrow(()-> new UserIdNotFoundException(id));
+
+        accountRepository.delete(account);
+        return transferAccountToAccountDto(account);
+    }
+
 
 
 
