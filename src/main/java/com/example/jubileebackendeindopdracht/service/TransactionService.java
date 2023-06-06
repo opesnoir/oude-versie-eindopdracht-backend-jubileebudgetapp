@@ -159,9 +159,13 @@ public class TransactionService {
         }
     }
 
-    // calculate methodes
+    // calculate methodes used in account-service
     public BigDecimal calculateTotalIncome() {
         return transactionRepository.calculateTotalIncome();
+    }
+
+    public BigDecimal calculateTotalExpense(){
+        return transactionRepository.calculateTotalExpense();
     }
 
 }

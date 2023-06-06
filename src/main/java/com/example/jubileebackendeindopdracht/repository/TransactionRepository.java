@@ -17,5 +17,7 @@ public interface TransactionRepository extends JpaRepository <Transaction, Long>
     @Query("SELECT SUM(t.amount) FROM Transaction t WHERE t.type = 'INCOME'")
     BigDecimal calculateTotalIncome();
 
+    @Query("SELECT SUM(t.amount) FROM Transaction t WHERE t.type = 'EXPENSE'")
+    BigDecimal calculateTotalExpense();
 
 }

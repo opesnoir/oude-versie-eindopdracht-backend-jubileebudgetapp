@@ -62,7 +62,7 @@ public class AccountService {
         accountDto.setId(account.getId());
         accountDto.setBalance(account.getBalance());
         accountDto.setTotalIncome(transactionService.calculateTotalIncome());
-        accountDto.setTotalExpense(account.getTotalExpense());
+        accountDto.setTotalExpense(transactionService.calculateTotalExpense());
 
         accountDto.setTransactionList(account.getTransactionList());
 

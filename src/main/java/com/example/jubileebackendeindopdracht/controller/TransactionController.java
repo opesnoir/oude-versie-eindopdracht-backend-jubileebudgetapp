@@ -69,4 +69,11 @@ public class TransactionController {
         BigDecimal totalIncome = transactionService.calculateTotalIncome();
         return ResponseEntity.ok(totalIncome);
     }
+
+    @GetMapping("/calculate-total-expense")
+    public ResponseEntity<BigDecimal> calculateTotalExpense(){
+        BigDecimal totalExpense = transactionService.calculateTotalExpense();
+        return ResponseEntity.ok(totalExpense);
+    }
+
 }
