@@ -3,9 +3,12 @@ package com.example.jubileebackendeindopdracht.service;
 import com.example.jubileebackendeindopdracht.dto.BalanceDto;
 import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Balance;
+import com.example.jubileebackendeindopdracht.model.Transaction;
 import com.example.jubileebackendeindopdracht.repository.BalanceRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BalanceService {
@@ -29,8 +32,13 @@ public class BalanceService {
             throw new UserIdNotFoundException();
         }
 
+        if (savedBalance.getBalance() == null){
+            throw new RuntimeException("Cannot create balance with no income and expense transactions");
+        }
+
         return transferBalanceToBalanceDto(savedBalance);
     }
+
     // delete
 
 
