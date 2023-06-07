@@ -76,7 +76,7 @@ public class TransactionService {
         return transferTransactionToTransactionDto(savedTransaction);
     }
 
-    // update single transaction
+    // update transaction
     public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto) {
         Transaction existingTransaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
@@ -87,7 +87,7 @@ public class TransactionService {
         return transferTransactionToTransactionDto(updatedTransaction);
     }
 
-    // delete single transaction
+    // delete transaction
     public TransactionDto deleteTransaction(Long id) {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException(id));

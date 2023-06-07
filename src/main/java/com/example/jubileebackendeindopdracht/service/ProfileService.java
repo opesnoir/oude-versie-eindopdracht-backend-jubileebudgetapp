@@ -1,7 +1,6 @@
 package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.ProfileDto;
-import com.example.jubileebackendeindopdracht.exception.UsernameNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Profile;
 import com.example.jubileebackendeindopdracht.repository.ProfileRepository;
 import org.springframework.stereotype.Service;

@@ -25,8 +25,10 @@ public class BalanceController {
     @PostMapping
     public ResponseEntity<BalanceDto> createBalance(@RequestBody BalanceDto balanceDto){
         BalanceDto createdBalanceDto = balanceService.createBalance(balanceDto);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(createdBalanceDto.getId()).toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdBalanceDto.getId())
+                .toUriString());
         return ResponseEntity.created(uri).body(createdBalanceDto);
     }
 

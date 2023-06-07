@@ -8,19 +8,17 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-// constructors, one empty and one with all variables
+
 @NoArgsConstructor
 @AllArgsConstructor
 
-// getters and setters for all variable declarations
 @Getter
 @Setter
 
 @Entity
 @Table(name = "profiles")
 public class Profile {
-    //variables declaration
-    // Primary key (id) of the entity, automatically generated using identity column
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,4 +30,5 @@ public class Profile {
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
 }

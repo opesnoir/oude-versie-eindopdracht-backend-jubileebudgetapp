@@ -20,14 +20,14 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    // get all transactions
+    // get transactions
     @GetMapping
     public List<TransactionDto> getAllTransactions(){
         List<TransactionDto> transactionDtoList = transactionService.getAllTransactions();
         return transactionDtoList;
     }
 
-    // get one transaction by id
+    // get transaction by id
     @GetMapping("/{id}")
     public ResponseEntity<TransactionDto> getTransaction(@PathVariable Long id){
         return ResponseEntity.ok(transactionService.getTransaction(id));

@@ -11,17 +11,15 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-// constructors, one empty and one with all variables
+
 @NoArgsConstructor
 @AllArgsConstructor
 
-// getters and setters for all variable declarations
 @Getter
 @Setter
 
 public class ProfileDto {
 
-    //variables declaration
     private Long id;
 
     @Size(min = 3, max = 50)

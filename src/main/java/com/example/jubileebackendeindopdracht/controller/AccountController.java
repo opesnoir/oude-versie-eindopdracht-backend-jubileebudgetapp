@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.math.BigDecimal;
 import java.net.URI;
 
 @RestController
@@ -23,8 +22,10 @@ public class AccountController {
     @PostMapping()
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
         AccountDto createdAccountDto = accountService.createAccount(accountDto);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(createdAccountDto.getId()).toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdAccountDto.getId())
+                .toUriString());
         return ResponseEntity.created(uri).body(createdAccountDto);
     }
 

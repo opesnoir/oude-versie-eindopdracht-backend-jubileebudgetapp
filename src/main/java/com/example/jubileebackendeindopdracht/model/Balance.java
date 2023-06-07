@@ -32,5 +32,4 @@ public class Balance {
     @OneToMany(mappedBy = "balance")
     private List<Transaction> transactionList;
 
-
 }
