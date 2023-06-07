@@ -24,7 +24,7 @@ public class Transaction {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "transaction_type_income_or_expense")
+    @Column(name = "transaction_type")
     private TransactionType type;
 
     private BigDecimal amount;
@@ -38,5 +38,9 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "balance_id")
+    private Balance balance;
 
 }

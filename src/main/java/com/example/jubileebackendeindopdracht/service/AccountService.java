@@ -45,7 +45,6 @@ public class AccountService {
     }
 
     // helper methods
-
     public Account transferAccountDtoToAccount (AccountDto accountDto){
         Account account = new Account();
         account.setId(accountDto.getId());
@@ -70,7 +69,4 @@ public class AccountService {
 
         return accountDto;
     }
-
-
-
 }
