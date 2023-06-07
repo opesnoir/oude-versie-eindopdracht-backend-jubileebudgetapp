@@ -1,6 +1,7 @@
 package com.example.jubileebackendeindopdracht.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,11 +25,15 @@ public class Profile {
     private Long id;
     private String username;
     private String password;
+    private String email;
 
-    @Column(name = "email_address")
-    private String emailAddress;
-
+    @Past
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 }

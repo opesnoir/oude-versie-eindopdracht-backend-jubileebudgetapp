@@ -36,7 +36,7 @@ public class ProfileService {
         profileDto.setId(profile.getId());
         profileDto.setUsername(profile.getUsername());
         profileDto.setPassword(profile.getPassword());
-        profileDto.setEmailAddress(profile.getEmailAddress());
+        profileDto.setEmailAddress(profile.getEmail());
         profileDto.setBirthDate(profile.getBirthDate());
 
         return profileDto;
@@ -50,7 +50,7 @@ public class ProfileService {
         profile.setId(profileDto.getId());
         profile.setUsername(profileDto.getUsername());
         profile.setPassword(profileDto.getPassword());
-        profile.setEmailAddress(profileDto.getEmailAddress());
+        profile.setEmail(profileDto.getEmailAddress());
         profile.setBirthDate(profileDto.getBirthDate());
 
         return profile;
@@ -70,7 +70,7 @@ public class ProfileService {
             existingProfile.setPassword(updatedProfileDto.getPassword());
         }
         if (updatedProfileDto.getEmailAddress() != null) {
-            existingProfile.setEmailAddress(updatedProfileDto.getEmailAddress());
+            existingProfile.setEmail(updatedProfileDto.getEmailAddress());
         }
         if (updatedProfileDto.getBirthDate() != null) {
             existingProfile.setBirthDate(updatedProfileDto.getBirthDate());

@@ -1,10 +1,7 @@
-package com.example.jubileebackendeindopdracht.dto;
+package com.example.jubileebackendeindopdracht.model;
 
-import com.example.jubileebackendeindopdracht.model.User;
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,20 +9,27 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 
 @Getter
 @Setter
 
-public class ProfileDto {
+@Entity
+@Table(name = "users")
+public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String username;
     private String password;
-    private String emailAddress;
+    @Column(unique = true)
+    private String email;
+
+    @Past
+    @Column(name = "birth_date")
     private LocalDate birthDate;
-    private User user;
 
 }
