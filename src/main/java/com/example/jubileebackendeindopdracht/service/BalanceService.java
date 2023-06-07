@@ -1,6 +1,7 @@
 package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.BalanceDto;
+import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Balance;
 import com.example.jubileebackendeindopdracht.repository.BalanceRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
@@ -18,6 +19,21 @@ public class BalanceService {
         this.transactionRepository = transactionRepository;
         this.transactionService = transactionService;
     }
+
+    // create
+    public BalanceDto createBalance(BalanceDto balanceDto){
+        Balance balance = transferBalanceDtoToBalance(balanceDto);
+        Balance savedBalance = balanceRepository.save(balance);
+
+        if (savedBalance.getId() == null){
+            throw new UserIdNotFoundException();
+        }
+
+        return transferBalanceToBalanceDto(savedBalance);
+    }
+    // delete
+
+
 
     // helper methods
     public Balance transferBalanceDtoToBalance(BalanceDto balanceDto){
