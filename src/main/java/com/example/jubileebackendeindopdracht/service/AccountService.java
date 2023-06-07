@@ -7,6 +7,7 @@ import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Service
 public class AccountService {
@@ -41,7 +42,7 @@ public class AccountService {
         Account account = new Account();
 
         account.setId(accountDto.getId());
-        account.setDateCreated(accountDto.getDateCreated());
+        account.setDateCreated(LocalDate.now());
 
         BigDecimal balance = transactionService.calculateBalance();
         if (balance != null){
@@ -57,7 +58,7 @@ public class AccountService {
         AccountDto accountDto = new AccountDto();
 
         accountDto.setId(account.getId());
-        accountDto.setDateCreated(account.getDateCreated());
+        accountDto.setDateCreated(LocalDate.now());
 
         BigDecimal balance = transactionService.calculateBalance();
         if (balance != null){
