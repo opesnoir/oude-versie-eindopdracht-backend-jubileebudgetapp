@@ -3,26 +3,19 @@ package com.example.jubileebackendeindopdracht.service;
 import com.example.jubileebackendeindopdracht.dto.AccountDto;
 import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Account;
-import com.example.jubileebackendeindopdracht.model.Transaction;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
-import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Service
 public class AccountService {
 
     private final AccountRepository accountRepository;
-    private final TransactionRepository transactionRepository;
-
-    private final List<Transaction> transactionList;
     private final TransactionService transactionService;
 
-    public AccountService(AccountRepository accountRepository, TransactionRepository transactionRepository, List<Transaction> transactionList, TransactionService transactionService) {
+    public AccountService(AccountRepository accountRepository, TransactionService transactionService) {
         this.accountRepository = accountRepository;
-        this.transactionRepository = transactionRepository;
-        this.transactionList = transactionList;
         this.transactionService = transactionService;
     }
 
@@ -46,10 +39,14 @@ public class AccountService {
     // helper methods
     public Account transferAccountDtoToAccount (AccountDto accountDto){
         Account account = new Account();
+
         account.setId(accountDto.getId());
-        account.setBalance(accountDto.getBalance());
-        account.setTotalIncome(accountDto.getTotalIncome());
-        account.setTotalExpense(accountDto.getTotalExpense());
+        account.setDateCreated(accountDto.getDateCreated());
+
+        BigDecimal balance = transactionService.calculateBalance();
+        if (balance != null){
+            account.setBalance(balance);
+        }
 
         account.setTransactionList(accountDto.getTransactionList());
 
@@ -60,12 +57,19 @@ public class AccountService {
         AccountDto accountDto = new AccountDto();
 
         accountDto.setId(account.getId());
-        accountDto.setBalance(account.getBalance());
-        accountDto.setTotalIncome(account.getTotalIncome());
-        accountDto.setTotalExpense(account.getTotalExpense());
+        accountDto.setDateCreated(account.getDateCreated());
+
+        BigDecimal balance = transactionService.calculateBalance();
+        if (balance != null){
+            accountDto.setBalance(balance);
+        }
 
         accountDto.setTransactionList(account.getTransactionList());
 
         return accountDto;
     }
+
+
+
+
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 // constructors, one empty and one with all variables
@@ -24,15 +25,11 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
     private BigDecimal balance;
-
-    @Column(name = "total_income")
-    private BigDecimal totalIncome;
-
-    @Column(name = "total_expense")
-    private BigDecimal totalExpense;
 
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactionList;
-
 }

@@ -6,7 +6,6 @@ import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundExcep
 import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.Transaction;
-import com.example.jubileebackendeindopdracht.model.TransactionType;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 
 @Service
@@ -46,23 +45,18 @@ public class TransactionService {
         return transactionDtos;
     }
 
-    // get single transaction
+    // get transaction
     public TransactionDto getTransaction(Long id){
-        Optional<Transaction> transactionOptional = transactionRepository.findById(id);
+        Transaction transaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new TransactionNotFoundException(id));
 
-        if (transactionOptional.isPresent()){
-            Transaction transaction = transactionOptional.get();
-            TransactionDto transactionDto = transferTransactionToTransactionDto(transaction);
+        TransactionDto transactionDto = transferTransactionToTransactionDto(transaction);
 
-            Account account = transaction.getAccount();
-            if (account != null){
-                transactionDto.setAccountId(account.getId());
-            }
-
-            return transactionDto;
-        } else {
-            throw new TransactionNotFoundException(id);
+        Account account = transaction.getAccount();
+        if (account != null){
+            transactionDto.setAccountId(account.getId());
         }
+        return transactionDto;
     }
 
     // create transaction with account id
@@ -87,7 +81,7 @@ public class TransactionService {
         Transaction existingTransaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
 
-        updateTransactionFromDto(existingTransaction, updatedTransactionDto);
+        updateTransactionFromTransactionDto(existingTransaction, updatedTransactionDto);
         Transaction updatedTransaction = transactionRepository.save(existingTransaction);
 
         return transferTransactionToTransactionDto(updatedTransaction);
@@ -137,7 +131,7 @@ public class TransactionService {
         return transaction;
     }
 
-    public void updateTransactionFromDto(Transaction existingTransaction, TransactionDto updatedTransactionDto) {
+    public void updateTransactionFromTransactionDto(Transaction existingTransaction, TransactionDto updatedTransactionDto) {
 
         if (updatedTransactionDto.getType() != null) {
             existingTransaction.setType(updatedTransactionDto.getType());

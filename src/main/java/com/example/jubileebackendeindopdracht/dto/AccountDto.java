@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
@@ -19,9 +20,8 @@ import java.util.List;
 public class AccountDto {
 
     private Long id;
+    private LocalDate dateCreated;
     private BigDecimal balance;
-    private BigDecimal totalIncome;
-    private BigDecimal totalExpense;
     private List<Transaction> transactionList;
 
     @Valid
