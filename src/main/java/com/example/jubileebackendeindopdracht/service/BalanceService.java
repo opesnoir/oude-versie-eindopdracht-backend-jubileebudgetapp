@@ -39,10 +39,6 @@ public class BalanceService {
         return transferBalanceToBalanceDto(savedBalance);
     }
 
-    // delete
-
-
-
     // helper methods
     public Balance transferBalanceDtoToBalance(BalanceDto balanceDto){
         Balance balance = new Balance();
