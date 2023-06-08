@@ -28,4 +28,7 @@ public class ContractUpload {
     @Column(name = "contract_pdf_url")
     private String contractPdfUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 }

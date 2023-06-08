@@ -64,7 +64,6 @@ public class TransactionService {
 
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new UserIdNotFoundException(accountId));
-
         transactionDto.setAccount(account);
 
         Transaction transaction = transferTransactionDtoToTransaction(transactionDto);

@@ -1,5 +1,7 @@
 package com.example.jubileebackendeindopdracht.dto;
 
+import com.example.jubileebackendeindopdracht.model.Account;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,5 +24,9 @@ public class ContractUploadDto {
 
     private String contractPurpose;
     private String contractPdfUrl;
+
+    @Valid
+    private Account account;
+    private Long accountId;
 
 }
