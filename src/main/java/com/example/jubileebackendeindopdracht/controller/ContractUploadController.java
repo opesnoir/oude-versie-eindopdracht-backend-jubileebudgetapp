@@ -14,8 +14,10 @@ public class ContractUploadController {
         this.contractUploadService = contractUploadService;
     }
 
-    //post
-    //get
-    //delete
+    // upload file
+
+    // update file
+    // download file
+    // delete file
 
 }

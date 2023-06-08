@@ -19,7 +19,7 @@ public class ContractUploadService {
         this.accountRepository = accountRepository;
     }
 
-    //upload file
+    // upload file
     public ContractUploadDto createContractUpload(ContractUploadDto contractUploadDto, Long accountId){
 
         Account account = accountRepository.findById(accountId)
@@ -33,8 +33,10 @@ public class ContractUploadService {
 
         return transferContractUploadToContractUploadDto(savedContractUpload);
     }
-    //download file
-    //delete file
+
+    // update file
+    // download file
+    // delete file
 
     //helper methodes
     public ContractUploadDto transferContractUploadToContractUploadDto(ContractUpload contractUpload){
