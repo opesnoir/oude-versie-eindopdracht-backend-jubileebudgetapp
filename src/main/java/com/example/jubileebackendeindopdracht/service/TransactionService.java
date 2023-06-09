@@ -164,6 +164,14 @@ public class TransactionService {
     public BigDecimal calculateBalance(){
         BigDecimal totalIncome = calculateTotalIncome();
         BigDecimal totalExpense = calculateTotalExpense();
+
+        if (totalIncome == null) {
+            totalIncome = BigDecimal.ZERO;
+        }
+        if (totalExpense == null) {
+            totalExpense = BigDecimal.ZERO;
+        }
+
         return totalIncome.subtract(totalExpense);
     }
 
