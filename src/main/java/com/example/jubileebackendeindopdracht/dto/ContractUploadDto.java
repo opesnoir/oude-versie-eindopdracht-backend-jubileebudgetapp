@@ -22,9 +22,6 @@ public class ContractUploadDto {
     @NotBlank(message = "Payee should not be blank. Please provide the name of the payee." )
     private String payee;
 
-    private String contractPurpose;
-    private String contractPdfUrl;
-
     @Valid
     private Account account;
     private Long accountId;

@@ -1,14 +1,13 @@
 package com.example.jubileebackendeindopdracht.controller;
 
 import com.example.jubileebackendeindopdracht.dto.ContractUploadDto;
-import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.service.ContractUploadService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 
 @RestController
@@ -22,10 +21,11 @@ public class ContractUploadController {
     }
 
     // upload file
-    public ResponseEntity<ContractUploadDto> createContractUpload(@RequestBody ContractUploadDto contractUploadDto){
+    @PostMapping
+    public ResponseEntity<ContractUploadDto> createContractUpload(@RequestParam("file") MultipartFile file, @RequestBody ContractUploadDto contractUploadDto) throws IOException {
         Long accountId = contractUploadDto.getAccountId();
 
-        ContractUploadDto createdContractUploadDto = contractUploadService.createContractUpload(contractUploadDto, accountId);
+        ContractUploadDto createdContractUploadDto = contractUploadService.createContractUpload(file, contractUploadDto, accountId);
 
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -34,6 +34,8 @@ public class ContractUploadController {
 
         return ResponseEntity.created(uri).body(createdContractUploadDto);
     }
+
+
 
     // update file
     // download file
