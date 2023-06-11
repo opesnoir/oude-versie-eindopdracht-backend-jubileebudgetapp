@@ -29,5 +29,7 @@ public class AccountDto {
     @Valid
     private Transaction transaction;
     private Long transactionId;
+    private SavingGoal savingGoal;
+    private Long savingGoalId;
 
 }
