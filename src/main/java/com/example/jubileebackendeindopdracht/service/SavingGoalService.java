@@ -1,7 +1,11 @@
 package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.SavingGoalDto;
+import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
+import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.SavingGoal;
+import com.example.jubileebackendeindopdracht.model.Transaction;
+import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.SavingGoalRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +13,31 @@ import org.springframework.stereotype.Service;
 public class SavingGoalService {
 
     private final SavingGoalRepository savingGoalRepository;
+    private final AccountRepository accountRepository;
 
-    public SavingGoalService(SavingGoalRepository savingGoalRepository) {
+    public SavingGoalService(SavingGoalRepository savingGoalRepository, AccountRepository accountRepository) {
         this.savingGoalRepository = savingGoalRepository;
+        this.accountRepository = accountRepository;
     }
 
     //get all
     //get one
     //create
+    public SavingGoalDto createSavingGoal(SavingGoalDto savingGoalDto, Long accountId){
+
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new UserIdNotFoundException(accountId));
+        savingGoalDto.setAccount(account);
+
+        SavingGoal savingGoal = transferSavingGoalDtoToSavingGoal(savingGoalDto);
+        SavingGoal savedSavingGoal = savingGoalRepository.save(savingGoal);
+
+        account.getSavingGoalList().add(savedSavingGoal);
+
+        return transferSavingGoalToSavingGoalDto(savingGoal);
+    }
+
+
     //update
     //delete
 

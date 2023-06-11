@@ -1,5 +1,6 @@
 package com.example.jubileebackendeindopdracht.dto;
 
+import com.example.jubileebackendeindopdracht.model.SavingGoal;
 import com.example.jubileebackendeindopdracht.model.Transaction;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class AccountDto {
     private LocalDate dateCreated;
     private BigDecimal balance;
     private List<Transaction> transactionList;
+    private List<SavingGoal> savingGoalList;
 
     @Valid
     private Transaction transaction;
