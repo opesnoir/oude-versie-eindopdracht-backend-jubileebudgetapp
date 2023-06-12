@@ -15,18 +15,12 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "contracts")
-public class ContractUpload {
+public class Upload {
 
     @Id
     @GeneratedValue
     private Long id;
     private String payee;
-
-    @Column(name = "contract_purpose")
-    private String contractPurpose;
-
-    @Column(name = "contract_pdf_url")
-    private String contractPdfUrl;
 
     @ManyToOne
     @JoinColumn(name = "account_id")

@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class ContractUploadDto {
+public class UploadDto {
 
     private Long id;
 

@@ -34,7 +34,7 @@ public class Account {
     private List<Transaction> transactionList;
 
     @OneToMany(mappedBy = "account")
-    private List<ContractUpload> contractUpload;
+    private List<Upload> upload;
 
     @OneToMany(mappedBy = "account")
     private List<SavingGoal> savingGoalList;
