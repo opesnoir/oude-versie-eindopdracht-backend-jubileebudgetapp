@@ -1,5 +1,6 @@
 package com.example.jubileebackendeindopdracht.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +36,7 @@ public class SavingGoal {
     @Column(name = "amount_subtracted")
     private BigDecimal amountSubtracted;
 
+    @JsonIgnore // prefent loop
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
