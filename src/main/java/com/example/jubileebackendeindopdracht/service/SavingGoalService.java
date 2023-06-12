@@ -8,6 +8,9 @@ import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.SavingGoalRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class SavingGoalService {
 
@@ -20,7 +23,25 @@ public class SavingGoalService {
     }
 
     //get all
+    public List<SavingGoalDto> getAllSavingGoals() {
+        List<SavingGoalDto> savingGoalDtos = new ArrayList<>();
+        List<SavingGoal> savingGoals = savingGoalRepository.findAll();
+
+        for (SavingGoal savingGoal : savingGoals) {
+            SavingGoalDto savingGoalDto = transferSavingGoalToSavingGoalDto(savingGoal);
+
+            Account account = savingGoal.getAccount();
+            if (account != null) {
+                savingGoalDto.setAccountId(account.getId());
+            }
+            savingGoalDtos.add(savingGoalDto);
+        }
+        return savingGoalDtos;
+    }
+
     //get one
+
+
     //create
     public SavingGoalDto createSavingGoal(SavingGoalDto savingGoalDto, Long accountId){
 
