@@ -6,7 +6,12 @@ import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.SavingGoal;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.SavingGoalRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class SavingGoalService {
@@ -19,7 +24,28 @@ public class SavingGoalService {
         this.accountRepository = accountRepository;
     }
 
-    //get all
+    //get all saving goals
+    public List<SavingGoalDto> getAllSavingGoals(){
+        List<SavingGoalDto> savingGoalDtoList = new ArrayList<>();
+        List<SavingGoal> savingGoals = savingGoalRepository.findAll();
+
+        for(SavingGoal savingGoal : savingGoals){
+            SavingGoalDto savingGoalDto = transferSavingGoalToSavingGoalDto(savingGoal);
+
+            Account account = savingGoal.getAccount();
+            if (account !=null){
+                savingGoalDto.setAccountId(account.getId());
+            }
+            savingGoalDtoList.add(savingGoalDto);
+        }
+
+        if (savingGoalDtoList.isEmpty()){
+            return Collections.emptyList();
+        }
+        return savingGoalDtoList;
+    }
+
+
     //get one
     //create
     public SavingGoalDto createSavingGoal(SavingGoalDto savingGoalDto, Long accountId){

@@ -2,14 +2,13 @@ package com.example.jubileebackendeindopdracht.controller;
 
 import com.example.jubileebackendeindopdracht.dto.SavingGoalDto;
 import com.example.jubileebackendeindopdracht.service.SavingGoalService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/saving_goals")
@@ -21,10 +20,20 @@ public class SavingGoalController {
         this.savingGoalService = savingGoalService;
     }
 
+    //get all saving goals
+    @GetMapping
+    public ResponseEntity<List<SavingGoalDto>> getAllSavingGoals(){
+        List<SavingGoalDto> savingGoalDtoList = savingGoalService.getAllSavingGoals();
+
+        if (savingGoalDtoList.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity<>(savingGoalDtoList, HttpStatus.OK);
+    }
+
     // create saving goal
     @PostMapping
     public ResponseEntity<SavingGoalDto> createSavingGoal(@RequestBody SavingGoalDto savingGoalDto){
-
         Long accountId = savingGoalDto.getAccountId();
 
         SavingGoalDto createdSavingGoalDto= savingGoalService.createSavingGoal(savingGoalDto, accountId);

@@ -27,10 +27,9 @@ public class TransactionService {
         this.accountRepository = accountRepository;
     }
 
-    // get all transactions from the repository with account id
+    // get all transactions
     public List<TransactionDto> getAllTransactions(){
-
-        List<TransactionDto> transactionDtos = new ArrayList<>();
+        List<TransactionDto> transactionDtoList = new ArrayList<>();
         List<Transaction> transactions = transactionRepository.findAll();
 
         for (Transaction transaction : transactions){
@@ -40,9 +39,9 @@ public class TransactionService {
             if (account != null){
                 transactionDto.setAccountId(account.getId());
             }
-            transactionDtos.add(transactionDto);
+            transactionDtoList.add(transactionDto);
         }
-        return transactionDtos;
+        return transactionDtoList;
     }
 
     // get transaction
