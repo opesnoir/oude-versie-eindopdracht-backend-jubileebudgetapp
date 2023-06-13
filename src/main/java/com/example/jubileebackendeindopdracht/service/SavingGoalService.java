@@ -74,8 +74,18 @@ public class SavingGoalService {
         return transferSavingGoalToSavingGoalDto(savingGoal);
     }
 
-
     //update
+    public SavingGoalDto updateSavingGoal(Long accountId, SavingGoalDto updatedSavingGoalDto){
+        SavingGoal existingSavingGoal = savingGoalRepository.findById(accountId)
+                .orElseThrow(() -> new UserIdNotFoundException(accountId));
+
+        updateTransferSavingGoalToSavingGoalDto(existingSavingGoal, updatedSavingGoalDto);
+        SavingGoal updatedSavingGoal = savingGoalRepository.save(existingSavingGoal);
+
+        return transferSavingGoalToSavingGoalDto(updatedSavingGoal);
+    }
+
+
     //delete
     public SavingGoalDto deleteSavingGoal(Long savingGoalId){
         SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId)

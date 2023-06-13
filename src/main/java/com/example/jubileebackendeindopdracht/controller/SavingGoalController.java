@@ -58,6 +58,13 @@ public class SavingGoalController {
         return ResponseEntity.created(uri).body(createdSavingGoalDto);
     }
 
+    //update
+    @RequestMapping(value = "/{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+    public ResponseEntity<SavingGoalDto> updateSavingGoal(@PathVariable Long id, @RequestBody SavingGoalDto updatedSavingGoalDto){
+        SavingGoalDto updatedSavingGoal = savingGoalService.updateSavingGoal(id, updatedSavingGoalDto);
+        return ResponseEntity.ok(updatedSavingGoal);
+    }
+
     //delete saving goal by id
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSavingGoal(@PathVariable Long id){
