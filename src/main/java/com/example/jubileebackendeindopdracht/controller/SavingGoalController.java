@@ -1,7 +1,6 @@
 package com.example.jubileebackendeindopdracht.controller;
 
 import com.example.jubileebackendeindopdracht.dto.SavingGoalDto;
-import com.example.jubileebackendeindopdracht.model.SavingGoal;
 import com.example.jubileebackendeindopdracht.service.SavingGoalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,4 +58,10 @@ public class SavingGoalController {
         return ResponseEntity.created(uri).body(createdSavingGoalDto);
     }
 
+    //delete saving goal by id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteSavingGoal(@PathVariable Long id){
+        savingGoalService.deleteSavingGoal(id);
+        return ResponseEntity.noContent().build();
+    }
 }
