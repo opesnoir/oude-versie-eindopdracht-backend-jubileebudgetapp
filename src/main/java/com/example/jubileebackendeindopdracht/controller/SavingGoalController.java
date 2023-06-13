@@ -71,4 +71,5 @@ public class SavingGoalController {
         savingGoalService.deleteSavingGoal(id);
         return ResponseEntity.noContent().build();
     }
+
 }

@@ -31,12 +31,12 @@ public class SavingGoal {
     private BigDecimal targetAmount;
     @Column(name = "current_amount")
     private BigDecimal currentAmount;
-    @Column(name = "amount-added")
+    @Column(name = "amount_added")
     private BigDecimal amountAdded;
     @Column(name = "amount_subtracted")
     private BigDecimal amountSubtracted;
 
-    @JsonIgnore // prefent loop
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;

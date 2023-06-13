@@ -45,7 +45,6 @@ public class SavingGoalService {
         return savingGoalDtoList;
     }
 
-
     //get saving goal
     public SavingGoalDto getSavingGoalById(Long savingGoalId){
         SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId)
@@ -85,7 +84,6 @@ public class SavingGoalService {
         return transferSavingGoalToSavingGoalDto(updatedSavingGoal);
     }
 
-
     //delete
     public SavingGoalDto deleteSavingGoal(Long savingGoalId){
         SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId)
@@ -112,6 +110,7 @@ public class SavingGoalService {
         return savingGoalDto;
     }
 
+
     public SavingGoal transferSavingGoalDtoToSavingGoal(SavingGoalDto savingGoalDto){
 
         SavingGoal savingGoal = new SavingGoal();
@@ -126,6 +125,7 @@ public class SavingGoalService {
 
         return savingGoal;
     }
+
 
     public void updateTransferSavingGoalToSavingGoalDto(SavingGoal existingSavingGoal, SavingGoalDto updatedSavingGoalDto ){
 
@@ -148,10 +148,6 @@ public class SavingGoalService {
             existingSavingGoal.setAmountSubtracted(updatedSavingGoalDto.getAmountSubtracted());
         }
 
-
-
     }
-
-
 
 }

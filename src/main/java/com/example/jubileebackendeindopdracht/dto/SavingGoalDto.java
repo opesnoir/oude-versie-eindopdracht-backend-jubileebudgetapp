@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 public class SavingGoalDto {
 
     private Long id;
+
     @NotNull(message = "Saving goal name cannot be null")
     private String name;
     private BigDecimal startAmount;

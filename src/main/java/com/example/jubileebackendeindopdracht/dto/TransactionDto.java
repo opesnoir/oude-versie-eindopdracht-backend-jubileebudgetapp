@@ -25,7 +25,7 @@ public class TransactionDto {
     private Long id;
 
     @NotNull(message = "Transaction type cannot be null")
-    @Pattern(regexp = "^(?i)(income|expense)$", message = "Please enter 'income' or 'expense'")
+    @Pattern(regexp = "^(?i)(income|expense)$", message = "Please enter 'INCOME' or 'EXPENSE'")
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 

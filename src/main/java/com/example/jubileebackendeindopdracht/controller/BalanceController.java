@@ -21,7 +21,7 @@ public class BalanceController {
         this.balanceService = balanceService;
     }
 
-    // create map
+    // create
     @PostMapping
     public ResponseEntity<BalanceDto> createBalance(@RequestBody BalanceDto balanceDto){
         BalanceDto createdBalanceDto = balanceService.createBalance(balanceDto);
@@ -31,8 +31,5 @@ public class BalanceController {
                 .toUriString());
         return ResponseEntity.created(uri).body(createdBalanceDto);
     }
-
-    // update map
-    // delete map
 
 }

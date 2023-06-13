@@ -2,6 +2,7 @@ package com.example.jubileebackendeindopdracht.controller;
 
 import com.example.jubileebackendeindopdracht.dto.TransactionDto;
 import com.example.jubileebackendeindopdracht.service.TransactionService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,9 +23,12 @@ public class TransactionController {
 
     // get transactions
     @GetMapping
-    public List<TransactionDto> getAllTransactions(){
+    public ResponseEntity<List<TransactionDto>> getAllTransactions(){
         List<TransactionDto> transactionDtoList = transactionService.getAllTransactions();
-        return transactionDtoList;
+        if(transactionDtoList.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity<>(transactionDtoList, HttpStatus.OK);
     }
 
     // get transaction by id
