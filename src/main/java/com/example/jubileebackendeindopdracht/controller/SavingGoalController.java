@@ -1,6 +1,7 @@
 package com.example.jubileebackendeindopdracht.controller;
 
 import com.example.jubileebackendeindopdracht.dto.SavingGoalDto;
+import com.example.jubileebackendeindopdracht.model.SavingGoal;
 import com.example.jubileebackendeindopdracht.service.SavingGoalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,18 @@ public class SavingGoalController {
             return ResponseEntity.notFound().build();
         }
         return new ResponseEntity<>(savingGoalDtoList, HttpStatus.OK);
+    }
+
+    //get saving goal by id
+    @GetMapping("/{id}")
+    public ResponseEntity<SavingGoalDto> getSavingGoal(@PathVariable Long id) {
+        SavingGoalDto savingGoalDto = savingGoalService.getSavingGoalById(id);
+
+        if (savingGoalDto == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return new ResponseEntity<>(savingGoalDto, HttpStatus.OK);
     }
 
     // create saving goal
