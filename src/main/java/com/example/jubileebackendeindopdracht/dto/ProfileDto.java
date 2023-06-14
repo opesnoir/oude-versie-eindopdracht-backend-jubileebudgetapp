@@ -1,12 +1,9 @@
 package com.example.jubileebackendeindopdracht.dto;
 
 import com.example.jubileebackendeindopdracht.model.User;
-import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

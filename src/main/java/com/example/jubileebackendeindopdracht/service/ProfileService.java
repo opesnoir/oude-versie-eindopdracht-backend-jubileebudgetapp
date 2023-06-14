@@ -9,22 +9,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProfileService {
 
-    // repository for accessing profile data
     private final ProfileRepository profileRepository;
 
-    // constructor for initializing ProfileService with the corresponding repository
     public ProfileService(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
     }
 
-    //TODO: welcome message pas doorgeven bij het aanmaken van account, je wil het maar 1 ker zien het hoeft niet terug gezocht te worden
-    public String getWelcomeMessage(ProfileDto profileDto) {
-        if (profileDto == null){
-            return "Welcome, user!";
-        } else {
-            return "Hi " + profileDto.getUsername() + "! Welcome to your Jubilee profile page. Here you can see your username, update your username, and remove your account.";
-        }
-    }
+    //get all
+    //get one
+    //create
+
+    //update
+    //delete
+
 
 
     // helper method to convert a profile object to a profile dto object
@@ -34,7 +31,6 @@ public class ProfileService {
 
         profileDto.setId(profile.getId());
         profileDto.setUsername(profile.getUsername());
-        profileDto.setPassword(profile.getPassword());
         profileDto.setEmailAddress(profile.getEmail());
         profileDto.setBirthDate(profile.getBirthDate());
 
@@ -48,7 +44,6 @@ public class ProfileService {
 
         profile.setId(profileDto.getId());
         profile.setUsername(profileDto.getUsername());
-        profile.setPassword(profileDto.getPassword());
         profile.setEmail(profileDto.getEmailAddress());
         profile.setBirthDate(profileDto.getBirthDate());
 
@@ -65,9 +60,6 @@ public class ProfileService {
         if (updatedProfileDto.getUsername() != null) {
             existingProfile.setUsername(updatedProfileDto.getUsername());
         }
-        if (updatedProfileDto.getPassword() != null) {
-            existingProfile.setPassword(updatedProfileDto.getPassword());
-        }
         if (updatedProfileDto.getEmailAddress() != null) {
             existingProfile.setEmail(updatedProfileDto.getEmailAddress());
         }
@@ -75,4 +67,13 @@ public class ProfileService {
             existingProfile.setBirthDate(updatedProfileDto.getBirthDate());
         }
     }
+
+    public String getWelcomeMessage(ProfileDto profileDto) {
+        if (profileDto == null){
+            return "Welcome, user!";
+        } else {
+            return "Hi " + profileDto.getUsername() + "! Welcome to your Jubilee profile page.";
+        }
+    }
+
 }

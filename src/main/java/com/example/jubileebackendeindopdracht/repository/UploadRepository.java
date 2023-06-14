@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UploadRepository extends JpaRepository <Upload, Long> {
 
-    //query('s)
-
 }

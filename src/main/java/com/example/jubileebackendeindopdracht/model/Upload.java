@@ -14,15 +14,19 @@ import lombok.Setter;
 @Setter
 
 @Entity
-@Table(name = "contracts")
+@Table(name = "uploads")
 public class Upload {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String payee;
+
+    @Lob
+    @Column(name = "upload")
+    private byte[] upload;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
 }

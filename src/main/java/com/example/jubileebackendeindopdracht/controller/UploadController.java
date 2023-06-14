@@ -1,13 +1,13 @@
 package com.example.jubileebackendeindopdracht.controller;
 
+import com.example.jubileebackendeindopdracht.dto.UploadDto;
 import com.example.jubileebackendeindopdracht.service.UploadService;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.IOException;
+import java.net.URI;
 
 
 @RestController
@@ -20,11 +20,21 @@ public class UploadController {
         this.uploadService = uploadService;
     }
 
-    // upload file
+    // upload
     @PostMapping
-    public void uploadFile(@RequestParam("file") MultipartFile file ) throws IOException {
-        uploadService.uploadFile(file);
+    public ResponseEntity<UploadDto> uploadFile(@RequestParam("file")MultipartFile file, @RequestParam("accountId") Long accountId){
+
+        UploadDto uploadedFileDto = uploadService.uploadFile(file, accountId);
+
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(uploadedFileDto.getId())
+                .toUriString());
+
+        return ResponseEntity.created(uri).body(uploadedFileDto);
     }
+
+
 
     // download file
 
