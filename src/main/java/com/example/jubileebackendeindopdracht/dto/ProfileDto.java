@@ -1,7 +1,10 @@
 package com.example.jubileebackendeindopdracht.dto;
 
+import com.example.jubileebackendeindopdracht.model.Account;
+import com.example.jubileebackendeindopdracht.model.Upload;
 import com.example.jubileebackendeindopdracht.model.User;
 import jakarta.persistence.Lob;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
@@ -24,14 +27,17 @@ public class ProfileDto {
     private String username;
 
     @Email
-    private String emailAddress;
+    private String email;
+
+    @Lob
+    private byte[] profileUpload;
 
     @Past
     private LocalDate birthDate;
 
-    @Lob
-    private byte[] profileImage;
-
+    @Valid
+    private Account account;
     private User user;
+    private Upload upload;
 
 }

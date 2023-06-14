@@ -1,7 +1,6 @@
 package com.example.jubileebackendeindopdracht.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,18 +22,26 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
     private String email;
+
+    @Lob
+    private byte[] profileUpload;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Lob
-    @Column(name = "profile_image")
-    private byte[] profileImage;
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "upload_id")
+    private Upload upload;
 
 }
