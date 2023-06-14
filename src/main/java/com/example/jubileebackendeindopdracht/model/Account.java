@@ -10,11 +10,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-// constructors, one empty and one with all variables
+
 @NoArgsConstructor
 @AllArgsConstructor
 
-//  getters and setters for all variable declarations
 @Getter
 @Setter
 
@@ -38,4 +37,9 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<SavingGoal> savingGoalList;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

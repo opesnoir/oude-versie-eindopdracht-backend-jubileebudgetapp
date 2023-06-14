@@ -30,4 +30,8 @@ public class Upload {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

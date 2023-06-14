@@ -1,13 +1,12 @@
 package com.example.jubileebackendeindopdracht.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,8 +27,16 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @Past
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @OneToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
+
+    @OneToMany
+    @JoinColumn(name = "upload_id")
+    private List<Upload> uploads;
 
 }

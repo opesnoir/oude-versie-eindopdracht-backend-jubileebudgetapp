@@ -1,9 +1,13 @@
 package com.example.jubileebackendeindopdracht.dto;
 
+import com.example.jubileebackendeindopdracht.model.Account;
+import com.example.jubileebackendeindopdracht.model.Profile;
+import com.example.jubileebackendeindopdracht.model.Upload;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +34,14 @@ public class UserDto {
     @Email
     private String email;
 
-    @Past
-    private LocalDate birthDate;
+    @Valid
+    private Account account;
+    private Long accountId;
+
+    private Profile profile;
+    private Long profileId;
+
+    private Upload upload;
+    private Long uploadId;
 
 }
