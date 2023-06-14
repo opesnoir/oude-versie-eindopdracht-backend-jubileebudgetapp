@@ -23,7 +23,6 @@ public class ProfileService {
             return "Welcome, user!";
         } else {
             return "Hi " + profileDto.getUsername() + "! Welcome to your Jubilee profile page. Here you can see your username, update your username, and remove your account.";
-
         }
     }
 

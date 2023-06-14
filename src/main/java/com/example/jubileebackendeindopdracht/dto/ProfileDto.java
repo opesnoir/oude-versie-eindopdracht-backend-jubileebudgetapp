@@ -1,6 +1,8 @@
 package com.example.jubileebackendeindopdracht.dto;
 
 import com.example.jubileebackendeindopdracht.model.User;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
@@ -23,9 +25,16 @@ public class ProfileDto {
 
     private Long id;
     private String username;
-    private String password;
+
+    @Email
     private String emailAddress;
+
+    @Past
     private LocalDate birthDate;
+
+    @Lob
+    private byte[] profileImage;
+
     private User user;
 
 }

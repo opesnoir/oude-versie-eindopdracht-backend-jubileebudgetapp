@@ -24,16 +24,17 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    private String password;
     private String email;
 
-    @Past
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    @Lob
+    @Column(name = "profile_image")
+    private byte[] profileImage;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
 
 }
