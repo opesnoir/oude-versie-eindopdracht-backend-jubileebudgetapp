@@ -2,6 +2,8 @@ package com.example.jubileebackendeindopdracht.controller;
 
 import com.example.jubileebackendeindopdracht.dto.UploadDto;
 import com.example.jubileebackendeindopdracht.service.UploadService;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +37,18 @@ public class UploadController {
         return ResponseEntity.created(uri).body(uploadedFileDto);
     }
 
-    // download file
+    // download
+    @GetMapping("/{fileId}/download")
+    public ResponseEntity<Resource> downloadFile(@PathVariable("fileId") Long fileId) throws FileNotFoundException {
+        Resource fileResource = uploadService.downloadFile(fileId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDispositionFormData("attachment", fileResource.getFilename());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(fileResource);
+    }
 
 
     // delete file
@@ -44,7 +57,5 @@ public class UploadController {
         UploadDto deletedFileDto = uploadService.deleteFile(fileId);
         return ResponseEntity.ok(deletedFileDto);
     }
-
-
 
 }

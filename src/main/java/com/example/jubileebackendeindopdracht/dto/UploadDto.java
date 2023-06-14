@@ -18,6 +18,7 @@ import lombok.Setter;
 public class UploadDto {
 
     private Long id;
+    private String fileName;
 
     @Lob
     private byte[] upload;

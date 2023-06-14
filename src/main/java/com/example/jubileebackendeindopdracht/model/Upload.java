@@ -20,6 +20,7 @@ public class Upload {
     @Id
     @GeneratedValue
     private Long id;
+    private String fileName;
 
     @Lob
     @Column(name = "upload")

@@ -7,6 +7,8 @@ import com.example.jubileebackendeindopdracht.model.Upload;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UploadRepository;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,9 +36,7 @@ public class UploadService {
             byte[] fileBytes = file.getBytes();
 
             Upload upload = transferContractUploadDtoToContractUpload(createUploadDto(fileBytes, account));
-
             Upload savedUpload = uploadRepository.save(upload);
-
             UploadDto uploadDto = transferContractUploadToContractUploadDto(savedUpload);
 
             return uploadDto;
@@ -45,8 +45,22 @@ public class UploadService {
         }
     }
 
-
     // download file
+    public Resource downloadFile(Long fileId) throws FileNotFoundException {
+        Upload upload = uploadRepository.findById(fileId)
+                .orElseThrow(() -> new FileNotFoundException("File not found with ID: " + fileId));
+
+        byte[] fileBytes = upload.getUpload();
+        String fileName = upload.getFileName();
+
+        return new ByteArrayResource(fileBytes) {
+            @Override
+            public String getFilename() {
+                return fileName;
+            }
+        };
+    }
+
     // delete file
     public UploadDto deleteFile(Long fileId) throws FileNotFoundException {
         Upload upload = uploadRepository.findById(fileId)
@@ -89,8 +103,6 @@ public class UploadService {
 
         return uploadDto;
     }
-
-
 
 
 }
