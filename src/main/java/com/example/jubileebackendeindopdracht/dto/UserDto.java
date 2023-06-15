@@ -1,20 +1,12 @@
 package com.example.jubileebackendeindopdracht.dto;
 
-import com.example.jubileebackendeindopdracht.model.Account;
-import com.example.jubileebackendeindopdracht.model.Profile;
 import com.example.jubileebackendeindopdracht.model.Upload;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,9 +28,6 @@ public class UserDto {
     private Long accountId;
 
     @Valid
-    private Profile profile;
-    private Long profileId;
-
     private Upload upload;
     private Long uploadId;
 

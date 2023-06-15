@@ -30,10 +30,6 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Account account;
 
-    @OneToOne
-    @JoinColumn(name = "profile_id")
-    private Profile profile;
-
     @OneToMany
     @JoinColumn(name = "upload_id")
     private List<Upload> uploads;

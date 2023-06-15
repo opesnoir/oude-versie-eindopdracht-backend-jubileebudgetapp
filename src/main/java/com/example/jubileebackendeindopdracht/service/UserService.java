@@ -112,12 +112,6 @@ public class UserService {
         userDto.setPassword(user.getPassword());
         userDto.setEmail(user.getEmail());
 
-        Profile profile = user.getProfile();
-        if (profile != null) {
-            userDto.setProfile(profile);
-            userDto.setProfileId(profile.getId());
-        }
-
         return userDto;
     }
 
@@ -128,7 +122,6 @@ public class UserService {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
-        user.setProfile(userDto.getProfile());
 
         return user;
     }

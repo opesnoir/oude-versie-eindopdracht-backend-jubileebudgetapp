@@ -42,8 +42,4 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "profile_id")
-    private Profile profile;
-
 }
