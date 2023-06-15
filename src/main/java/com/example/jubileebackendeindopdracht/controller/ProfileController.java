@@ -4,25 +4,36 @@ import com.example.jubileebackendeindopdracht.dto.ProfileDto;
 import com.example.jubileebackendeindopdracht.service.ProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/profiles")
 public class ProfileController {
-    //variables
+
     private final ProfileService profileService;
 
-    //constructor
     public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
     }
 
-    //welcome message
-    //TODO: welcome message pas doorgeven bij het aanmaken van account
-    @PostMapping("/welcome")
-    public ResponseEntity<String> getWelcomeMessage(@RequestBody ProfileDto profileDto) {
-        String welcomeMessage = profileService.getWelcomeMessage(profileDto);
-        return ResponseEntity.ok(welcomeMessage);
+    //create
+    @PostMapping
+    public ResponseEntity<ProfileDto> createProfile(@RequestBody ProfileDto profileDto){
+        Long accountId = profileDto.getAccountId();
+
+        ProfileDto createdProfileDto = profileService.createProfile(profileDto, accountId);
+
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdProfileDto.getId())
+                .toUriString());
+
+        return ResponseEntity.created(uri).body(createdProfileDto);
     }
+
+
 
 
 }

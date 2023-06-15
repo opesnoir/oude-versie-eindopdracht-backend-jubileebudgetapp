@@ -1,13 +1,13 @@
 package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.ProfileDto;
-import com.example.jubileebackendeindopdracht.dto.UploadDto;
 import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.Account;
 import com.example.jubileebackendeindopdracht.model.Profile;
-import com.example.jubileebackendeindopdracht.model.Upload;
+import com.example.jubileebackendeindopdracht.model.User;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.ProfileRepository;
+import com.example.jubileebackendeindopdracht.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -16,25 +16,26 @@ public class ProfileService {
 
     private final ProfileRepository profileRepository;
     private final AccountRepository accountRepository;
-    private final UploadService uploadService;
+    private final UserRepository userRepository;
 
-
-    public ProfileService(ProfileRepository profileRepository, AccountRepository accountRepository, UploadService uploadService) {
+    public ProfileService(ProfileRepository profileRepository, AccountRepository accountRepository, UserRepository userRepository) {
         this.profileRepository = profileRepository;
         this.accountRepository = accountRepository;
-        this.uploadService = uploadService;
+        this.userRepository = userRepository;
     }
+
 
     //get all
     //get one
     //create
-    public ProfileDto createProfile(ProfileDto profileDto, UploadDto uploadDto, Long accountId){
+    public ProfileDto createProfile(ProfileDto profileDto, Long accountId){
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new UserIdNotFoundException(accountId));
-        profileDto.setAccount(account);
 
         Profile profile = transferProfileDtoToProfile(profileDto);
         Profile savedProfile = profileRepository.save(profile);
+
+        savedProfile.setAccount(account);
 
         return transferProfileToProfileDto(savedProfile);
     }
@@ -50,10 +51,12 @@ public class ProfileService {
         ProfileDto profileDto = new ProfileDto();
 
         profileDto.setId(profile.getId());
-        profileDto.setUsername(profile.getUsername());
-        profileDto.setEmail(profile.getEmail());
-        profileDto.setBirthDate(profile.getBirthDate());
-        profileDto.setProfileUpload(profile.getProfileUpload());
+        profileDto.setUsername(profile.getUser().getUsername());
+        profileDto.setEmail(profile.getUser().getEmail());
+
+        if (profile.getAccount() != null) {
+            profileDto.setAccountId(profile.getAccount().getId());
+        }
 
         return profileDto;
     }
@@ -66,12 +69,12 @@ public class ProfileService {
         profile.setId(profileDto.getId());
         profile.setUsername(profileDto.getUsername());
         profile.setEmail(profileDto.getEmail());
-        profile.setBirthDate(profileDto.getBirthDate());
-        profile.setProfileUpload(profileDto.getProfileUpload());
+
+        User user = userRepository.findById(profileDto.getUserId()).orElseThrow(() -> new UserIdNotFoundException());
+        profile.setUser(user);
 
         return profile;
     }
-
 
     public void updateProfileFromProfileDto(Profile existingProfile, ProfileDto updatedProfileDto) {
 
@@ -84,20 +87,6 @@ public class ProfileService {
         }
         if (updatedProfileDto.getEmail() != null) {
             existingProfile.setEmail(updatedProfileDto.getEmail());
-        }
-        if (updatedProfileDto.getBirthDate() != null) {
-            existingProfile.setBirthDate(updatedProfileDto.getBirthDate());
-        }
-        if (updatedProfileDto.getProfileUpload() != null){
-            existingProfile.setProfileUpload(updatedProfileDto.getProfileUpload());
-        }
-    }
-
-    public String getWelcomeMessage(ProfileDto profileDto) {
-        if (profileDto == null){
-            return "Welcome, user!";
-        } else {
-            return "Hi " + profileDto.getUsername() + "! Welcome to your Jubilee profile page.";
         }
     }
 

@@ -26,22 +26,15 @@ public class Profile {
     private String username;
     private String email;
 
-    @Lob
-    private byte[] profileUpload;
-
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
-
-    @OneToOne
-    @JoinColumn(name = "account_id")
+    @OneToOne(mappedBy = "profile")
     private Account account;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @OneToOne
     @JoinColumn(name = "upload_id")
     private Upload upload;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

@@ -28,12 +28,8 @@ public class ProfileDto {
 
     @Email
     private String email;
-
-    @Lob
-    private byte[] profileUpload;
-
-    @Past
-    private LocalDate birthDate;
+    private Long userId;
+    private Long accountId;
 
     @Valid
     private Account account;
