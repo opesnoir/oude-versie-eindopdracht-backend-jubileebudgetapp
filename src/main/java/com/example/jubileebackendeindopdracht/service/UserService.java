@@ -1,11 +1,16 @@
 package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.UserDto;
+import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundException;
 import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.*;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -20,15 +25,47 @@ public class UserService {
 
 
     //get all
-    //get one
+    public List<UserDto> getAllUsers(){
+        List<UserDto> userDtoList = new ArrayList<>();
+        List<User> users = userRepository.findAll();
+
+        for (User user : users){
+            UserDto userDto = transferUserToUserDto(user);
+
+            Account account = user.getAccount();
+            if (account != null){
+                userDto.setAccountId(account.getId());
+            }
+
+            userDtoList.add(userDto);
+        }
+        return userDtoList;
+    }
+
+
+    //get user
+    public UserDto getUser(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserIdNotFoundException(id));
+
+        UserDto userDto = transferUserToUserDto(user);
+
+        Account account = user.getAccount();
+        if (account != null){
+            userDto.setAccountId(account.getId());
+        }
+        return userDto;
+    }
+
     //create
     public UserDto createUser(UserDto userDto, Long accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new UserIdNotFoundException(accountId));
-        userDto.setAccount(account);
 
         User user = transferUserDtoToUser(userDto);
         User savedUser = userRepository.save(user);
+
+        savedUser.setAccount(account);
 
         account.setUser(savedUser);
         accountRepository.save(account);
@@ -36,9 +73,23 @@ public class UserService {
         return transferUserToUserDto(savedUser);
     }
 
-
     //update
     //delete
+    public ResponseEntity<UserDto> deleteUser(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserIdNotFoundException(id));
+
+        Account account = user.getAccount();
+        if (account != null) {
+            account.setUser(null);
+            accountRepository.save(account);
+        }
+
+        userRepository.delete(user);
+
+        return ResponseEntity.noContent().build();
+    }
+
 
     //helper methods
     public UserDto transferUserToUserDto(User user){
@@ -49,15 +100,10 @@ public class UserService {
         userDto.setUsername(user.getUsername());
         userDto.setPassword(user.getPassword());
         userDto.setEmail(user.getEmail());
-        userDto.setProfile(user.getProfile());
-
-        Account account = user.getAccount();
-        if (account != null){
-            userDto.setAccountId(account.getId());
-        }
 
         Profile profile = user.getProfile();
-        if (profile != null){
+        if (profile != null) {
+            userDto.setProfile(profile);
             userDto.setProfileId(profile.getId());
         }
 
@@ -72,7 +118,6 @@ public class UserService {
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
         user.setProfile(userDto.getProfile());
-        user.setAccount(userDto.getAccount());
 
         return user;
     }

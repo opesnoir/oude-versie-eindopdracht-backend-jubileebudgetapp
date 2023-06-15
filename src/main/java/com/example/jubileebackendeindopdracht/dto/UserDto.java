@@ -33,11 +33,9 @@ public class UserDto {
     private String password;
     @Email
     private String email;
-
-    @Valid
-    private Account account;
     private Long accountId;
 
+    @Valid
     private Profile profile;
     private Long profileId;
 

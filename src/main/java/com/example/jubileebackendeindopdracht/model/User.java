@@ -27,8 +27,11 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @OneToOne
+   /* @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "account_id")
+    private Account account;*/
+
+    @OneToOne(mappedBy = "user")
     private Account account;
 
     @OneToOne
