@@ -37,7 +37,6 @@ public class UserController {
     }
 
 
-
     //create
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
@@ -53,6 +52,14 @@ public class UserController {
         return ResponseEntity.created(uri).body(createdUserDto);
 
     }
+
+    // update transaction put (fully) /patch (partially)
+    @RequestMapping(value = "/{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id,@RequestBody UserDto updatedUserDto){
+        UserDto updatedUser = userService.updateUser(id, updatedUserDto);
+        return ResponseEntity.ok(updatedUser);
+    }
+
 
     //delete
     @DeleteMapping("/{id}")

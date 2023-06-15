@@ -1,7 +1,6 @@
 package com.example.jubileebackendeindopdracht.service;
 
 import com.example.jubileebackendeindopdracht.dto.UserDto;
-import com.example.jubileebackendeindopdracht.exception.TransactionNotFoundException;
 import com.example.jubileebackendeindopdracht.exception.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.model.*;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
@@ -74,6 +73,18 @@ public class UserService {
     }
 
     //update
+    public UserDto updateUser(Long id, UserDto updatedUserDto){
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserIdNotFoundException(id));
+
+        updateUserFromUserDto(existingUser, updatedUserDto);
+        User updatedUser = userRepository.save(existingUser);
+
+        return transferUserToUserDto(updatedUser);
+
+    }
+
+
     //delete
     public ResponseEntity<UserDto> deleteUser(Long id){
         User user = userRepository.findById(id)
