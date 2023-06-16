@@ -1,6 +1,6 @@
 package com.example.jubileebackendeindopdracht.repository;
 
-import com.example.jubileebackendeindopdracht.model.User;
+import com.example.jubileebackendeindopdracht.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
