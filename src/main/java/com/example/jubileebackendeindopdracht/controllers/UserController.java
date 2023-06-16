@@ -19,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-
+/*
     //get all
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers(){
@@ -28,17 +28,17 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return new ResponseEntity<>(userDtoList, HttpStatus.OK);
-    }
+    }*/
 
-    //get user by id
+/*    //get user by id
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long id){
         return ResponseEntity.ok(userService.getUser(id));
-    }
+    }*/
 
 
     //create
-    @PostMapping
+/*    @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
         Long accountId = userDto.getAccountId();
 
@@ -50,21 +50,22 @@ public class UserController {
                 .toUriString());
 
         return ResponseEntity.created(uri).body(createdUserDto);
+    }*/
 
-    }
 
+/*
     // update transaction put (fully) /patch (partially)
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id,@RequestBody UserDto updatedUserDto){
         UserDto updatedUser = userService.updateUser(id, updatedUserDto);
         return ResponseEntity.ok(updatedUser);
-    }
+    }*/
 
-    //delete
+ /*   //delete
     @DeleteMapping("/{id}")
     public ResponseEntity<UserDto> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
 }

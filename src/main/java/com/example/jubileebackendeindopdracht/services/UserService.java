@@ -24,7 +24,7 @@ public class UserService {
 
 
     //get all
-    public List<UserDto> getAllUsers(){
+/*    public List<UserDto> getAllUsers(){
         List<UserDto> userDtoList = new ArrayList<>();
         List<User> users = userRepository.findAll();
 
@@ -39,11 +39,11 @@ public class UserService {
             userDtoList.add(userDto);
         }
         return userDtoList;
-    }
+    }*/
 
 
     //get user
-    public UserDto getUser(Long id){
+/*    public UserDto getUser(Long id){
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserIdNotFoundException(id));
 
@@ -54,10 +54,10 @@ public class UserService {
             userDto.setAccountId(account.getId());
         }
         return userDto;
-    }
+    }*/
 
     //create
-    public UserDto createUser(UserDto userDto, Long accountId) {
+/*    public UserDto createUser(UserDto userDto, Long accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new UserIdNotFoundException(accountId));
 
@@ -70,10 +70,10 @@ public class UserService {
         accountRepository.save(account);
 
         return transferUserToUserDto(savedUser);
-    }
+    }*/
 
     //update
-    public UserDto updateUser(Long id, UserDto updatedUserDto){
+/*    public UserDto updateUser(Long id, UserDto updatedUserDto){
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserIdNotFoundException(id));
 
@@ -82,11 +82,11 @@ public class UserService {
 
         return transferUserToUserDto(updatedUser);
 
-    }
+    }*/
 
 
     //delete
-    public ResponseEntity<UserDto> deleteUser(Long id){
+/*    public ResponseEntity<UserDto> deleteUser(Long id){
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserIdNotFoundException(id));
 
@@ -99,11 +99,11 @@ public class UserService {
         userRepository.delete(user);
 
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
 
     //helper methods
-    public UserDto transferUserToUserDto(User user){
+/*    public UserDto transferUserToUserDto(User user){
 
         UserDto userDto = new UserDto();
 
@@ -113,9 +113,9 @@ public class UserService {
         userDto.setEmail(user.getEmail());
 
         return userDto;
-    }
+    }*/
 
-    public User transferUserDtoToUser(UserDto userDto){
+/*    public User transferUserDtoToUser(UserDto userDto){
         User user = new User();
 
         user.setId(userDto.getId());
@@ -124,10 +124,10 @@ public class UserService {
         user.setEmail(userDto.getEmail());
 
         return user;
-    }
+    }*/
 
 
-    public void updateUserFromUserDto(User existingUser, UserDto updatedUserDto){
+/*    public void updateUserFromUserDto(User existingUser, UserDto updatedUserDto){
         if (updatedUserDto.getId() != null) {
             existingUser.setId(updatedUserDto.getId());
         }
@@ -140,7 +140,7 @@ public class UserService {
         if (updatedUserDto.getEmail() != null) {
             existingUser.setEmail(updatedUserDto.getEmail());
         }
-    }
+    }*/
 
 
 
