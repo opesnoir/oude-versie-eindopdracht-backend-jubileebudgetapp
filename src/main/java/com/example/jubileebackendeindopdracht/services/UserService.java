@@ -1,16 +1,13 @@
 package com.example.jubileebackendeindopdracht.services;
 
 import com.example.jubileebackendeindopdracht.dtos.UserDto;
-import com.example.jubileebackendeindopdracht.exceptions.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.exceptions.UsernameNotFoundException;
 import com.example.jubileebackendeindopdracht.models.*;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 @Service
@@ -111,7 +108,7 @@ public class UserService {
         userDto.username = user.getUsername();
         userDto.password = user.getPassword();
         userDto.enabled = user.isEnabled();
-        userDto.apiKey = user.getApiKey();
+        userDto.apikey = user.getApikey();
         userDto.email = user.getEmail();
         userDto.authorities = user.getAuthorities();
 
@@ -125,7 +122,7 @@ public class UserService {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEnabled(userDto.getEnabled());
-        user.setApiKey(userDto.getApikey());
+        user.setApikey(userDto.getApikey());
         user.setEmail(userDto.getEmail());
 
         return user;
