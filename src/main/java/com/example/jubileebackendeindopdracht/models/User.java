@@ -39,10 +39,6 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Account account;
 
-    @OneToMany
-    @JoinColumn(name = "upload_id")
-    private List<Upload> uploads;
-
     @OneToMany(
             targetEntity = Authority.class,
             mappedBy = "username",

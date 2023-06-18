@@ -36,8 +36,4 @@ public class UserDto {
     public Set<Authority> authorities;
     private Long accountId;
 
-    @Valid
-    private Upload upload;
-    private Long uploadId;
-
 }
