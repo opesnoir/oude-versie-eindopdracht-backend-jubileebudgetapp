@@ -2,6 +2,7 @@ package com.example.jubileebackendeindopdracht.services;
 
 import com.example.jubileebackendeindopdracht.dtos.UserDto;
 import com.example.jubileebackendeindopdracht.exceptions.UserIdNotFoundException;
+import com.example.jubileebackendeindopdracht.exceptions.UsernameNotFoundException;
 import com.example.jubileebackendeindopdracht.models.*;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
@@ -104,44 +105,54 @@ public class UserService {
 
 
     //helper methods
-/*    public UserDto transferUserToUserDto(User user){
+    public UserDto transferUserToUserDto(User user){
+        var userDto = new UserDto();
 
-        UserDto userDto = new UserDto();
-
-        userDto.setId(user.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setPassword(user.getPassword());
-        userDto.setEmail(user.getEmail());
+        userDto.username = user.getUsername();
+        userDto.password = user.getPassword();
+        userDto.enabled = user.isEnabled();
+        userDto.apiKey = user.getApiKey();
+        userDto.email = user.getEmail();
+        userDto.authorities = user.getAuthorities();
 
         return userDto;
-    }*/
 
-/*    public User transferUserDtoToUser(UserDto userDto){
-        User user = new User();
+    }
 
-        user.setId(userDto.getId());
+    public User transferUserDtoToUser(UserDto userDto){
+        var user = new User();
+
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
+        user.setEnabled(userDto.getEnabled());
+        user.setApiKey(userDto.getApikey());
         user.setEmail(userDto.getEmail());
 
         return user;
-    }*/
+    }
 
 
-/*    public void updateUserFromUserDto(User existingUser, UserDto updatedUserDto){
-        if (updatedUserDto.getId() != null) {
-            existingUser.setId(updatedUserDto.getId());
+    public void updateUserFromUserDto(String username, UserDto updatedUserDto) {
+
+        if (!userRepository.existsById(username)) {
+            throw new UsernameNotFoundException(username);
         }
+
+        User user = userRepository.findById(username).get();
+
         if (updatedUserDto.getUsername() != null) {
-            existingUser.setUsername(updatedUserDto.getUsername());
+            user.setUsername(updatedUserDto.getUsername());
         }
         if (updatedUserDto.getPassword() != null) {
-            existingUser.setPassword(updatedUserDto.getPassword());
+            user.setPassword(updatedUserDto.getPassword());
+        }
+        if (updatedUserDto.getEnabled() != null) {
+            user.setEnabled(updatedUserDto.getEnabled());
         }
         if (updatedUserDto.getEmail() != null) {
-            existingUser.setEmail(updatedUserDto.getEmail());
+            user.setEmail(updatedUserDto.getEmail());
         }
-    }*/
+    }
 
 
 

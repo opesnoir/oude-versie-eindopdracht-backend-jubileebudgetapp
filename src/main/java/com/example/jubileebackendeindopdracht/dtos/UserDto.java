@@ -1,8 +1,6 @@
 package com.example.jubileebackendeindopdracht.dtos;
 
 import com.example.jubileebackendeindopdracht.models.Authority;
-import com.example.jubileebackendeindopdracht.models.Upload;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
