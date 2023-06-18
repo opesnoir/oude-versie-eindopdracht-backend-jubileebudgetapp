@@ -1,24 +1,19 @@
 package com.example.jubileebackendeindopdracht.services;
 
-import com.example.jubileebackendeindopdracht.dtos.UserDto;
-import com.example.jubileebackendeindopdracht.exceptions.UserIdNotFoundException;
-import com.example.jubileebackendeindopdracht.models.*;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+//TODO: kiezen of je Profile wil uitwerken, dan moet je hem nog aanmaken als entiteit, dto etc.
 
 @Service
-public class UserService {
+public class ProfileService {
 
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
 
-    public UserService(UserRepository userRepository, AccountRepository accountRepository) {
+
+    public ProfileService(UserRepository userRepository, AccountRepository accountRepository) {
         this.userRepository = userRepository;
         this.accountRepository = accountRepository;
     }
@@ -142,8 +137,6 @@ public class UserService {
             existingUser.setEmail(updatedUserDto.getEmail());
         }
     }*/
-
-
 
 
 }
