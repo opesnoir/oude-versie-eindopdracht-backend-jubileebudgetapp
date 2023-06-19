@@ -50,7 +50,6 @@ public class UserService {
         return userDtoList;
     }
 
-
     //get user
     public UserDto getUser(String username) {
         User user = userRepository.findById(username)
