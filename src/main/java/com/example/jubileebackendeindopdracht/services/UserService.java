@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 public class UserService {
@@ -27,22 +30,26 @@ public class UserService {
 
 
     //get all
-/*    public List<UserDto> getAllUsers(){
+    public List<UserDto> getAllUsers(){
         List<UserDto> userDtoList = new ArrayList<>();
         List<User> users = userRepository.findAll();
 
-        for (User user : users){
-            UserDto userDto = transferUserToUserDto(user);
+        if (users.isEmpty()) {
+            throw new RecordNotFoundException("No user data found");
+        }
 
-            Account account = user.getAccount();
-            if (account != null){
-                userDto.setAccountId(account.getId());
-            }
+            for (User user : users){
+                UserDto userDto = transferUserToUserDto(user);
 
-            userDtoList.add(userDto);
+                Account account = user.getAccount();
+                if (account != null){
+                    userDto.setAccountId(account.getId());
+                }
+                userDtoList.add(userDto);
+
         }
         return userDtoList;
-    }*/
+    }
 
 
     //get user
@@ -104,8 +111,7 @@ public class UserService {
 
         Account account = user.getAccount();
         if (account != null) {
-            account.setUser(null);
-            accountRepository.save(account);
+            accountRepository.delete(account);
         }
         userRepository.delete(user);
 
@@ -140,7 +146,6 @@ public class UserService {
 
         return user;
     }
-
 
     public void updateUserFromUserDto(String username, UserDto updatedUserDto) {
         if (!userRepository.existsById(username)) {
