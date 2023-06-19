@@ -1,5 +1,6 @@
 package com.example.jubileebackendeindopdracht.dtos;
 
+import com.example.jubileebackendeindopdracht.models.Account;
 import com.example.jubileebackendeindopdracht.models.Authority;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.*;
@@ -33,10 +34,10 @@ public class UserDto {
     @Email
     public String email;
 
+    private Long accountId;
+
     @JsonSerialize
     public Set<Authority> authorities;
-
-    private Long accountId;
 
     @Override
     public boolean equals(Object o) {

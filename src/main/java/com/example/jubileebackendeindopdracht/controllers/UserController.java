@@ -30,27 +30,28 @@ public class UserController {
         return new ResponseEntity<>(userDtoList, HttpStatus.OK);
     }*/
 
-/*    //get user by id
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable Long id){
-        return ResponseEntity.ok(userService.getUser(id));
-    }*/
+    //get user by id
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDto> getUser(@PathVariable String username){
+        return ResponseEntity.ok(userService.getUser(username));
+    }
 
 
     //create
-/*    @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
-        Long accountId = userDto.getAccountId();
-
-        UserDto createdUserDto = userService.createUser(userDto, accountId);
+    @PostMapping
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+        UserDto createdUserDto = userService.createUser(userDto);
 
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(createdUserDto.getId())
+                .buildAndExpand(createdUserDto.getUsername())
                 .toUriString());
 
         return ResponseEntity.created(uri).body(createdUserDto);
-    }*/
+    }
+
+
+
 
 
 /*

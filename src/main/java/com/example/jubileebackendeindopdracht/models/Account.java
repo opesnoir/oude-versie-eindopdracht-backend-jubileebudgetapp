@@ -38,8 +38,8 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<SavingGoal> savingGoalList;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private String userId;
+
 
 }

@@ -1,8 +1,10 @@
 package com.example.jubileebackendeindopdracht.services;
 
 import com.example.jubileebackendeindopdracht.dtos.UserDto;
+import com.example.jubileebackendeindopdracht.exceptions.RecordNotFoundException;
 import com.example.jubileebackendeindopdracht.exceptions.UsernameNotFoundException;
 import com.example.jubileebackendeindopdracht.models.*;
+import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
 import com.example.jubileebackendeindopdracht.utils.RandomStringGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,10 +16,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AccountRepository accountRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AccountRepository accountRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.accountRepository = accountRepository;
     }
 
 
@@ -44,20 +48,31 @@ public class UserService {
     public UserDto getUser(String username) {
         User user = userRepository.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
-        return transferUserToUserDto(user);
+        UserDto userDto = transferUserToUserDto(user);
+
+        Account account = user.getAccount();
+        if (account != null){
+            userDto.setAccountId(account.getId());
+        }
+        return userDto;
     }
 
     //create
-    public String createUser(UserDto userDto){
+    public UserDto createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
         userDto.setEnabled(true);
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        User newUser = userRepository.save(transferUserDtoToUser(userDto));
+        User newUser = transferUserDtoToUser(userDto);
+        userRepository.save(newUser);
 
-        return newUser.getUsername();
+        return transferUserToUserDto(newUser);
     }
+
+
+
+
 
 
     //update

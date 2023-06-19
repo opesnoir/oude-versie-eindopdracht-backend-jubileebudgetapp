@@ -27,9 +27,6 @@ public class Profile {
     private String email;
     private Date profileCreationDate;
 
-    @OneToOne(mappedBy = "user")
-    private Account account;
-
     @OneToMany
     @JoinColumn(name = "upload_id")
     private List<Upload> uploads;

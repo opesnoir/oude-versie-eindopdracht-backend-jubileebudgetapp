@@ -35,7 +35,8 @@ public class User {
     @Column
     private String email;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @OneToMany(
