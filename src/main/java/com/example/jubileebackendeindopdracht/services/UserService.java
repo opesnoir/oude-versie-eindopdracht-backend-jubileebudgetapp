@@ -7,6 +7,7 @@ import com.example.jubileebackendeindopdracht.models.*;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
 import com.example.jubileebackendeindopdracht.utils.RandomStringGenerator;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,12 +60,21 @@ public class UserService {
 
     //create
     public UserDto createUser(UserDto userDto) {
+        Long accountId = userDto.getAccountId();
+
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
         userDto.setEnabled(true);
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         User newUser = transferUserDtoToUser(userDto);
+
+        if (accountId != null) {
+            Account account = new Account();
+            account.setId(accountId);
+            newUser.setAccount(account);
+        }
+
         userRepository.save(newUser);
 
         return transferUserToUserDto(newUser);
@@ -89,20 +99,20 @@ public class UserService {
 
 
     //delete
-/*    public ResponseEntity<UserDto> deleteUser(Long id){
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserIdNotFoundException(id));
+    public ResponseEntity<UserDto> deleteUser(String username){
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
 
         Account account = user.getAccount();
         if (account != null) {
             account.setUser(null);
             accountRepository.save(account);
         }
-
         userRepository.delete(user);
 
         return ResponseEntity.noContent().build();
-    }*/
+    }
+
 
 
     //helper methods

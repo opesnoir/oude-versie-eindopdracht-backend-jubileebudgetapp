@@ -30,7 +30,7 @@ public class UserController {
         return new ResponseEntity<>(userDtoList, HttpStatus.OK);
     }*/
 
-    //get user by id
+    //get user by id: username
     @GetMapping("/{username}")
     public ResponseEntity<UserDto> getUser(@PathVariable String username){
         return ResponseEntity.ok(userService.getUser(username));
