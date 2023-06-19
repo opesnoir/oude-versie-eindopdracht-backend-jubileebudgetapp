@@ -3,22 +3,21 @@ package com.example.jubileebackendeindopdracht.services;
 import com.example.jubileebackendeindopdracht.dtos.UserDto;
 import com.example.jubileebackendeindopdracht.exceptions.UsernameNotFoundException;
 import com.example.jubileebackendeindopdracht.models.*;
-import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
+import com.example.jubileebackendeindopdracht.utils.RandomStringGenerator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-
 
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-    private final AccountRepository accountRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, AccountRepository accountRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.accountRepository = accountRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -42,34 +41,24 @@ public class UserService {
 
 
     //get user
-/*    public UserDto getUser(Long id){
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserIdNotFoundException(id));
-
-        UserDto userDto = transferUserToUserDto(user);
-
-        Account account = user.getAccount();
-        if (account != null){
-            userDto.setAccountId(account.getId());
-        }
-        return userDto;
-    }*/
+    public UserDto getUser(String username) {
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
+        return transferUserToUserDto(user);
+    }
 
     //create
-/*    public UserDto createUser(UserDto userDto, Long accountId) {
-        Account account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new UserIdNotFoundException(accountId));
+    public String createUser(UserDto userDto){
+        String randomString = RandomStringGenerator.generateAlphaNumeric(20);
+        userDto.setApikey(randomString);
+        userDto.setEnabled(true);
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        User user = transferUserDtoToUser(userDto);
-        User savedUser = userRepository.save(user);
+        User newUser = userRepository.save(transferUserDtoToUser(userDto));
 
-        savedUser.setAccount(account);
+        return newUser.getUsername();
+    }
 
-        account.setUser(savedUser);
-        accountRepository.save(account);
-
-        return transferUserToUserDto(savedUser);
-    }*/
 
     //update
 /*    public UserDto updateUser(Long id, UserDto updatedUserDto){
