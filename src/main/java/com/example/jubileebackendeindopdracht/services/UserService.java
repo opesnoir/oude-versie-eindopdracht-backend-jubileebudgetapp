@@ -104,7 +104,7 @@ public class UserService {
     }
 
     //delete
-    public ResponseEntity<UserDto> deleteUser(String username){
+    public ResponseEntity<UserDto> deleteUser(String username) {
         User user = userRepository.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
 
@@ -114,8 +114,11 @@ public class UserService {
         }
         userRepository.delete(user);
 
-        return ResponseEntity.noContent().build();
+        UserDto deletedUserDto = transferUserToUserDto(user);
+
+        return ResponseEntity.ok(deletedUserDto);
     }
+
 
 
     // authority methods
