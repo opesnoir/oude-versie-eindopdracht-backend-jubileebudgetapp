@@ -151,8 +151,6 @@ public class UserService {
     }
 
 
-
-
     //helper methods
     public UserDto transferUserToUserDto(User user){
         var userDto = new UserDto();
