@@ -86,6 +86,12 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException(username));
 
         updateUserFromUserDto(existingUser.getUsername(), updatedUserDto);
+
+        if (updatedUserDto.getPassword() != null) {
+            String encodedPassword = passwordEncoder.encode(updatedUserDto.getPassword());
+            existingUser.setPassword(encodedPassword);
+        }
+
         User updatedUser = userRepository.save(existingUser);
 
         return transferUserToUserDto(updatedUser);
