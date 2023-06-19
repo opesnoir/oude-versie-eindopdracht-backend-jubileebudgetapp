@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -27,7 +28,6 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
         this.accountRepository = accountRepository;
     }
-
 
     //get all
     public List<UserDto> getAllUsers(){
@@ -46,7 +46,6 @@ public class UserService {
                     userDto.setAccountId(account.getId());
                 }
                 userDtoList.add(userDto);
-
         }
         return userDtoList;
     }
@@ -119,6 +118,38 @@ public class UserService {
     }
 
 
+    // authority methods
+    public Set<Authority> getAuthorities(String username) {
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
+
+        UserDto userDto = transferUserToUserDto(user);
+        return userDto.getAuthorities();
+    }
+
+    public void addAuthority(String username, String authority) {
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
+
+        user.addAuthority(new Authority(username, authority));
+        userRepository.save(user);
+    }
+
+    public void removeAuthority(String username, String authority) {
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
+
+        Authority authorityToRemove = user.getAuthorities().stream()
+                .filter((a) -> a.getAuthority().equalsIgnoreCase(authority))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Authority not found: " + authority));
+
+        user.removeAuthority(authorityToRemove);
+        userRepository.save(user);
+    }
+
+
+
 
     //helper methods
     public UserDto transferUserToUserDto(User user){
@@ -132,7 +163,6 @@ public class UserService {
         userDto.authorities = user.getAuthorities();
 
         return userDto;
-
     }
 
     public User transferUserDtoToUser(UserDto userDto){
@@ -164,8 +194,5 @@ public class UserService {
         }
         userRepository.save(user);
     }
-
-
-
 
 }
