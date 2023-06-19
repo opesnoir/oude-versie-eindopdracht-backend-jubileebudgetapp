@@ -30,7 +30,6 @@ public class AuthenticationController {
         this.jwtUtil = jwtUtil;
     }
 
-
     // returns principal (basic user data) of logged-in user
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
