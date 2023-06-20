@@ -19,7 +19,6 @@ public class UserController {
         this.userService = userService;
     }
 
-/*
     //get all
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers(){
@@ -27,45 +26,52 @@ public class UserController {
         if (userDtoList.isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity<>(userDtoList, HttpStatus.OK);
-    }*/
+        return ResponseEntity.ok(userDtoList);
+    }
 
-    //get user by id: username
+    //get user
     @GetMapping("/{username}")
-    public ResponseEntity<UserDto> getUser(@PathVariable String username){
-        return ResponseEntity.ok(userService.getUser(username));
+    public ResponseEntity<UserDto> getUser(@PathVariable("username") String username){
+        UserDto userDto = userService.getUser(username);
+        if (userDto == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(userDto);
     }
 
     //create
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         UserDto createdUserDto = userService.createUser(userDto);
+        userService.addAuthority(createdUserDto.getUsername(), "ROLE_USER");
 
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
+                .path("/{username}")
                 .buildAndExpand(createdUserDto.getUsername())
                 .toUriString());
 
         return ResponseEntity.created(uri).body(createdUserDto);
     }
 
-
-
-
-
-/*
     // update transaction put (fully) /patch (partially)
-    @RequestMapping(value = "/{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id,@RequestBody UserDto updatedUserDto){
-        UserDto updatedUser = userService.updateUser(id, updatedUserDto);
+    @RequestMapping(value = "/{username}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username,@RequestBody UserDto updatedUserDto){
+        UserDto updatedUser = userService.updateUser(username, updatedUserDto);
+        if (updatedUser == null){
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(updatedUser);
-    }*/
+    }
 
- /*   //delete
-    @DeleteMapping("/{id}")
-    public ResponseEntity<UserDto> deleteUser(@PathVariable Long id){
-        userService.deleteUser(id);
+    //delete
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("username") String username) {
+        userService.deleteUser(username);
         return ResponseEntity.noContent().build();
-    }*/
+    }
+
+    // authority
+
+
 
 }

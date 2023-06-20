@@ -79,9 +79,7 @@ public class UserService {
             account.setId(accountId);
             newUser.setAccount(account);
         }
-
         userRepository.save(newUser);
-
         return transferUserToUserDto(newUser);
     }
 
@@ -96,14 +94,12 @@ public class UserService {
             String encodedPassword = passwordEncoder.encode(updatedUserDto.getPassword());
             existingUser.setPassword(encodedPassword);
         }
-
         User updatedUser = userRepository.save(existingUser);
-
         return transferUserToUserDto(updatedUser);
     }
 
     //delete
-    public ResponseEntity<UserDto> deleteUser(String username) {
+    public void deleteUser(String username) {
         User user = userRepository.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
 
@@ -112,10 +108,6 @@ public class UserService {
             accountRepository.delete(account);
         }
         userRepository.delete(user);
-
-        UserDto deletedUserDto = transferUserToUserDto(user);
-
-        return ResponseEntity.ok(deletedUserDto);
     }
 
 
