@@ -3,11 +3,14 @@ package com.example.jubileebackendeindopdracht.services;
 import com.example.jubileebackendeindopdracht.dtos.UserDto;
 import com.example.jubileebackendeindopdracht.exceptions.RecordNotFoundException;
 import com.example.jubileebackendeindopdracht.exceptions.UsernameNotFoundException;
-import com.example.jubileebackendeindopdracht.models.*;
+import com.example.jubileebackendeindopdracht.models.Account;
+import com.example.jubileebackendeindopdracht.models.Authority;
+import com.example.jubileebackendeindopdracht.models.User;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
 import com.example.jubileebackendeindopdracht.utils.RandomStringGenerator;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +23,17 @@ import java.util.Set;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    @Lazy
+    private PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AccountRepository accountRepository) {
+    public UserService(UserRepository userRepository, AccountRepository accountRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
         this.accountRepository = accountRepository;
     }
+
 
     //get all
     public List<UserDto> getAllUsers(){

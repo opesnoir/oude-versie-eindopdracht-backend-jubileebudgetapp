@@ -1,7 +1,5 @@
 package com.example.jubileebackendeindopdracht.config;
 
-//TODO: deze klaar, check dan: AuthenticationController, of melding Could not autowire. No beans of 'AuthenticationManager' type found. weg is in constructor.
-
 import com.example.jubileebackendeindopdracht.filter.JwtRequestFilter;
 import com.example.jubileebackendeindopdracht.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
@@ -91,7 +89,6 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/uploads").hasRole("USER")
                 .requestMatchers(HttpMethod.GET, "/uploads/{fileId}/download").hasRole("USER")
                 .requestMatchers(HttpMethod.DELETE, "/uploads/{fileId}").hasRole("USER")
-
 
                 // authentication
                 .requestMatchers("/authenticated").authenticated()
