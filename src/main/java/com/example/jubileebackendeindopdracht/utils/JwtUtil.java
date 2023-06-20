@@ -14,7 +14,7 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
 
-    private final static String SECRET_KEY = "/*enter your super secret key here*/";
+    private final static String SECRET_KEY = "1234567891011121314151617181920212223242526272829303132333435";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
