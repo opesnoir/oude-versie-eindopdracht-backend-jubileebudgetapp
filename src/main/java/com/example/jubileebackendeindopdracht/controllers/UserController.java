@@ -56,7 +56,7 @@ public class UserController {
 
     // update transaction put (fully) /patch (partially)
     @RequestMapping(value = "/{username}", method = {RequestMethod.PUT, RequestMethod.PATCH})
-    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username,@RequestBody UserDto updatedUserDto){
+    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username, @RequestBody UserDto updatedUserDto){
         UserDto updatedUser = userService.updateUser(username, updatedUserDto);
         if (updatedUser == null){
             return ResponseEntity.notFound().build();
