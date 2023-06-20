@@ -2,16 +2,16 @@ package com.example.jubileebackendeindopdracht.exceptions;
 
 import java.io.Serial;
 
-public class FileNotFoundException extends RuntimeException{
+public class UploadFileNotFoundException extends RuntimeException{
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public FileNotFoundException() {
+    public UploadFileNotFoundException() {
         super();
     }
 
-    public FileNotFoundException(Long fileId) {
+    public UploadFileNotFoundException(Long fileId) {
         super("File not found with ID: " + fileId);
     }
 

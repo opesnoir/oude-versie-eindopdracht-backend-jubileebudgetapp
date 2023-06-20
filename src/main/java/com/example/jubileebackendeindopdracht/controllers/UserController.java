@@ -1,14 +1,15 @@
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.dtos.UserDto;
+import com.example.jubileebackendeindopdracht.exceptions.BadRequestException;
 import com.example.jubileebackendeindopdracht.services.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -71,7 +72,26 @@ public class UserController {
     }
 
     // authority
+    @GetMapping("/{username}/authorities")
+    public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
+        return ResponseEntity.ok().body(userService.getAuthorities(username));
+    }
 
+    @PostMapping("/{username}/authorities")
+    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
+        try {
+            String authorityName = (String) fields.get("authority");
+            userService.addAuthority(username, authorityName);
+            return ResponseEntity.noContent().build();
+        } catch (Exception ex) {
+            throw new BadRequestException();
+        }
+    }
 
+    @DeleteMapping("/{username}/authorities/{authority}")
+    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
+        userService.removeAuthority(username, authority);
+        return ResponseEntity.noContent().build();
+    }
 
 }

@@ -110,8 +110,6 @@ public class UserService {
         userRepository.delete(user);
     }
 
-
-
     // authority methods
     public Set<Authority> getAuthorities(String username) {
         User user = userRepository.findById(username)

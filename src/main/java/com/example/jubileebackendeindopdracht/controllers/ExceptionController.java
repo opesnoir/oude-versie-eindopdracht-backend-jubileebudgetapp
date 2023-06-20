@@ -14,6 +14,11 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = UploadFileNotFoundException.class)
+    public ResponseEntity<String> exception(UploadFileNotFoundException exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(value = RecordNotFoundException.class)
     public ResponseEntity<String> exception(RecordNotFoundException exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
@@ -33,7 +38,5 @@ public class ExceptionController {
     public ResponseEntity<String> exception(UsernameNotFoundException exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
-
-
 
 }
