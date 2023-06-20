@@ -71,9 +71,8 @@ public class SpringSecurityConfig {
                 // balance
                 .requestMatchers(HttpMethod.POST, "/balances").permitAll()
 
-                // profile
                 // saving goal
-                .requestMatchers(HttpMethod.POST, "/saving_goals").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/saving_goals").permitAll()
                 .requestMatchers(HttpMethod.GET, "/saving_goals").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/saving_goals/{id}").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.PUT, "/saving_goals/{id}").hasRole("USER")
@@ -81,7 +80,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/saving_goals/{id}").hasAnyRole("ADMIN", "USER")
 
                 // transaction
-                .requestMatchers(HttpMethod.POST, "/transactions").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/transactions").permitAll()
                 .requestMatchers(HttpMethod.GET, "/transactions").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/transactions/{id}").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.PUT, "/transactions/{id}").hasRole("USER")

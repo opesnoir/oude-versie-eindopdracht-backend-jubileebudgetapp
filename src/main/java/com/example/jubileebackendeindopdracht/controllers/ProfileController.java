@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //TODO: kiezen of je Profile wil uitwerken, dan moet je hem nog aanmaken als entiteit, dto etc.
+//TODO: als je besluit profile uit te werken, dan moet je profile toevoegen aan: SpringSecurityConfig
 @RestController
 @RequestMapping("/profiles")
 public class ProfileController {
