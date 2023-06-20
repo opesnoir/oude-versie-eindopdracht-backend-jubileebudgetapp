@@ -31,7 +31,7 @@ public class SavingGoalController {
         return new ResponseEntity<>(savingGoalDtoList, HttpStatus.OK);
     }
 
-    //get saving goal by id
+    //get saving
     @GetMapping("/{id}")
     public ResponseEntity<SavingGoalDto> getSavingGoal(@PathVariable Long id) {
         SavingGoalDto savingGoalDto = savingGoalService.getSavingGoalById(id);
@@ -43,7 +43,7 @@ public class SavingGoalController {
         return new ResponseEntity<>(savingGoalDto, HttpStatus.OK);
     }
 
-    // create saving goal
+    // create
     @PostMapping
     public ResponseEntity<SavingGoalDto> createSavingGoal(@RequestBody SavingGoalDto savingGoalDto){
         Long accountId = savingGoalDto.getAccountId();

@@ -18,7 +18,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    // create account
+    // create
     @PostMapping()
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
         AccountDto createdAccountDto = accountService.createAccount(accountDto);
@@ -29,7 +29,7 @@ public class AccountController {
         return ResponseEntity.created(uri).body(createdAccountDto);
     }
 
-    // delete transaction by id
+    // delete
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAccount(@PathVariable Long id){
         accountService.deleteAccount(id);
