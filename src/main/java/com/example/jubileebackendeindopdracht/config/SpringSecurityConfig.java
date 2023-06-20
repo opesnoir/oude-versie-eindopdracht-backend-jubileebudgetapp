@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
@@ -56,12 +57,12 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests()
 
                 // user
-                .antMatchers(HttpMethod.POST, "/users").permitAll()
-                .antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/users/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PATCH, "/users/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/{username}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.PUT, "/users/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PATCH, "/users/{username}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
 
                 // account
                 // balance
@@ -72,8 +73,8 @@ public class SpringSecurityConfig {
 
 
                 // authentication
-                .antMatchers("/authenticated").authenticated()
-                .antMatchers("/authenticate").permitAll()
+                .requestMatchers("/authenticated").authenticated()
+                .requestMatchers("/authenticate").permitAll()
 
                 .and()
                 .sessionManagement()
