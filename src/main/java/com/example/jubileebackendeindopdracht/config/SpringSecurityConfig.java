@@ -63,14 +63,14 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
 
                 // account
-                .requestMatchers(HttpMethod.POST, "/accounts").permitAll()
+                .requestMatchers(HttpMethod.POST, "/accounts").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.DELETE, "/accounts/{id}").hasRole("ADMIN")
 
                 // balance
-                .requestMatchers(HttpMethod.POST, "/balances").permitAll()
+                .requestMatchers(HttpMethod.POST, "/balances").hasAnyRole("ADMIN", "USER")
 
                 // saving goal
-                .requestMatchers(HttpMethod.POST, "/saving_goals").permitAll()
+                .requestMatchers(HttpMethod.POST, "/saving_goals").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/saving_goals").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/saving_goals/{id}").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.PUT, "/saving_goals/{id}").hasRole("USER")
