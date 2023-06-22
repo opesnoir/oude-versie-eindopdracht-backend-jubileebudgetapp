@@ -31,10 +31,19 @@ public class SavingGoal {
     private BigDecimal targetAmount;
     @Column(name = "current_amount")
     private BigDecimal currentAmount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "saving_goal_operation")
+    private SavingGoalOperation savingGoalOperation;
+
+    //TODO: deze twee verwijderen, enum neemt het over private BigDecimal amountAdded;
+    //    private BigDecimal amountSubtracted;
     @Column(name = "amount_added")
     private BigDecimal amountAdded;
     @Column(name = "amount_subtracted")
     private BigDecimal amountSubtracted;
+
+
 
     @JsonIgnore
     @ManyToOne
