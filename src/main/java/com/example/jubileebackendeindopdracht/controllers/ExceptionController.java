@@ -1,3 +1,4 @@
+/*
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.exceptions.*;
@@ -40,3 +41,4 @@ public class ExceptionController {
     }
 
 }
+*/

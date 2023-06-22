@@ -1,3 +1,4 @@
+/*
 package com.example.jubileebackendeindopdracht.filter;
 
 import com.example.jubileebackendeindopdracht.services.CustomUserDetailsService;
@@ -55,3 +56,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
+*/

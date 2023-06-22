@@ -1,3 +1,4 @@
+/*
 package com.example.jubileebackendeindopdracht.config;
 
 import com.example.jubileebackendeindopdracht.filter.JwtRequestFilter;
@@ -103,3 +104,4 @@ public class SpringSecurityConfig {
     }
 
 }
+*/

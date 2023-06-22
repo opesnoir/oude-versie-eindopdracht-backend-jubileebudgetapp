@@ -38,8 +38,9 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<SavingGoal> savingGoalList;
 
-    @Column(name = "user_id")
-    private String userId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 }

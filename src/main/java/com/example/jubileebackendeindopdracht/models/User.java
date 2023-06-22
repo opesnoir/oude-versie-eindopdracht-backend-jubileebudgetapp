@@ -27,16 +27,20 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private boolean enabled = true;
-
-    @Column
-    private String apikey;
-
-    @Column
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "account_id")
+    @Column(nullable = false)
+    private boolean enabled = true;
+
+    @Column(nullable = false)
+    private String apikey;
+
+    @OneToOne(
+            targetEntity = Account.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
     private Account account;
 
     @OneToMany(
@@ -45,7 +49,6 @@ public class User {
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER)
-
     private Set<Authority> authorities = new HashSet<>();
 
     public Set<Authority> getAuthorities() { return authorities; }

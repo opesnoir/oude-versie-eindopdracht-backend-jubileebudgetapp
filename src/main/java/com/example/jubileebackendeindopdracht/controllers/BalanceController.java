@@ -1,3 +1,4 @@
+/*
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.dtos.BalanceDto;
@@ -33,3 +34,4 @@ public class BalanceController {
     }
 
 }
+*/
