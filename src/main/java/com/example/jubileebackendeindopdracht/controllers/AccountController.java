@@ -1,4 +1,3 @@
-/*
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.dtos.AccountDto;
@@ -38,4 +37,3 @@ public class AccountController {
     }
 
 }
-*/

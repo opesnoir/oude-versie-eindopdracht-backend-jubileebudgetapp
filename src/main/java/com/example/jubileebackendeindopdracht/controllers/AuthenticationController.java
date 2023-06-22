@@ -1,4 +1,3 @@
-/*
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.payload.AuthenticationRequest;
@@ -59,4 +58,3 @@ public class AuthenticationController {
     }
 
 }
-*/

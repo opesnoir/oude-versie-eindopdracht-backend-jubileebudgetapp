@@ -1,4 +1,3 @@
-/*
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.dtos.SavingGoalDto;
@@ -74,4 +73,3 @@ public class SavingGoalController {
     }
 
 }
-*/

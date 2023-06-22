@@ -1,4 +1,3 @@
-/*
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.dtos.UserDto;
@@ -96,4 +95,3 @@ public class UserController {
     }
 
 }
-*/

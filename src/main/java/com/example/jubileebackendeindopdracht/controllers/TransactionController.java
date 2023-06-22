@@ -1,4 +1,3 @@
-/*
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.dtos.TransactionDto;
@@ -88,4 +87,3 @@ public class TransactionController {
     }
 
 }
-*/

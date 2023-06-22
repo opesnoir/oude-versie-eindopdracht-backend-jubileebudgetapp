@@ -1,4 +1,3 @@
-/*
 package com.example.jubileebackendeindopdracht.controllers;
 
 import com.example.jubileebackendeindopdracht.dtos.UploadDto;
@@ -60,4 +59,3 @@ public class UploadController {
     }
 
 }
-*/

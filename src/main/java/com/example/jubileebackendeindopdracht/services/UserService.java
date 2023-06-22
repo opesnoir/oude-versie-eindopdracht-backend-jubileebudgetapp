@@ -70,7 +70,7 @@ public class UserService {
 
     //create
     public UserDto createUser(UserDto userDto) {
-        Long accountId = userDto.getAccountId();
+       // Long accountId = userDto.getAccountId();
 
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
@@ -79,11 +79,11 @@ public class UserService {
 
         User newUser = transferUserDtoToUser(userDto);
 
-        if (accountId != null) {
+       /* if (accountId != null) {
             Account account = new Account();
             account.setId(accountId);
             newUser.setAccount(account);
-        }
+        }*/
         userRepository.save(newUser);
         return transferUserToUserDto(newUser);
     }

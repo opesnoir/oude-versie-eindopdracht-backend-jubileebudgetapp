@@ -41,7 +41,6 @@ public class AccountService {
     public Account transferAccountDtoToAccount (AccountDto accountDto){
         Account account = new Account();
 
-        account.setId(accountDto.getId());
         account.setDateCreated(LocalDate.now());
 
         BigDecimal balance = transactionService.calculateBalance();

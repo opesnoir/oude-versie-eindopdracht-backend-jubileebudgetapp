@@ -1,4 +1,3 @@
-/*
 package com.example.jubileebackendeindopdracht.utils;
 
 import io.jsonwebtoken.Claims;
@@ -59,4 +58,3 @@ public class JwtUtil {
     }
 
 }
-*/
