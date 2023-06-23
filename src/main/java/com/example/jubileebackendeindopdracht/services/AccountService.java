@@ -45,7 +45,7 @@ public class AccountService {
 
         BigDecimal balance = transactionService.calculateBalance();
         if (balance != null){
-            account.setBalance(balance);
+            account.setAccountBalance(balance);
         }
 
         account.setTransactionList(accountDto.getTransactionList());

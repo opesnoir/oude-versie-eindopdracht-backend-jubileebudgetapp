@@ -25,22 +25,25 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String email;
+
     @Column(name = "date_created")
     private LocalDate dateCreated;
-    private BigDecimal balance;
+
+    @Column(name = "account_balance")
+    private BigDecimal accountBalance;
 
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactionList;
 
     @OneToMany(mappedBy = "account")
-    private List<Upload> upload;
+    private List<SavingGoal> savingGoalList;
 
     @OneToMany(mappedBy = "account")
-    private List<SavingGoal> savingGoalList;
+    private List<Upload> upload;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
 
 }
