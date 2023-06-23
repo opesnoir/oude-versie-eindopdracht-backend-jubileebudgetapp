@@ -23,17 +23,18 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String payee;
+    private LocalDate date;
+    private String category;
+
+    @Column(name = "payment_method")
+    private String paymentMethod;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")
     private TransactionType type;
 
     private BigDecimal amount;
-    private LocalDate date;
-    private String category;
-    private String payee;
-
-    @Column(name = "payment_method")
-    private String paymentMethod;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
