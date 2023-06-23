@@ -106,8 +106,6 @@ public class SavingGoalService {
         savingGoalDto.setStartAmount(savingGoal.getStartAmount());
         savingGoalDto.setTargetAmount(savingGoal.getTargetAmount());
         savingGoalDto.setCurrentAmount(savingGoal.getCurrentAmount());
-        savingGoalDto.setAmountAdded(savingGoal.getAmountAdded());
-        savingGoalDto.setAmountSubtracted(savingGoal.getAmountSubtracted());
         savingGoalDto.setAccount(savingGoal.getAccount());
 
         return savingGoalDto;
@@ -122,8 +120,6 @@ public class SavingGoalService {
         savingGoal.setStartAmount(savingGoalDto.getStartAmount());
         savingGoal.setTargetAmount(savingGoalDto.getTargetAmount());
         savingGoal.setCurrentAmount(savingGoalDto.getCurrentAmount());
-        savingGoal.setAmountAdded(savingGoalDto.getAmountAdded());
-        savingGoal.setAmountSubtracted(savingGoalDto.getAmountSubtracted());
         savingGoal.setAccount(savingGoalDto.getAccount());
 
         return savingGoal;
@@ -144,13 +140,6 @@ public class SavingGoalService {
         if (updatedSavingGoalDto.getCurrentAmount() != null){
             existingSavingGoal.setCurrentAmount(updatedSavingGoalDto.getCurrentAmount());
         }
-        if (updatedSavingGoalDto.getAmountAdded() != null){
-            existingSavingGoal.setAmountAdded(updatedSavingGoalDto.getAmountAdded());
-        }
-        if (updatedSavingGoalDto.getAmountSubtracted() != null){
-            existingSavingGoal.setAmountSubtracted(updatedSavingGoalDto.getAmountSubtracted());
-        }
-
     }
 
 }

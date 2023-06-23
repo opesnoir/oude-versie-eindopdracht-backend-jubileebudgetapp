@@ -25,8 +25,10 @@ public class Balance {
 
     @Column(name = "total_income")
     private BigDecimal totalIncome;
+
     @Column(name = "total_expense")
     private BigDecimal totalExpense;
+
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "balance")
