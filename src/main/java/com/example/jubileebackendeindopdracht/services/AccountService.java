@@ -24,10 +24,6 @@ public class AccountService {
     // create account
     public AccountDto createAccount(AccountDto accountDto){
 
-/*        Account account = transferAccountDtoToAccount(accountDto);
-        Account savedAccount = accountRepository.save(account);
-        return transferAccountToAccountDto(savedAccount);*/
-
         String username = accountDto.getUser().getUsername();
 
         Account account = transferAccountDtoToAccount(accountDto);
