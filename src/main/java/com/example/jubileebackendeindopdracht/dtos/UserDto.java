@@ -3,7 +3,10 @@ package com.example.jubileebackendeindopdracht.dtos;
 import com.example.jubileebackendeindopdracht.models.Account;
 import com.example.jubileebackendeindopdracht.models.Authority;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +38,8 @@ public class UserDto {
     public String email;
 
     private Long accountId;
+
+    private Account account;
 
     @JsonSerialize
     public Set<Authority> authorities;

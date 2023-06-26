@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//TODO: deze twee verwijderen, enum neemt het over private BigDecimal amountAdded;
-//    private BigDecimal amountSubtracted; en dan de desbetreffende enum gebruiken
 
 @Service
 public class SavingGoalService {

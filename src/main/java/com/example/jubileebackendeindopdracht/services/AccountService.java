@@ -20,14 +20,24 @@ public class AccountService {
         this.transactionService = transactionService;
     }
 
+
     // create account
     public AccountDto createAccount(AccountDto accountDto){
-        Account account = transferAccountDtoToAccount(accountDto);
+
+/*        Account account = transferAccountDtoToAccount(accountDto);
         Account savedAccount = accountRepository.save(account);
+        return transferAccountToAccountDto(savedAccount);*/
+
+        String username = accountDto.getUser().getUsername();
+
+        Account account = transferAccountDtoToAccount(accountDto);
+        account.setUsername(username);
+        Account savedAccount = accountRepository.save(account);
+
         return transferAccountToAccountDto(savedAccount);
+
     }
 
-    //TODO: autorisatie toevoegen dat enkel de admin een account kan verwijderen
     // delete account
     public AccountDto deleteAccount(Long id){
         Account account = accountRepository.findById(id)
@@ -48,6 +58,8 @@ public class AccountService {
             account.setAccountBalance(balance);
         }
 
+        account.setUsername(accountDto.getUsername());
+
         account.setTransactionList(accountDto.getTransactionList());
 
         return account;
@@ -55,8 +67,10 @@ public class AccountService {
 
     public AccountDto transferAccountToAccountDto(Account account){
         AccountDto accountDto = new AccountDto();
+        accountDto.setUsername(account.getUsername());
 
-        accountDto.setId(account.getId());
+/*        accountDto.setId(account.getId());*/
+
         accountDto.setDateCreated(LocalDate.now());
 
         BigDecimal balance = transactionService.calculateBalance();

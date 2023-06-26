@@ -21,6 +21,9 @@ import java.util.List;
 public class AccountDto {
 
     private Long id;
+    private String username;
+    private UserDto user;
+    private String email;
     private LocalDate dateCreated;
     private BigDecimal balance;
     private List<Transaction> transactionList;
@@ -31,5 +34,6 @@ public class AccountDto {
     private Long transactionId;
     private SavingGoal savingGoal;
     private Long savingGoalId;
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.jubileebackendeindopdracht.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String username;
     private String email;
 
     @Column(name = "date_created")
@@ -42,8 +43,8 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Upload> upload;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne
+    @JsonIgnore
     private User user;
 
 }

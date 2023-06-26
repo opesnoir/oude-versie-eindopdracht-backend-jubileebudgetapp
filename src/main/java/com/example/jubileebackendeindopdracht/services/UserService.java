@@ -7,6 +7,7 @@ import com.example.jubileebackendeindopdracht.models.Account;
 import com.example.jubileebackendeindopdracht.models.Authority;
 import com.example.jubileebackendeindopdracht.models.User;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
+import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import com.example.jubileebackendeindopdracht.repository.UserRepository;
 import com.example.jubileebackendeindopdracht.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -27,10 +30,14 @@ public class UserService {
     @Lazy
     private PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
+    private final TransactionService transactionService;
+    private final TransactionRepository transactionRepository;
 
-    public UserService(UserRepository userRepository, AccountRepository accountRepository) {
+    public UserService(UserRepository userRepository, AccountRepository accountRepository, TransactionService transactionService, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
         this.accountRepository = accountRepository;
+        this.transactionService = transactionService;
+        this.transactionRepository = transactionRepository;
     }
 
 
@@ -70,7 +77,6 @@ public class UserService {
 
     //create
     public UserDto createUser(UserDto userDto) {
-       // Long accountId = userDto.getAccountId();
 
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
@@ -78,12 +84,22 @@ public class UserService {
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         User newUser = transferUserDtoToUser(userDto);
+        userRepository.save(newUser);
 
-       /* if (accountId != null) {
-            Account account = new Account();
-            account.setId(accountId);
-            newUser.setAccount(account);
-        }*/
+        Account account = new Account();
+        account.setUsername(userDto.getUsername());
+        account.setEmail(userDto.getEmail());
+        account.setDateCreated(LocalDate.now());
+        account.setUser(newUser);
+        BigDecimal balance = transactionService.calculateBalance();
+        if (balance != null){
+            account.setAccountBalance(balance);
+        }
+
+        Account savedAccount = accountRepository.save(account);
+        newUser.setAccount(savedAccount);
+
+
         userRepository.save(newUser);
         return transferUserToUserDto(newUser);
     }

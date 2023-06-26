@@ -35,12 +35,7 @@ public class User {
     @Column(nullable = false)
     private String apikey;
 
-    @OneToOne(
-            targetEntity = Account.class,
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
     private Account account;
 
     @OneToMany(
