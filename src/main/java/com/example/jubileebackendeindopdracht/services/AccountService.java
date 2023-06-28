@@ -65,8 +65,6 @@ public class AccountService {
         AccountDto accountDto = new AccountDto();
         accountDto.setUsername(account.getUsername());
 
-/*        accountDto.setId(account.getId());*/
-
         accountDto.setDateCreated(LocalDate.now());
 
         BigDecimal balance = transactionService.calculateBalance();

@@ -151,7 +151,7 @@ public class TransactionService {
         }
     }
 
-    // calculate methodes used in account-service
+    // calculate methodes used in balance
     public BigDecimal calculateTotalIncome() {
         return transactionRepository.calculateTotalIncome();
     }
