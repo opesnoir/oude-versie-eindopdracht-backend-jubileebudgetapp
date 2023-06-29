@@ -1,14 +1,27 @@
 package com.example.jubileebackendeindopdracht.services;
 
+import com.example.jubileebackendeindopdracht.repository.AccountRepository;
+import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class TransactionServiceTest {
+
+    @Mock
+    TransactionRepository transactionRepository;
+
+    @Mock
+    AccountRepository accountRepository;
+
+    @InjectMocks
+    TransactionService transactionService;
 
     @BeforeEach
     void setUp() {
@@ -57,4 +70,5 @@ class TransactionServiceTest {
     @Disabled
     void calculateBalance() {
     }
+
 }
