@@ -6,7 +6,6 @@ import com.example.jubileebackendeindopdracht.models.Transaction;
 import com.example.jubileebackendeindopdracht.models.TransactionType;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -20,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -73,7 +73,6 @@ class TransactionServiceTest {
     }
 
     @Test
-/*    @Disabled*/
     void getAllTransactions() {
         //act
         when(transactionRepository.findAll()).thenReturn(List.of(transaction1, transaction2));
@@ -95,9 +94,22 @@ class TransactionServiceTest {
     @Test
     @Disabled
     void getTransaction() {
-        //arrange
         //act
+        Long id = 2L;
+        when(transactionRepository.findById(id)).thenReturn(Optional.of(transaction2));
+
+        Transaction transaction = transactionRepository.findById(id).get();
+        TransactionDto transactionDto = transactionService.getTransaction(id);
+
         //assert
+        assertEquals(transaction.getPayee(), transactionDto.getPayee());
+        assertEquals(transaction.getDate(), transactionDto.getDate());
+        assertEquals(transaction.getCategory(), transactionDto.getCategory());
+        assertEquals(transaction.getPaymentMethod(), transactionDto.getPaymentMethod());
+        assertEquals(transaction.getType(), transactionDto.getType());
+        assertEquals(transaction.getDate(), transactionDto.getDate());
+        assertEquals(transaction.getAmount(), transactionDto.getAmount());
+
     }
 
     @Test

@@ -17,9 +17,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -70,7 +73,6 @@ class SavingGoalServiceTest {
     }
 
     @Test
- /*   @Disabled*/
     void getAllSavingGoals() {
         //act
         when(savingGoalRepository.findAll()).thenReturn(List.of(savingGoal1, savingGoal2));
@@ -85,15 +87,37 @@ class SavingGoalServiceTest {
         assertEquals(savingGoalList.get(0).getTargetAmount(), savingGoalDtos.get(0).getTargetAmount());
         assertEquals(savingGoalList.get(0).getAccount(), savingGoalDtos.get(0).getAccount());
 
-
     }
+
+    @Test
+    void getAllSavingGoals_emptyList() {
+        // Arrange
+        when(savingGoalRepository.findAll()).thenReturn(Collections.emptyList());
+
+        // Act
+        List<SavingGoalDto> savingGoalDtos = savingGoalService.getAllSavingGoals();
+
+        // Assert
+        assertTrue(savingGoalDtos.isEmpty());
+    }
+
 
     @Test
     @Disabled
     void getSavingGoalById() {
-        //arrange
         //act
+        Long savingGoalId = 2L;
+        when(savingGoalRepository.findById(savingGoalId)).thenReturn(Optional.of(savingGoal2));
+
+        SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId).get();
+        SavingGoalDto savingGoalDto = savingGoalService.getSavingGoalById(savingGoalId);
+
         //assert
+        assertEquals(savingGoal.getName(), savingGoalDto.getName());
+        assertEquals(savingGoal.getStartAmount(), savingGoalDto.getStartAmount());
+        assertEquals(savingGoal.getCurrentAmount(), savingGoalDto.getCurrentAmount());
+        assertEquals(savingGoal.getTargetAmount(), savingGoalDto.getTargetAmount());
+        assertEquals(savingGoal.getAccount(), savingGoalDto.getAccount());
     }
 
     @Test
