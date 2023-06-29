@@ -2,10 +2,12 @@ package com.example.jubileebackendeindopdracht.services;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+@ExtendWith(MockitoExtension.class)
 class TransactionServiceTest {
 
     @BeforeEach
@@ -17,34 +19,42 @@ class TransactionServiceTest {
     }
 
     @Test
+    @Disabled
     void getAllTransactions() {
     }
 
     @Test
+    @Disabled
     void getTransaction() {
     }
 
     @Test
+    @Disabled
     void createTransaction() {
     }
 
     @Test
+    @Disabled
     void updateTransaction() {
     }
 
     @Test
+    @Disabled
     void deleteTransaction() {
     }
 
     @Test
+    @Disabled
     void calculateTotalIncome() {
     }
 
     @Test
+    @Disabled
     void calculateTotalExpense() {
     }
 
     @Test
+    @Disabled
     void calculateBalance() {
     }
 }
