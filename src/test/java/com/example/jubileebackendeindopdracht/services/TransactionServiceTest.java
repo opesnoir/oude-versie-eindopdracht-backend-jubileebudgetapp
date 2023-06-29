@@ -125,12 +125,12 @@ class TransactionServiceTest {
 
     @Test
     void createTransaction_UserIdNotFound() {
-        // Arrange
+        //arrange
         Long accountId = 1L;
         when(accountRepository.findById(accountId)).thenReturn(Optional.empty());
         TransactionDto transactionDto = new TransactionDto();
 
-        // Act & Assert
+        //act, assert
         assertThrows(UserIdNotFoundException.class, () -> transactionService.createTransaction(transactionDto, accountId));
     }
 
@@ -144,12 +144,12 @@ class TransactionServiceTest {
 
     @Test
     void updateTransaction_TransactionNotFound() {
-        // Arrange
+        //arrange
         Long id = 1L;
         when(transactionRepository.findById(id)).thenReturn(Optional.empty());
         TransactionDto updatedTransactionDto = new TransactionDto();
 
-        // Act & Assert
+        //act, assert
         assertThrows(TransactionNotFoundException.class, () -> transactionService.updateTransaction(id, updatedTransactionDto));
     }
 

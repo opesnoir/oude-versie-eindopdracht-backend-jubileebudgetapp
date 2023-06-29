@@ -1,11 +1,11 @@
 package com.example.jubileebackendeindopdracht.services;
 
 import com.example.jubileebackendeindopdracht.dtos.SavingGoalDto;
+import com.example.jubileebackendeindopdracht.exceptions.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.models.Account;
 import com.example.jubileebackendeindopdracht.models.SavingGoal;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.SavingGoalRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -131,7 +131,20 @@ class SavingGoalServiceTest {
         //arrange
         //act
         //assert
+
     }
+
+    @Test
+    void updateSavingGoal_RecordNotFound(){
+        //arrange
+        Long savingGoalId = 1L;
+        when(savingGoalRepository.findById(savingGoalId)).thenReturn(Optional.empty());
+        SavingGoalDto updatedSavingGoalDto = new SavingGoalDto();
+
+        //act, assert
+        assertThrows(UserIdNotFoundException.class, () -> savingGoalService.updateSavingGoal(savingGoalId, updatedSavingGoalDto));
+    }
+
 
     @Test
     @Disabled
