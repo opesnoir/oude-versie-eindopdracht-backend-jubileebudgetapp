@@ -139,16 +139,16 @@ class TransactionServiceTest {
         when(transactionRepository.findById(id)).thenReturn(Optional.of(transaction));
 
         //act
-        TransactionDto result = transactionService.deleteTransaction(1L);
+        TransactionDto transactionDto = transactionService.deleteTransaction(1L);
         //assert
-        assertNotNull(result);
-        assertEquals(transaction.getId(), result.getId());
-        assertEquals(transaction.getType(), result.getType());
-        assertEquals(transaction.getAmount(), result.getAmount());
-        assertEquals(transaction.getDate(), result.getDate());
-        assertEquals(transaction.getCategory(), result.getCategory());
-        assertEquals(transaction.getPayee(), result.getPayee());
-        assertEquals(transaction.getPaymentMethod(), result.getPaymentMethod());
+        assertNotNull(transactionDto);
+        assertEquals(transaction.getId(), transactionDto.getId());
+        assertEquals(transaction.getType(), transactionDto.getType());
+        assertEquals(transaction.getAmount(), transactionDto.getAmount());
+        assertEquals(transaction.getDate(), transactionDto.getDate());
+        assertEquals(transaction.getCategory(), transactionDto.getCategory());
+        assertEquals(transaction.getPayee(), transactionDto.getPayee());
+        assertEquals(transaction.getPaymentMethod(), transactionDto.getPaymentMethod());
 
         verify(transactionRepository).delete(transaction);
     }

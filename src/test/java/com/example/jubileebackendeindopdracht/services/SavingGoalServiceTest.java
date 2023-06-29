@@ -21,8 +21,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -140,8 +140,24 @@ class SavingGoalServiceTest {
     @Disabled
     void deleteSavingGoal() {
         //arrange
+        Long id = 1L;
+        SavingGoal savingGoal = new SavingGoal();
+        when(savingGoalRepository.findById(id)).thenReturn(Optional.of(savingGoal));
+
         //act
+        SavingGoalDto savingGoalDto = savingGoalService.deleteSavingGoal(1L);
+
         //assert
+        assertNotNull(savingGoalDto);
+        assertEquals(savingGoal.getId(), savingGoalDto.getId());
+        assertEquals(savingGoal.getName(), savingGoalDto.getName());
+        assertEquals(savingGoal.getStartAmount(), savingGoalDto.getStartAmount());
+        assertEquals(savingGoal.getCurrentAmount(), savingGoalDto.getCurrentAmount());
+        assertEquals(savingGoal.getTargetAmount(), savingGoalDto.getTargetAmount());
+        assertEquals(savingGoal.getAccount(), savingGoalDto.getAccount());
+
+        verify(savingGoalRepository).delete(savingGoal);
+
     }
 
 
