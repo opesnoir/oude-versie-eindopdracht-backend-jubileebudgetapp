@@ -1,6 +1,8 @@
 package com.example.jubileebackendeindopdracht.services;
 
 import com.example.jubileebackendeindopdracht.dtos.TransactionDto;
+import com.example.jubileebackendeindopdracht.exceptions.TransactionNotFoundException;
+import com.example.jubileebackendeindopdracht.exceptions.UserIdNotFoundException;
 import com.example.jubileebackendeindopdracht.models.Account;
 import com.example.jubileebackendeindopdracht.models.Transaction;
 import com.example.jubileebackendeindopdracht.models.TransactionType;
@@ -21,8 +23,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -123,12 +124,35 @@ class TransactionServiceTest {
     }
 
     @Test
+    void createTransaction_UserIdNotFound() {
+        // Arrange
+        Long accountId = 1L;
+        when(accountRepository.findById(accountId)).thenReturn(Optional.empty());
+        TransactionDto transactionDto = new TransactionDto();
+
+        // Act & Assert
+        assertThrows(UserIdNotFoundException.class, () -> transactionService.createTransaction(transactionDto, accountId));
+    }
+
+    @Test
     @Disabled
     void updateTransaction() {
         //arrange
 
 
     }
+
+    @Test
+    void updateTransaction_TransactionNotFound() {
+        // Arrange
+        Long id = 1L;
+        when(transactionRepository.findById(id)).thenReturn(Optional.empty());
+        TransactionDto updatedTransactionDto = new TransactionDto();
+
+        // Act & Assert
+        assertThrows(TransactionNotFoundException.class, () -> transactionService.updateTransaction(id, updatedTransactionDto));
+    }
+
 
     @Test
     @Disabled

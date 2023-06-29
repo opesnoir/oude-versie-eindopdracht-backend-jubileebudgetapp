@@ -68,9 +68,6 @@ class SavingGoalServiceTest {
 
     }
 
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void getAllSavingGoals() {
