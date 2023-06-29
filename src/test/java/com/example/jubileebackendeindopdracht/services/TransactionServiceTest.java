@@ -32,6 +32,7 @@ class TransactionServiceTest {
 
     @Mock
     AccountRepository accountRepository;
+/*    Account account;*/
 
     @InjectMocks
     TransactionService transactionService;
@@ -49,22 +50,23 @@ class TransactionServiceTest {
     @BeforeEach
     void setUp() {
 
-        //id1
+/*        account = new Account();*/
+        //assert
         transaction1 = new Transaction(1L, "Ekoplaza", LocalDate.parse("2023-10-12"), "Grocery", "cash", TransactionType.EXPENSE, new BigDecimal("3.50"), account);
-        transaction2 = new Transaction(1L, "Bijenkorf", LocalDate.parse("2023-11-25"), "Home goods", "debit card", TransactionType.EXPENSE, new BigDecimal("25.00"), account);
-        //id2
-        transaction3 = new Transaction(2L, "Saving", LocalDate.parse("2023-1-15"), "Vacation", "saving card", TransactionType.INCOME, new BigDecimal("750.00"), account);
-        transaction4 = new Transaction(2L, "Rose & Vanille", LocalDate.parse("2023-7-15"), "Cheesecake", "debit card", TransactionType.EXPENSE, new BigDecimal("5.00"), account);
+        transaction2 = new Transaction(2L, "Bijenkorf", LocalDate.parse("2023-11-25"), "Home goods", "debit card", TransactionType.EXPENSE, new BigDecimal("25.00"), account);
+        transaction3 = new Transaction(3L, "Saving", LocalDate.parse("2023-1-15"), "Vacation", "saving card", TransactionType.INCOME, new BigDecimal("750.00"), account);
+        transaction4 = new Transaction(4L, "Rose & Vanille", LocalDate.parse("2023-7-15"), "Cheesecake", "debit card", TransactionType.EXPENSE, new BigDecimal("5.00"), account);
 
     }
 
 
     @AfterEach
     void tearDown() {
+        //clean [repository delete all]
     }
 
     @Test
-    @Disabled
+/*    @Disabled*/
     void getAllTransactions() {
         //act
         when(transactionRepository.findAll()).thenReturn(List.of(transaction1, transaction2, transaction3, transaction4));
