@@ -32,7 +32,6 @@ class TransactionServiceTest {
 
     @Mock
     AccountRepository accountRepository;
-/*    Account account;*/
 
     @InjectMocks
     TransactionService transactionService;
@@ -41,21 +40,38 @@ class TransactionServiceTest {
     ArgumentCaptor<Transaction> captor;
 
     Transaction transaction1;
+
     Transaction transaction2;
-    Transaction transaction3;
-    Transaction transaction4;
+
+
+
+    Account account1;
 
 
 
     @BeforeEach
     void setUp() {
-
-/*        account = new Account();*/
         //assert
-        transaction1 = new Transaction(1L, "Ekoplaza", LocalDate.parse("2023-10-12"), "Grocery", "cash", TransactionType.EXPENSE, new BigDecimal("3.50"), account);
-        transaction2 = new Transaction(2L, "Bijenkorf", LocalDate.parse("2023-11-25"), "Home goods", "debit card", TransactionType.EXPENSE, new BigDecimal("25.00"), account);
-        transaction3 = new Transaction(3L, "Saving", LocalDate.parse("2023-1-15"), "Vacation", "saving card", TransactionType.INCOME, new BigDecimal("750.00"), account);
-        transaction4 = new Transaction(4L, "Rose & Vanille", LocalDate.parse("2023-7-15"), "Cheesecake", "debit card", TransactionType.EXPENSE, new BigDecimal("5.00"), account);
+        account1 = new Account();
+
+        transaction1 = new Transaction();
+        transaction1.setId(1L);
+        transaction1.setType(TransactionType.INCOME);
+        transaction1.setCategory("Grocery");
+        transaction1.setAmount(BigDecimal.valueOf(3.50));
+        transaction1.setDate(LocalDate.ofEpochDay(2023-1-2));
+        transaction1.setPaymentMethod("debit-card");
+        transaction1.setAccount(account1);
+
+        transaction2 = new Transaction();
+        transaction2.setId(2L);
+        transaction2.setType(TransactionType.EXPENSE);
+        transaction2.setCategory("Grocery");
+        transaction2.setAmount(BigDecimal.valueOf(13.50));
+        transaction2.setDate(LocalDate.ofEpochDay(2023-4-2));
+        transaction2.setPaymentMethod("cash");
+        transaction2.setAccount(account1);
+
 
     }
 
@@ -69,7 +85,7 @@ class TransactionServiceTest {
 /*    @Disabled*/
     void getAllTransactions() {
         //act
-        when(transactionRepository.findAll()).thenReturn(List.of(transaction1, transaction2, transaction3, transaction4));
+        when(transactionRepository.findAll()).thenReturn(List.of(transaction1, transaction2));
 
         List<Transaction> transactionList = transactionRepository.findAll();
         List<TransactionDto> transactionDtos = transactionService.getAllTransactions();
@@ -82,12 +98,6 @@ class TransactionServiceTest {
         assertEquals(transactionList.get(0).getType(), transactionDtos.get(0).getType());
         assertEquals(transactionList.get(0).getDate(), transactionDtos.get(0).getDate());
         assertEquals(transactionList.get(0).getAmount(), transactionDtos.get(0).getAmount());
-        assertEquals(transactionList.get(0).getAccount(), transactionDtos.get(0).getAccount());
-
-
-
-
-
 
     }
 

@@ -98,6 +98,7 @@ public class TransactionService {
     public TransactionDto transferTransactionToTransactionDto(Transaction transaction){
 
         TransactionDto transactionDto = new TransactionDto();
+        transactionDto.setId(transaction.getId());
         transactionDto.setType(transaction.getType());
         transactionDto.setAmount(transaction.getAmount());
         transactionDto.setDate(transaction.getDate());
@@ -116,6 +117,7 @@ public class TransactionService {
     public Transaction transferTransactionDtoToTransaction(TransactionDto transactionDto){
 
         Transaction transaction = new Transaction();
+        //TODO: set-id verwijderen
         transaction.setId(transactionDto.getId());
         transaction.setType(transactionDto.getType());
         transaction.setAmount(transactionDto.getAmount());
