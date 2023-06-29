@@ -1,5 +1,7 @@
 package com.example.jubileebackendeindopdracht.services;
 
+import com.example.jubileebackendeindopdracht.dtos.SavingGoalDto;
+import com.example.jubileebackendeindopdracht.models.Account;
 import com.example.jubileebackendeindopdracht.models.SavingGoal;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.SavingGoalRepository;
@@ -13,6 +15,12 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class SavingGoalServiceTest {
@@ -32,8 +40,28 @@ class SavingGoalServiceTest {
     SavingGoal savingGoal1;
     SavingGoal savingGoal2;
 
+    Account account1;
+
     @BeforeEach
     void setUp() {
+        //assert
+        account1 = new Account();
+
+        savingGoal1 = new SavingGoal();
+        savingGoal1.setId(1L);
+        savingGoal1.setName("holiday");
+        savingGoal1.setStartAmount(BigDecimal.valueOf(500));
+        savingGoal1.setTargetAmount(BigDecimal.valueOf(1750));
+        savingGoal1.setCurrentAmount(BigDecimal.valueOf(1200));
+        savingGoal1.setAccount(account1);
+
+        savingGoal2 = new SavingGoal();
+        savingGoal2.setId(2L);
+        savingGoal2.setName("buffer");
+        savingGoal2.setStartAmount(BigDecimal.valueOf(100));
+        savingGoal2.setTargetAmount(BigDecimal.valueOf(10000));
+        savingGoal2.setCurrentAmount(BigDecimal.valueOf(2000));
+        savingGoal2.setAccount(account1);
 
     }
 
@@ -42,11 +70,22 @@ class SavingGoalServiceTest {
     }
 
     @Test
-    @Disabled
+ /*   @Disabled*/
     void getAllSavingGoals() {
-        //arrange
         //act
+        when(savingGoalRepository.findAll()).thenReturn(List.of(savingGoal1, savingGoal2));
+
+        List<SavingGoal> savingGoalList = savingGoalRepository.findAll();
+        List<SavingGoalDto> savingGoalDtos = savingGoalService.getAllSavingGoals();
+
         //assert
+        assertEquals(savingGoalList.get(0).getName(), savingGoalDtos.get(0).getName());
+        assertEquals(savingGoalList.get(0).getStartAmount(), savingGoalDtos.get(0).getStartAmount());
+        assertEquals(savingGoalList.get(0).getCurrentAmount(), savingGoalDtos.get(0).getCurrentAmount());
+        assertEquals(savingGoalList.get(0).getTargetAmount(), savingGoalDtos.get(0).getTargetAmount());
+        assertEquals(savingGoalList.get(0).getAccount(), savingGoalDtos.get(0).getAccount());
+
+
     }
 
     @Test

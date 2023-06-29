@@ -43,8 +43,6 @@ class TransactionServiceTest {
 
     Transaction transaction2;
 
-
-
     Account account1;
 
 
@@ -72,13 +70,6 @@ class TransactionServiceTest {
         transaction2.setPaymentMethod("cash");
         transaction2.setAccount(account1);
 
-
-    }
-
-
-    @AfterEach
-    void tearDown() {
-        //clean [repository delete all]
     }
 
     @Test
