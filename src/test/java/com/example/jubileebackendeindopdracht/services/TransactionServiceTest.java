@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -124,16 +126,31 @@ class TransactionServiceTest {
     @Disabled
     void updateTransaction() {
         //arrange
-        //act
-        //assert
+
+
     }
 
     @Test
     @Disabled
     void deleteTransaction() {
         //arrange
+        Long id = 1L;
+        Transaction transaction = new Transaction();
+        when(transactionRepository.findById(id)).thenReturn(Optional.of(transaction));
+
         //act
+        TransactionDto result = transactionService.deleteTransaction(1L);
         //assert
+        assertNotNull(result);
+        assertEquals(transaction.getId(), result.getId());
+        assertEquals(transaction.getType(), result.getType());
+        assertEquals(transaction.getAmount(), result.getAmount());
+        assertEquals(transaction.getDate(), result.getDate());
+        assertEquals(transaction.getCategory(), result.getCategory());
+        assertEquals(transaction.getPayee(), result.getPayee());
+        assertEquals(transaction.getPaymentMethod(), result.getPaymentMethod());
+
+        verify(transactionRepository).delete(transaction);
     }
 
     @Test
