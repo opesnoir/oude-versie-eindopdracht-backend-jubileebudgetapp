@@ -7,7 +7,6 @@ import com.example.jubileebackendeindopdracht.models.SavingGoal;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.SavingGoalRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -22,8 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SavingGoalServiceTest {
@@ -83,7 +81,6 @@ class SavingGoalServiceTest {
         assertEquals(savingGoalList.get(0).getCurrentAmount(), savingGoalDtos.get(0).getCurrentAmount());
         assertEquals(savingGoalList.get(0).getTargetAmount(), savingGoalDtos.get(0).getTargetAmount());
         assertEquals(savingGoalList.get(0).getAccount(), savingGoalDtos.get(0).getAccount());
-
     }
 
     @Test
@@ -116,38 +113,65 @@ class SavingGoalServiceTest {
         assertEquals(savingGoal.getAccount(), savingGoalDto.getAccount());
     }
 
-    @Test
-    @Disabled
-    void createSavingGoal() {
 
+    @Test
+    void testCreateSavingGoal() {
+        Long accountId = 1L;
+        SavingGoalDto savingGoalDto = new SavingGoalDto();
+        savingGoalDto.setName("newGoal");
+        savingGoalDto.setStartAmount(BigDecimal.valueOf(200));
+        savingGoalDto.setTargetAmount(BigDecimal.valueOf(1000));
+
+        when(accountRepository.findById(accountId)).thenReturn(Optional.of(account1));
+        when(savingGoalRepository.save(any(SavingGoal.class))).thenReturn(savingGoal1);
+
+        SavingGoalDto createdSavingGoalDto = savingGoalService.createSavingGoal(savingGoalDto, accountId);
+
+        assertEquals(savingGoalDto.getName(), createdSavingGoalDto.getName());
+        assertEquals(savingGoalDto.getStartAmount(), createdSavingGoalDto.getStartAmount());
+        assertEquals(savingGoalDto.getTargetAmount(), createdSavingGoalDto.getTargetAmount());
+
+        verify(accountRepository, times(1)).findById(accountId);
+        verify(savingGoalRepository, times(1)).save(captor.capture());
+
+        SavingGoal savedSavingGoal = captor.getValue();
+        assertNotNull(savedSavingGoal);
+        assertEquals(account1, savedSavingGoal.getAccount());
+        assertEquals(savingGoalDto.getName(), savedSavingGoal.getName());
+        assertEquals(savingGoalDto.getStartAmount(), savedSavingGoal.getStartAmount());
+        assertEquals(savingGoalDto.getCurrentAmount(), savedSavingGoal.getCurrentAmount());
+        assertEquals(savingGoalDto.getTargetAmount(), savedSavingGoal.getTargetAmount());
+        assertEquals(savingGoalDto.getAccount(), savedSavingGoal.getAccount());
     }
 
 
     @Test
     void updateSavingGoal() {
-        //arrange
+        // arrange
         Long id = 1L;
         SavingGoal existingSavingGoal = new SavingGoal();
         when(savingGoalRepository.findById(id)).thenReturn(Optional.of(existingSavingGoal));
 
         SavingGoalDto updatedSavingGoalDto = new SavingGoalDto();
-        assertEquals(existingSavingGoal.getName(), updatedSavingGoalDto.getName());
-        assertEquals(existingSavingGoal.getStartAmount(), updatedSavingGoalDto.getStartAmount());
-        assertEquals(existingSavingGoal.getCurrentAmount(), updatedSavingGoalDto.getCurrentAmount());
-        assertEquals(existingSavingGoal.getTargetAmount(), updatedSavingGoalDto.getTargetAmount());
-        assertEquals(existingSavingGoal.getAccount(), updatedSavingGoalDto.getAccount());
+        updatedSavingGoalDto.setName("Banana tree");
+        updatedSavingGoalDto.setStartAmount(BigDecimal.valueOf(60));
+        updatedSavingGoalDto.setCurrentAmount(BigDecimal.valueOf(5));
+        updatedSavingGoalDto.setTargetAmount(BigDecimal.valueOf(200));
 
         SavingGoal savedSavingGoal = new SavingGoal();
         when(savingGoalRepository.save(existingSavingGoal)).thenReturn(savedSavingGoal);
 
-        //act
+        // act
         SavingGoalDto result = savingGoalService.updateSavingGoal(id, updatedSavingGoalDto);
 
-        //assert
+        // assert
         assertNotNull(result);
+        assertEquals(updatedSavingGoalDto.getName(), existingSavingGoal.getName());
+        assertEquals(updatedSavingGoalDto.getStartAmount(), existingSavingGoal.getStartAmount());
+        assertEquals(updatedSavingGoalDto.getCurrentAmount(), existingSavingGoal.getCurrentAmount());
+        assertEquals(updatedSavingGoalDto.getTargetAmount(), existingSavingGoal.getTargetAmount());
 
         verify(savingGoalRepository).save(existingSavingGoal);
-
     }
 
     @Test

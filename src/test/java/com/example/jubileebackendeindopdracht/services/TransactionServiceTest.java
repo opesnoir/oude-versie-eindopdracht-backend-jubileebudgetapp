@@ -234,6 +234,20 @@ class TransactionServiceTest {
         when(transactionRepository.calculateTotalIncome()).thenReturn(expectedTotalIncome);
 
         //act
+        BigDecimal actualTotalIncome = transactionRepository.calculateTotalIncome();
+
+        //assert
+        assertEquals(expectedTotalIncome, actualTotalIncome);
+    }
+
+
+    @Test
+    void calculateTotalIncomeService() {
+        //arrange
+        BigDecimal expectedTotalIncome = new BigDecimal("1000.00");
+        when(transactionRepository.calculateTotalIncome()).thenReturn(expectedTotalIncome);
+
+        //act
         BigDecimal actualTotalIncome = transactionService.calculateTotalIncome();
 
         //assert
