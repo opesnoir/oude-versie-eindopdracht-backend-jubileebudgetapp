@@ -287,4 +287,22 @@ class TransactionServiceTest {
     }
 
 
+    @Test
+    void calculateBalance_ZERO() {
+        // Arrange
+        BigDecimal totalExpense = new BigDecimal("50.00");
+        when(transactionRepository.calculateTotalIncome()).thenReturn(null);
+        when(transactionRepository.calculateTotalExpense()).thenReturn(totalExpense);
+
+        // Act
+        BigDecimal actualBalance = transactionService.calculateBalance();
+
+        // Assert
+        BigDecimal expectedBalance = BigDecimal.ZERO.subtract(totalExpense);
+        assertEquals(expectedBalance, actualBalance);
+    }
+
+
+
+
 }

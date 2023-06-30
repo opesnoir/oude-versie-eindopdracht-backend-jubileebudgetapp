@@ -171,9 +171,8 @@ public class TransactionService {
             totalIncome = BigDecimal.ZERO;
         }
         if (totalExpense == null) {
-            totalIncome = BigDecimal.ZERO;
+            totalExpense = BigDecimal.ZERO;
         }
-
         return totalIncome.subtract(totalExpense);
     }
 
