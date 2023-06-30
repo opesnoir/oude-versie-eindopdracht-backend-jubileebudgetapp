@@ -50,7 +50,7 @@ class SavingGoalServiceTest {
 
         savingGoal1 = new SavingGoal();
         savingGoal1.setId(1L);
-        savingGoal1.setName("holiday");
+        savingGoal1.setName("Holiday to Hawaii");
         savingGoal1.setStartAmount(BigDecimal.valueOf(500));
         savingGoal1.setTargetAmount(BigDecimal.valueOf(1750));
         savingGoal1.setCurrentAmount(BigDecimal.valueOf(1200));
@@ -58,12 +58,11 @@ class SavingGoalServiceTest {
 
         savingGoal2 = new SavingGoal();
         savingGoal2.setId(2L);
-        savingGoal2.setName("buffer");
+        savingGoal2.setName("Financial buffer");
         savingGoal2.setStartAmount(BigDecimal.valueOf(100));
         savingGoal2.setTargetAmount(BigDecimal.valueOf(10000));
         savingGoal2.setCurrentAmount(BigDecimal.valueOf(2000));
         savingGoal2.setAccount(account1);
-
     }
 
 
@@ -185,7 +184,6 @@ class SavingGoalServiceTest {
         assertThrows(UserIdNotFoundException.class, () -> savingGoalService.updateSavingGoal(savingGoalId, updatedSavingGoalDto));
     }
 
-
     @Test
     void deleteSavingGoal() {
         //arrange
@@ -208,6 +206,5 @@ class SavingGoalServiceTest {
         verify(savingGoalRepository).delete(savingGoal);
 
     }
-
 
 }

@@ -132,9 +132,7 @@ class TransactionServiceTest {
     @Test
     void createTransaction() {
         // arrange (wat de methode die ik test nodig heeft)
-
         when(accountRepository.findById(account1.getId())).thenReturn(Optional.of(account1));
-
 
         // act (ik roep de methode daadwerkelijk aan)
         TransactionDto createdTransactionDto = transactionService.createTransaction(transactionDto, account1.getId());
@@ -171,13 +169,13 @@ class TransactionServiceTest {
         when(transactionRepository.findById(id)).thenReturn(Optional.of(existingTransaction));
 
         TransactionDto updatedTransactionDto = new TransactionDto();
-        assertEquals(existingTransaction.getPayee(), updatedTransactionDto.getPayee());
-        assertEquals(existingTransaction.getDate(), updatedTransactionDto.getDate());
-        assertEquals(existingTransaction.getCategory(), updatedTransactionDto.getCategory());
-        assertEquals(existingTransaction.getPaymentMethod(), updatedTransactionDto.getPaymentMethod());
-        assertEquals(existingTransaction.getType(), updatedTransactionDto.getType());
-        assertEquals(existingTransaction.getDate(), updatedTransactionDto.getDate());
-        assertEquals(existingTransaction.getAmount(), updatedTransactionDto.getAmount());
+        updatedTransactionDto.setPayee("Ekoplaza");
+        updatedTransactionDto.setDate(LocalDate.of(2023, 1, 1));
+        updatedTransactionDto.setCategory("grocery");
+        updatedTransactionDto.setPaymentMethod("cash");
+        updatedTransactionDto.setType(EXPENSE);
+        updatedTransactionDto.setAmount(BigDecimal.valueOf(20));
+        updatedTransactionDto.setAccountId(1L);
 
         Transaction savedTransaction = new Transaction();
         when(transactionRepository.save(existingTransaction)).thenReturn(savedTransaction);
@@ -187,10 +185,15 @@ class TransactionServiceTest {
 
         //assert
         assertNotNull(result);
+        assertEquals(updatedTransactionDto.getType(), existingTransaction.getType());
+        assertEquals(updatedTransactionDto.getAmount(), existingTransaction.getAmount());
+        assertEquals(updatedTransactionDto.getPayee(), existingTransaction.getPayee());
+        assertEquals(updatedTransactionDto.getDate(), existingTransaction.getDate());
+        assertEquals(updatedTransactionDto.getCategory(), existingTransaction.getCategory());
+        assertEquals(updatedTransactionDto.getPaymentMethod(), existingTransaction.getPaymentMethod());
+        assertEquals(updatedTransactionDto.getDate(), existingTransaction.getDate());
 
         verify(transactionRepository).save(existingTransaction);
-
-
     }
 
     @Test
@@ -282,5 +285,6 @@ class TransactionServiceTest {
         BigDecimal expectedBalance = totalIncome.subtract(totalExpense);
         assertEquals(expectedBalance, actualBalance);
     }
+
 
 }
