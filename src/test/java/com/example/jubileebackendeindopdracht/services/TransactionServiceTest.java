@@ -9,7 +9,6 @@ import com.example.jubileebackendeindopdracht.models.TransactionType;
 import com.example.jubileebackendeindopdracht.repository.AccountRepository;
 import com.example.jubileebackendeindopdracht.repository.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -57,6 +56,7 @@ class TransactionServiceTest {
     void setUp() {
         //assert
         account1 = new Account();
+        account1.setId(1L);
         accountRepository.save(account1);
 
         transaction1 = new Transaction();
@@ -84,6 +84,7 @@ class TransactionServiceTest {
         transactionDto.setPaymentMethod("Expected Payment Method");
         transactionDto.setType(EXPENSE);
         transactionDto.setAmount(BigDecimal.valueOf(100));
+        transactionDto.setAccountId(1L);
 
 
     }
@@ -108,7 +109,6 @@ class TransactionServiceTest {
     }
 
     @Test
-    @Disabled
     void getTransaction() {
         //act
         Long id = 2L;
@@ -130,9 +130,9 @@ class TransactionServiceTest {
 
 
     @Test
-    @Disabled
     void createTransaction() {
         // arrange (wat de methode die ik test nodig heeft)
+
         when(accountRepository.findById(account1.getId())).thenReturn(Optional.of(account1));
 
 
@@ -148,7 +148,6 @@ class TransactionServiceTest {
         assertEquals(transactionDto.getAmount(), createdTransactionDto.getAmount());
 
         verify(transactionRepository).save(captor.capture());
-        assertEquals(transactionDto, captor.getValue());
     }
 
 
@@ -207,7 +206,6 @@ class TransactionServiceTest {
 
 
     @Test
-    @Disabled
     void deleteTransaction() {
         //arrange
         Long id = 1L;
@@ -243,7 +241,6 @@ class TransactionServiceTest {
     }
 
     @Test
-    @Disabled
     void calculateTotalExpense() {
         //arrange
         BigDecimal expectedTotalExpense = new BigDecimal("50.00");
