@@ -61,7 +61,7 @@ public class SavingGoalService {
     }
 
     //create
-    public SavingGoalDto createSavingGoal(SavingGoalDto savingGoalDto, Long accountId){
+    public SavingGoalDto createSavingGoal(SavingGoalDto savingGoalDto, Long accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new UserIdNotFoundException(accountId));
         savingGoalDto.setAccount(account);
@@ -69,11 +69,15 @@ public class SavingGoalService {
         SavingGoal savingGoal = transferSavingGoalDtoToSavingGoal(savingGoalDto);
         SavingGoal savedSavingGoal = savingGoalRepository.save(savingGoal);
 
-        //TODO: zie transactionDot create Transaction for loop bouwen om te checken of hij null is en als hij null is, dan
+        if (account.getSavingGoalList() == null) {
+            account.setSavingGoalList(new ArrayList<>());
+        }
+
         account.getSavingGoalList().add(savedSavingGoal);
 
         return transferSavingGoalToSavingGoalDto(savingGoal);
     }
+
 
     //update
     public SavingGoalDto updateSavingGoal(Long accountId, SavingGoalDto updatedSavingGoalDto){

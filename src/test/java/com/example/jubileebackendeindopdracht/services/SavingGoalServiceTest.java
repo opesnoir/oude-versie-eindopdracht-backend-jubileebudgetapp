@@ -100,7 +100,6 @@ class SavingGoalServiceTest {
 
 
     @Test
-    @Disabled
     void getSavingGoalById() {
         //act
         Long savingGoalId = 2L;
@@ -120,17 +119,34 @@ class SavingGoalServiceTest {
     @Test
     @Disabled
     void createSavingGoal() {
-        //arrange
-        //act
-        //assert
+
     }
 
+
     @Test
-    @Disabled
     void updateSavingGoal() {
         //arrange
+        Long id = 1L;
+        SavingGoal existingSavingGoal = new SavingGoal();
+        when(savingGoalRepository.findById(id)).thenReturn(Optional.of(existingSavingGoal));
+
+        SavingGoalDto updatedSavingGoalDto = new SavingGoalDto();
+        assertEquals(existingSavingGoal.getName(), updatedSavingGoalDto.getName());
+        assertEquals(existingSavingGoal.getStartAmount(), updatedSavingGoalDto.getStartAmount());
+        assertEquals(existingSavingGoal.getCurrentAmount(), updatedSavingGoalDto.getCurrentAmount());
+        assertEquals(existingSavingGoal.getTargetAmount(), updatedSavingGoalDto.getTargetAmount());
+        assertEquals(existingSavingGoal.getAccount(), updatedSavingGoalDto.getAccount());
+
+        SavingGoal savedSavingGoal = new SavingGoal();
+        when(savingGoalRepository.save(existingSavingGoal)).thenReturn(savedSavingGoal);
+
         //act
+        SavingGoalDto result = savingGoalService.updateSavingGoal(id, updatedSavingGoalDto);
+
         //assert
+        assertNotNull(result);
+
+        verify(savingGoalRepository).save(existingSavingGoal);
 
     }
 
@@ -147,7 +163,6 @@ class SavingGoalServiceTest {
 
 
     @Test
-    @Disabled
     void deleteSavingGoal() {
         //arrange
         Long id = 1L;
