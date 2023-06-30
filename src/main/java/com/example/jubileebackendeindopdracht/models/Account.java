@@ -47,4 +47,12 @@ public class Account {
     @JsonIgnore
     private User user;
 
+    //TODO: addToSavingGoalList maken zoals hieronder voor transaction
+    public void addToTransactionList(Transaction transaction){
+        transactionList.add(transaction);
+    }
+
+
+
+
 }

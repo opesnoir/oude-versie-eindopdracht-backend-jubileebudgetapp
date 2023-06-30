@@ -69,6 +69,7 @@ public class SavingGoalService {
         SavingGoal savingGoal = transferSavingGoalDtoToSavingGoal(savingGoalDto);
         SavingGoal savedSavingGoal = savingGoalRepository.save(savingGoal);
 
+        //TODO: zie transactionDot create Transaction for loop bouwen om te checken of hij null is en als hij null is, dan
         account.getSavingGoalList().add(savedSavingGoal);
 
         return transferSavingGoalToSavingGoalDto(savingGoal);

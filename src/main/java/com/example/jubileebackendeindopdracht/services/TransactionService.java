@@ -60,19 +60,22 @@ public class TransactionService {
 
     // create transaction with account id
     public TransactionDto createTransaction(TransactionDto transactionDto, Long accountId) {
-
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new UserIdNotFoundException(accountId));
         transactionDto.setAccount(account);
-
         Transaction transaction = transferTransactionDtoToTransaction(transactionDto);
         Transaction savedTransaction = transactionRepository.save(transaction);
 
-        account.getTransactionList().add(savedTransaction);
-        accountRepository.save(account);
+        if (account.getTransactionList() == null) {
+            List<Transaction> transactionList = new ArrayList<>();
+            account.setTransactionList(transactionList);
+        }
 
+        account.addToTransactionList(savedTransaction);
+        accountRepository.save(account);
         return transferTransactionToTransactionDto(savedTransaction);
     }
+
 
     // update transaction
     public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto) {
@@ -117,7 +120,6 @@ public class TransactionService {
     public Transaction transferTransactionDtoToTransaction(TransactionDto transactionDto){
 
         Transaction transaction = new Transaction();
-        //TODO: set-id verwijderen
         transaction.setId(transactionDto.getId());
         transaction.setType(transactionDto.getType());
         transaction.setAmount(transactionDto.getAmount());
