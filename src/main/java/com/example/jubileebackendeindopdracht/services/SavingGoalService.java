@@ -104,7 +104,6 @@ public class SavingGoalService {
     public SavingGoalDto transferSavingGoalToSavingGoalDto(SavingGoal savingGoal){
 
         SavingGoalDto savingGoalDto = new SavingGoalDto();
-
         savingGoalDto.setName(savingGoal.getName());
         savingGoalDto.setStartAmount(savingGoal.getStartAmount());
         savingGoalDto.setTargetAmount(savingGoal.getTargetAmount());
@@ -118,7 +117,6 @@ public class SavingGoalService {
     public SavingGoal transferSavingGoalDtoToSavingGoal(SavingGoalDto savingGoalDto){
 
         SavingGoal savingGoal = new SavingGoal();
-
         savingGoal.setName(savingGoalDto.getName());
         savingGoal.setStartAmount(savingGoalDto.getStartAmount());
         savingGoal.setTargetAmount(savingGoalDto.getTargetAmount());

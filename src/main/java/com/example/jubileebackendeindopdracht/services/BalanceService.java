@@ -40,8 +40,6 @@ public class BalanceService {
     // helper methods
     public Balance transferBalanceDtoToBalance(BalanceDto balanceDto){
         Balance balance = new Balance();
-
-        balance.setId(balanceDto.getId());
         balance.setTotalIncome(transactionRepository.calculateTotalIncome());
         balance.setTotalExpense(transactionRepository.calculateTotalExpense());
         balance.setBalance(transactionService.calculateBalance());
@@ -51,7 +49,6 @@ public class BalanceService {
 
     public BalanceDto transferBalanceToBalanceDto(Balance balance){
         BalanceDto balanceDto = new BalanceDto();
-
         balanceDto.setId(balance.getId());
         balanceDto.setTotalIncome(transactionRepository.calculateTotalIncome());
         balanceDto.setTotalExpense(transactionRepository.calculateTotalExpense());

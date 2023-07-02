@@ -25,7 +25,6 @@ public class AccountService {
     public AccountDto createAccount(AccountDto accountDto){
 
         String username = accountDto.getUser().getUsername();
-
         Account account = transferAccountDtoToAccount(accountDto);
         account.setUsername(username);
         Account savedAccount = accountRepository.save(account);

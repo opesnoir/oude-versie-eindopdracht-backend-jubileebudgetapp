@@ -165,7 +165,6 @@ public class UserService {
     //helper methods
     public UserDto transferUserToUserDto(User user){
         var userDto = new UserDto();
-
         userDto.username = user.getUsername();
         userDto.password = user.getPassword();
         userDto.enabled = user.isEnabled();
@@ -178,7 +177,6 @@ public class UserService {
 
     public User transferUserDtoToUser(UserDto userDto){
         var user = new User();
-
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEnabled(userDto.getEnabled());

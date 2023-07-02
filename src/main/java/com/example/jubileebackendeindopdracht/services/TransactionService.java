@@ -74,6 +74,7 @@ public class TransactionService {
         account.addToTransactionList(transaction);
         accountRepository.save(account);
         return transferTransactionToTransactionDto(transaction);
+
     }
 
 
@@ -120,7 +121,6 @@ public class TransactionService {
     public Transaction transferTransactionDtoToTransaction(TransactionDto transactionDto){
 
         Transaction transaction = new Transaction();
-        transaction.setId(transactionDto.getId());
         transaction.setType(transactionDto.getType());
         transaction.setAmount(transactionDto.getAmount());
         transaction.setDate(transactionDto.getDate());
