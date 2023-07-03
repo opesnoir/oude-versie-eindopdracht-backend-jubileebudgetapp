@@ -148,8 +148,6 @@ class TransactionServiceTest {
         verify(transactionRepository).save(captor.capture());
     }
 
-
-
     @Test
     void createTransaction_UserIdNotFound() {
         //arrange

@@ -93,7 +93,7 @@ public class UserService {
         account.setUser(newUser);
         BigDecimal balance = transactionService.calculateBalance();
         if (balance != null){
-            account.setAccountBalance(balance);
+            account.setBalance(balance);
         }
 
         Account savedAccount = accountRepository.save(account);

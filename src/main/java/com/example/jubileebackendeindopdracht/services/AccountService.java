@@ -50,7 +50,7 @@ public class AccountService {
 
         BigDecimal balance = transactionService.calculateBalance();
         if (balance != null){
-            account.setAccountBalance(balance);
+            account.setBalance(balance);
         }
 
         account.setUsername(accountDto.getUsername());

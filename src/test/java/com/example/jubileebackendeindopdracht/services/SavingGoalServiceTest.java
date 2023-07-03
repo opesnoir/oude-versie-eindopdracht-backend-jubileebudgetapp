@@ -102,7 +102,7 @@ class SavingGoalServiceTest {
         when(savingGoalRepository.findById(savingGoalId)).thenReturn(Optional.of(savingGoal2));
 
         SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId).get();
-        SavingGoalDto savingGoalDto = savingGoalService.getSavingGoalById(savingGoalId);
+        SavingGoalDto savingGoalDto = savingGoalService.getSavingGoal(savingGoalId);
 
         //assert
         assertEquals(savingGoal.getName(), savingGoalDto.getName());

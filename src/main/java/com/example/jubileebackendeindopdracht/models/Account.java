@@ -32,7 +32,7 @@ public class Account {
     private LocalDate dateCreated;
 
     @Column(name = "account_balance")
-    private BigDecimal accountBalance;
+    private BigDecimal balance;
 
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactionList;
@@ -47,12 +47,8 @@ public class Account {
     @JsonIgnore
     private User user;
 
-    //TODO: addToSavingGoalList maken zoals hieronder voor transaction
     public void addToTransactionList(Transaction transaction){
         transactionList.add(transaction);
     }
-
-
-
 
 }

@@ -47,9 +47,9 @@ public class SavingGoalService {
     }
 
     //get saving goal
-    public SavingGoalDto getSavingGoalById(Long savingGoalId){
-        SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId)
-                .orElseThrow(() -> new RecordNotFoundException("No saving goal was found for: " + savingGoalId));
+    public SavingGoalDto getSavingGoal(Long id){
+        SavingGoal savingGoal = savingGoalRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No saving goal was found for: " + id));
 
         SavingGoalDto savingGoalDto = transferSavingGoalToSavingGoalDto(savingGoal);
 
