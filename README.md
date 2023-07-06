@@ -1,4 +1,4 @@
-# Eindopdracht backend Novi Hogeschool Jubilee BudgetApp
+# Eindopdracht backend Novi Hogeschool -2023 Jubilee BudgetApp
 ![Jubilee BudgetApp logo](./src/assets/logo.png)
 
 
