@@ -30,7 +30,6 @@ public class AccountService {
         Account savedAccount = accountRepository.save(account);
 
         return transferAccountToAccountDto(savedAccount);
-
     }
 
     // delete account
