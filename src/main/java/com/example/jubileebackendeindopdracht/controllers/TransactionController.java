@@ -31,7 +31,7 @@ public class TransactionController {
         return new ResponseEntity<>(transactionDtoList, HttpStatus.OK);
     }
 
-    // get transaction by id
+    // get transaction
     @GetMapping("/{id}")
     public ResponseEntity<TransactionDto> getTransaction(@PathVariable Long id){
         return ResponseEntity.ok(transactionService.getTransaction(id));
@@ -60,7 +60,7 @@ public class TransactionController {
         return ResponseEntity.ok(updatedTransaction);
     }
 
-    // delete transaction by id
+    // delete transaction
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTransaction(@PathVariable Long id){
         transactionService.deleteTransaction(id);

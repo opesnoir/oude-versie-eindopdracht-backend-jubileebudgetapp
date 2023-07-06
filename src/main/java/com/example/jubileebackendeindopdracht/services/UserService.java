@@ -161,7 +161,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-
     //helper methods
     public UserDto transferUserToUserDto(User user){
         var userDto = new UserDto();

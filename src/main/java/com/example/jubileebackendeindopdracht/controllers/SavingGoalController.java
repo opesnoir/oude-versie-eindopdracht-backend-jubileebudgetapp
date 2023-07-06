@@ -43,7 +43,7 @@ public class SavingGoalController {
         return new ResponseEntity<>(savingGoalDto, HttpStatus.OK);
     }
 
-    // create
+    //create
     @PostMapping
     public ResponseEntity<SavingGoalDto> createSavingGoal(@RequestBody SavingGoalDto savingGoalDto){
         Long accountId = savingGoalDto.getAccountId();
@@ -65,7 +65,7 @@ public class SavingGoalController {
         return ResponseEntity.ok(updatedSavingGoal);
     }
 
-    //delete saving goal by id
+    //delete
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSavingGoal(@PathVariable Long id){
         savingGoalService.deleteSavingGoal(id);
